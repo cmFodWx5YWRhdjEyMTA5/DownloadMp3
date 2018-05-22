@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="light_shadow_start_color">#5a000000</color>
+
+    <color name="colorPrimaryTextWhite">#ffffffff</color>
+    <color name="colorPrimaryTextBlack">#dfffffff</color>
+    <color name="colorSubTextBlack">#ccffffff</color>
+
+    <color name="colorSubTextWhite">#b3ffffff</color>
+    <color name="colorAccentReal">#ffffffff</color>
+
+    <color name="material_white">#ffffff</color>
+    <color name="material_black">#ff000000</color>
+
+    <color name="default_thum">#e5e5e5</color>
+    <color name="des_color">#757575</color>
+
+</resources>

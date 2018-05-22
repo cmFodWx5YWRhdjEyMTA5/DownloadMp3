@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Mp3Downloader</string>
+
+    <string name="ratting_name">Rating</string>
+
+    <string name="recommend">Recommend</string>
+    <string name="download">Download</string>
+
+    <string name="load_error">Network Error</string>
+    <string name="empty_error">Data Empty</string>
+
+    <string name="error_video_streams_empty">The video %s has no streams.</string>
+    <string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
+    <string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
+    <string name="error_invalid_url">Invalid video URL: %s</string>
+
+    <string name="download_text">Downloads</string>
+
+    <string name="download_text2">Download</string>
+
+    <string name="play_text">Play</string>
+
+    <string name="license_text">CC License</string>
+
+    <string name="download_added">Download already added</string>
+
+    <string name="download_add_success">Download add success</string>
+
+    <string name="download_video_success">Download Finish</string>
+    <string name="finish_download">Download complete</string>
+    <string name="error_download">Download error</string>
+
+    <string name="parse_url">Parse Download URL</string>
+
+    <string name="declare_text">Disclaimers</string>
+
+    <string name="youtube_search">YouTube Search</string>
+    <string name="soundcloud_search">SoundCloud Search</string>
+
+    <string name="switch_ytb_search">Switch YouTube Search</string>
+    <string name="switch_sc_search">Switch SoundCloud Search</string>
+
+    <string name="disclaimer_text">Music is provided by "www.jamendo.com".All songs, available through this application, are intended only for your personal non-commercial use.You can visit Jamendo privacy policy https://api.jamendo.com/ App authorized to use Jamendo API. All tracks available is under CC license(author and license link properly mentioned for each song). You can find and contact authors on www.jamendo.com</string>
+    <string name="disclaimers">Disclaimers</string>
+    <string name="confirm_text">confirm</string>
+
+    <string name="music_playing">Music is playing...</string>
+
+    <string name="del_des">Do you want to delete it?</string>
+    <string name="ok_text">OK</string>
+    <string name="cancel_text">Cancel</string>
+
+    <item type="id" name="tag_badge">
+    </item>
+</resources>

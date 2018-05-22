@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item"
+    android:padding="12dp"
+    android:foreground="@drawable/rect_selector"
+    android:layout_width="match_parent"
+    android:layout_height="94dp">
+
+    <ImageView
+        android:id="@+id/itemThumbnailView"
+        android:scaleType="centerCrop"
+        android:layout_width="124dp"
+        android:layout_height="70dp" />
+
+    <TextView
+        android:paddingStart="12dp"
+        android:paddingLeft="12dp"
+        android:id="@+id/itemVideoTitleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/itemThumbnailView"
+        android:layout_toEndOf="@+id/itemThumbnailView"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique vitae sem vitae blanditLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum"/>
+
+    <TextView
+        android:id="@+id/itemTextView"
+        android:paddingStart="12dp"
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemVideoTitleView"
+        android:layout_toRightOf="@+id/itemThumbnailView"
+        android:layout_toEndOf="@+id/itemThumbnailView"
+        android:lines="3"
+        android:textColor="@color/des_color"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        tools:text="Uploader"/>
+
+        <FrameLayout
+            android:id="@+id/badge_frame"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</RelativeLayout>

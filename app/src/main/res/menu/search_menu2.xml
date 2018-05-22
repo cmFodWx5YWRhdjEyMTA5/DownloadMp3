@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/action_youtube"
+        android:title="@string/youtube_search"
+        android:orderInCategory="0"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/action_rating"
+        android:title="@string/ratting_name"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/action_declare"
+        android:title="@string/declare_text"
+        android:orderInCategory="2"
+        app:showAsAction="never"
+        />
+</menu>

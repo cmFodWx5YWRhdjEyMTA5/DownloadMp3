@@ -28,6 +28,7 @@ public class JamendoDeserializer implements JsonDeserializer<JamendoModel> {
             JsonObject trackJO = jsonArray.get(i).getAsJsonObject();
             JamendoModel.JamendoResult jamendoResult = context.deserialize(trackJO,
                     JamendoModel.JamendoResult.class);
+            jamendoResult.duration = jamendoResult.duration * 1000;
             jamendoModel.arrayList.add(jamendoResult);
         }
         return jamendoModel;

@@ -43,18 +43,30 @@ public class Utils {
         sExecutorService2.execute(runnable);
     }
 
-    public static void checkAndRequestPermissions(Activity activity) {
+    public static boolean checkAndRequestPermissions(Activity activity) {
         try {
             ArrayList<String> permissionList = new ArrayList<>();
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             permissionList.add(Manifest.permission.READ_PHONE_STATE);
-            checkAndRequestPermissions(activity, permissionList);
+            return checkAndRequestPermissions(activity, permissionList);
         } catch (Throwable e) {
             e.printStackTrace();
         }
+        return true;
     }
 
-    private static void checkAndRequestPermissions(Activity activity, ArrayList<String> permissionList) {
+    public static boolean checkAndStoreRequestPermissions(Activity activity) {
+        try {
+            ArrayList<String> permissionList = new ArrayList<>();
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            return checkAndRequestPermissions(activity, permissionList);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    private static boolean checkAndRequestPermissions(Activity activity, ArrayList<String> permissionList) {
         ArrayList<String> list = new ArrayList<>(permissionList);
         Iterator<String> it = list.iterator();
         while (it.hasNext()) {
@@ -67,11 +79,12 @@ public class Utils {
         }
 
         if (list.size() == 0) {
-            return;
+            return true;
         }
         String[] permissions = list.toArray(new String[0]);
         //正式请求权限
         ActivityCompat.requestPermissions(activity, permissions, 101);
+        return false;
     }
 
     public static void transparence(Activity activity) {
@@ -122,22 +135,26 @@ public class Utils {
     }
 
     public static void playMusic(Context context, String path) {
-        Uri uri;
-        if (!path.startsWith("http")) {
-            String ourPackage = context.getApplicationContext().getPackageName();
-            uri = FileProvider.getUriForFile(context, ourPackage + ".provider", new File(path));
-        } else {
-            uri = Uri.parse(path);
+        try {
+            Uri uri;
+            if (!path.startsWith("http")) {
+                String ourPackage = context.getApplicationContext().getPackageName();
+                uri = FileProvider.getUriForFile(context, ourPackage + ".provider", new File(path));
+            } else {
+                uri = Uri.parse(path);
+            }
+            Intent intent = new Intent();
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, "audio/mp3");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                intent.addFlags(FLAG_GRANT_PREFIX_URI_PERMISSION);
+            }
+            App.sContext.startActivity(intent);
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
-        Intent intent = new Intent();
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(uri , "audio/mp3");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            intent.addFlags(FLAG_GRANT_PREFIX_URI_PERMISSION);
-        }
-        App.sContext.startActivity(intent);
     }
 
     public static void gotoGP(Activity context) {

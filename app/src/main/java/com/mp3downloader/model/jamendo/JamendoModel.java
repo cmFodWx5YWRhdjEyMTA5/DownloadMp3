@@ -33,10 +33,11 @@ public class JamendoModel {
         public String shareurl;
         public String image;
         public String lyrics;
+        public long duration;
 
         @Override
         public long getDuration() {
-            return 0;
+            return duration;
         }
 
         @Override

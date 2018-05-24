@@ -5,13 +5,20 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.liulishuo.filedownloader.FileDownloader;
+import com.lzx.musiclibrary.cache.CacheConfig;
+import com.lzx.musiclibrary.cache.CacheUtils;
+import com.lzx.musiclibrary.manager.MusicLibrary;
+import com.lzx.musiclibrary.notification.NotificationCreater;
 import com.mp3downloader.musicgo.MainActivity;
 import com.mp3downloader.util.ReferVersions;
+import com.tencent.bugly.crashreport.CrashReport;
 
+import java.io.File;
 import java.util.List;
 
 import me.yokeyword.fragmentation.Fragmentation;
@@ -72,7 +79,32 @@ public class App extends Application {
             }
         }).install();
 
+        CrashReport.initCrashReport(getApplicationContext());
+
+        initMusicPlayer();
+
         //setYouTube();
+    }
+
+    private void initMusicPlayer() {
+        NotificationCreater creater = new NotificationCreater.Builder()
+                .setTargetClass("com.mp3downloader.musicgo.MainActivity")
+                .setCreateSystemNotification(true)
+                .setNotificationCanClearBySystemBtn(true)
+                .build();
+        File file = getCacheDir();
+        if (!file.canRead() || !file.canWrite()) {
+            file = CacheUtils.getDefaultSongCacheDir();
+        }
+        CacheConfig cacheConfig = new CacheConfig.Builder()
+                .setOpenCacheWhenPlaying(true)
+                .setCachePath(file.getPath())
+                .build();
+        MusicLibrary musicLibrary = new MusicLibrary.Builder(this)
+                .setNotificationCreater(creater)
+                .setCacheConfig(cacheConfig)
+                .build();
+        musicLibrary.init();
     }
 
     private String getCurrentProcessName() {

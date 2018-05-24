@@ -34,6 +34,8 @@ public class YouTubeModel {
 
         public String downloadurl;
 
+        public long duration;
+
 //        public ContentDetails contentDetails;
 //
 //        public Statistics statistics;
@@ -41,7 +43,7 @@ public class YouTubeModel {
 
         @Override
         public long getDuration() {
-            return 0;
+            return 1000*60*3+120;
         }
 
         @Override

@@ -11,17 +11,20 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.lzx.musiclibrary.aidl.model.SongInfo;
 import com.mp3downloader.App;
 import com.mp3downloader.R;
 import com.mp3downloader.model.BaseModel;
 import com.mp3downloader.model.youtube.VideoStream.ParseStreamMetaData;
 import com.mp3downloader.model.youtube.VideoStream.StreamMetaData;
 import com.mp3downloader.model.youtube.YouTubeModel;
+import com.mp3downloader.musicgo.PlayingDetailActivity;
 import com.mp3downloader.util.FileDownloaderHelper;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.Utils;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 /**
  * Created by liyanju on 2018/5/18.
@@ -100,6 +103,15 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
     public void initView() {
         mSong = getArguments().getParcelable("song");
 
+        if (!Utils.checkAndStoreRequestPermissions(mActivity)) {
+            try {
+                dismiss();
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
         mLoadingView = rootView.findViewById(R.id.parse_load_linear);
         TextView titleTV = rootView.findViewById(R.id.title_tv);
         titleTV.setText(mSong.getName());
@@ -111,6 +123,13 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                     parseYouTubeUrl(((YouTubeModel.Snippet) mSong).vid, new Runnable() {
                         @Override
                         public void run() {
+                            if (isShowing()) {
+                                try {
+                                    dismiss();
+                                } catch (Throwable e) {
+                                    e.printStackTrace();
+                                }
+                            }
                             FileDownloaderHelper.addDownloadTask(mSong, new WeakReference<>(mActivity));
                         }
                     });
@@ -137,7 +156,22 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                         parseYouTubeUrl(((YouTubeModel.Snippet) mSong).vid, new Runnable() {
                             @Override
                             public void run() {
-                                Utils.playMusic(App.sContext, mSong.getPlayUrl());
+                                if (isShowing()) {
+                                    try {
+                                        dismiss();
+                                    } catch (Throwable e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                SongInfo songInfo = new SongInfo();
+                                songInfo.setSongId(((YouTubeModel.Snippet) mSong).vid);
+                                songInfo.setSongUrl(mSong.getPlayUrl());
+                                songInfo.setSongName(mSong.getName());
+                                songInfo.setDuration(mSong.getDuration());
+                                songInfo.setSongCover(mSong.getImageUrl());
+                                PlayingDetailActivity.launch(App.sContext, songInfo);
+
                                 Utils.showLongToastSafe(R.string.music_playing);
                             }
                         });
@@ -147,11 +181,17 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                         } catch (Throwable e) {
                             e.printStackTrace();
                         }
-                        Utils.playMusic(App.sContext, mSong.getPlayUrl());
+
+                        SongInfo songInfo = new SongInfo();
+                        songInfo.setSongId(String.valueOf(System.currentTimeMillis()));
+                        songInfo.setSongUrl(mSong.getPlayUrl());
+                        songInfo.setSongCover(mSong.getImageUrl());
+                        songInfo.setSongName(mSong.getName());
+                        songInfo.setDuration(mSong.getDuration());
+                        PlayingDetailActivity.launch(App.sContext, songInfo);
+
                         Utils.showLongToastSafe(R.string.music_playing);
                     }
-
-
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }

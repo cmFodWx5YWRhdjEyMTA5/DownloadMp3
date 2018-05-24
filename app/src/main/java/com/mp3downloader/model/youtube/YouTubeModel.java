@@ -43,7 +43,7 @@ public class YouTubeModel {
 
         @Override
         public long getDuration() {
-            return 1000*60*3+120;
+            return 1000*60*3+1500;
         }
 
         @Override

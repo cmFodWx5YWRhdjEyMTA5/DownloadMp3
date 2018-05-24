@@ -51,7 +51,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_file_download_aaaaaa_24dp" />
+            android:src="@drawable/ic_file_download_6a6a6a_24dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_play_arrow_black_24dp" />
+            android:src="@drawable/ic_play_arrow_6a6a6a_24dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -131,10 +131,10 @@
 </LinearLayout>
 
     <LinearLayout
-        android:background="#40000000"
-        android:visibility="gone"
+        android:background="#4c000000"
         android:id="@+id/parse_load_linear"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

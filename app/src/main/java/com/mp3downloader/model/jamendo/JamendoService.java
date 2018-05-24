@@ -19,7 +19,7 @@ public interface JamendoService {
     String DOWNLOADS_TOTAL_ORDER = "downloads_total";
     String POPULARITY_TOTAL_ORDER = "popularity_total";
 
-    int PAGE_LIMIT = 45;
+    int PAGE_LIMIT = 25;
 
     @GET("tracks?client_id="+ClIENT_ID+"&format=json&include=lyrics&limit=25&audiodlformat=mp32&order=relevance&type=single+albumtrack")
     Call<JamendoModel> searchJamendoData(@Query("search") String namesearch, @Query("offset") int offset);

@@ -25,6 +25,7 @@ import com.mp3downloader.musicgo.IHomeFragment;
 import com.mp3downloader.musicgo.MainActivity;
 import com.mp3downloader.provider.DownloadDao;
 import com.mp3downloader.router.Router;
+import com.rating.RatingActivity;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -78,6 +79,10 @@ public class FileDownloaderHelper {
                 + " path " + path);
         LogUtil.v(TAG, "addDownloadTask url : " + song.getDownloadUrl());
         Utils.showLongToastSafe(song.getName() + " " + sContext.getString(R.string.download_add_success));
+
+        if (activityWeakReference.get() != null) {
+            FBAdUtils.showAdDialog(activityWeakReference.get(), Constants.NATIVE_ID);
+        }
 
     }
 
@@ -133,6 +138,11 @@ public class FileDownloaderHelper {
                                 }
                             }
                         });
+
+                        RatingActivity.launch(App.sContext, "",
+                                App.sContext.getString(R.string.download_rating));
+
+                        FacebookReport.logSentDownloadFinish(song.getName());
                     } else {
                         File file = new File(task.getPath());
                         if (file.exists()) {

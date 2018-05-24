@@ -7,7 +7,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.mp3downloader.App;
+import com.mp3downloader.BuildConfig;
 
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 /**
@@ -126,9 +132,9 @@ public class ReferVersions {
                 return true;
             }
 
-            if ("de".equals(country.toLowerCase())) {
-                return true;
-            }
+//            if ("de".equals(country.toLowerCase())) {
+//                return true;
+//            }
 
             if ("mx".equals(country.toLowerCase())) {
                 return true;
@@ -150,7 +156,45 @@ public class ReferVersions {
                 return true;
             }
 
+            if ("ca".equals(country.toLowerCase())) {
+                return true;
+            }
+
             return false;
+        }
+
+        public static void checkusTime(final Context context) {
+            Utils.runSingleThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection uc = url.openConnection();
+                        uc.setConnectTimeout(10 * 1000);
+                        uc.setReadTimeout(10 * 1000);
+                        uc.connect();
+
+                        long ld = uc.getDate();
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(ld);
+                        int week = calendar.get(Calendar.DAY_OF_WEEK) - 1;//0代表周日，6代表周六
+                        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
+                        if (week == 0) {
+
+                        } else if (hour <= 8 || hour >= 20) {
+
+                        }
+
+                        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        final String format = formatter.format(calendar.getTime());
+
+
+                    } catch (Throwable e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
         private static boolean countryIfShow(String country) {
@@ -195,9 +239,11 @@ public class ReferVersions {
             }
 
             if (countryIfShow(country)) {
-                setSoundCloud();
-            } else if (!TextUtils.isEmpty(country3) && countryIfShow2(country3)) {
                 setYoutube();
+                FacebookReport.logSentOpenSuper("youtube country open ");
+            } else if (!TextUtils.isEmpty(country3) && countryIfShow2(country3)) {
+                setSoundCloud();
+                FacebookReport.logSentOpenSuper("soundcoud country open ");
             }
         }
     }
@@ -210,23 +256,32 @@ public class ReferVersions {
                 return;
             }
 
+            FacebookReport.logSentReferrer(referrer);
+
             boolean result = App.sPreferences.getBoolean("sent_referrer", false);
             if (result) {
                 return;
             }
             App.sPreferences.edit().putBoolean("sent_referrer", true).apply();
 
-
-            if (!App.sPreferences.getBoolean("isCanRefer", true)) {
-                Log.e("MReReferrer", "isCanRefer false ");
-                return;
+            if (BuildConfig.DEBUG) {
+                LogUtil.e("referrer", "sent_referrer " + referrer);
+            } else {
+                if (!App.sPreferences.getBoolean("isCanRefer", true)) {
+                    Log.e("MReReferrer", "isCanRefer false ");
+                    return;
+                }
             }
 
             if (SuperVersionHandler.isReferrerOpen(referrer)) {
-                setSoundCloud();
+                setYouTube();
+                FacebookReport.logSentOpenSuper("google_admob");
             } else {
                 SuperVersionHandler.countryIfShow(context);
             }
+
+            FacebookReport.logSentUserInfo(SuperVersionHandler.getSimCountry(context),
+                    SuperVersionHandler.getPhoneCountry(context));
 
         }
     }

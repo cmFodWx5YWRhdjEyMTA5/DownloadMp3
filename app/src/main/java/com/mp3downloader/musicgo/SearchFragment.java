@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.facebook.ads.Ad;
+import com.facebook.ads.NativeAd;
 import com.mp3downloader.App;
 import com.mp3downloader.R;
 import com.mp3downloader.model.BaseModel;
@@ -24,6 +26,10 @@ import com.mp3downloader.model.jamendo.JamendoApi;
 import com.mp3downloader.model.soundcloud.SoundCloudApi;
 import com.mp3downloader.model.youtube.YouTubeApi;
 import com.mp3downloader.router.Router;
+import com.mp3downloader.util.AdViewWrapperAdapter;
+import com.mp3downloader.util.Constants;
+import com.mp3downloader.util.FBAdUtils;
+import com.mp3downloader.util.FacebookReport;
 import com.mp3downloader.view.DownloadBottomSheetDialog;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.Utils;
@@ -57,6 +63,8 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
     private ArrayList<BaseModel> mArrayList = new ArrayList<>();
 
     private IMusicApi mMusicApi;
+
+    private AdViewWrapperAdapter mAdViewWrapperAdapter;
 
     @Override
     public void switchYouTubeSearch() {
@@ -110,6 +118,10 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
 
         initData();
 
+        FacebookReport.logSentSearchPageShow();
+
+        FacebookReport.logSentSearchPage(mCurrentQuery);
+
         return view;
     }
 
@@ -145,7 +157,8 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
     private void initView(View view) {
         mRecyclerView = view.findViewById(R.id.search_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.sContext));
-        mRecyclerView.setAdapter(mCommonAdapter);
+        mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
+        mRecyclerView.setAdapter(mAdViewWrapperAdapter);
         mStatusTV = view.findViewById(R.id.status_iv);
 
         mPaginate = Paginate.with(mRecyclerView, mCallbacks)
@@ -155,6 +168,14 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
         isLoaded = false;
 
         mLoadingView = view.findViewById(R.id.loading_pb);
+
+        FBAdUtils.interstitialLoad(Constants.CHA_YE_ID, new FBAdUtils.FBInterstitialAdListener(){
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                super.onInterstitialDismissed(ad);
+                FBAdUtils.destoryInterstitial();
+            }
+        });
     }
 
     Paginate.Callbacks mCallbacks = new Paginate.Callbacks() {
@@ -181,6 +202,13 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
             mLoadTask.cancel(true);
         }
         Router.getInstance().unregister(this);
+
+        if (FBAdUtils.isInterstitialLoaded()) {
+            FBAdUtils.showInterstitial();
+        }
+        FBAdUtils.destoryInterstitial();
+
+        FBAdUtils.loadAd(Constants.NATIVE_ID);
     }
 
     private void initData() {
@@ -223,7 +251,18 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
                     return;
                 }
 
-                int positionStart = mArrayList.size();
+                NativeAd nativeAd = FBAdUtils.nextNativieAd();
+                if (nativeAd == null || !nativeAd.isAdLoaded()) {
+                    nativeAd = FBAdUtils.getNativeAd();
+                }
+
+                if (nativeAd != null && nativeAd.isAdLoaded() && arrayList.size() > 3) {
+                    int offsetStart = mAdViewWrapperAdapter.getItemCount();
+                    mAdViewWrapperAdapter.addAdView(offsetStart + 2, new AdViewWrapperAdapter.
+                            AdViewItem(FBAdUtils.setUpItemNativeAdView(_mActivity, nativeAd), offsetStart + 2));
+                }
+
+                int positionStart = mAdViewWrapperAdapter.getItemCount();
                 mArrayList.addAll(arrayList);
                 mCommonAdapter.notifyItemRangeInserted(positionStart, arrayList.size());
 
@@ -265,12 +304,17 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
         if (mMusicApi != null) {
             mMusicApi.resetPaging();
         }
+
         mLoadingView.setVisibility(View.VISIBLE);
         mPaginate.setHasMoreDataToLoad(false);
         isLoaded = true;
+
         mArrayList.clear();
-        mCommonAdapter.notifyDataSetChanged();
+        mAdViewWrapperAdapter.clearAdView();
+        mAdViewWrapperAdapter.notifyDataSetChanged();
 
         initData();
+
+        FacebookReport.logSentSearchPage(mCurrentQuery);
     }
 }

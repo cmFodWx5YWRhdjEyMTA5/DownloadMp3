@@ -1,6 +1,7 @@
 package com.mp3downloader.model.jamendo;
 
 import android.os.Parcel;
+import android.text.TextUtils;
 
 import com.mp3downloader.model.BaseModel;
 
@@ -52,6 +53,9 @@ public class JamendoModel {
 
         @Override
         public String getPlayUrl() {
+            if (TextUtils.isEmpty(audio)) {
+                return audiodownload;
+            }
             return audio;
         }
 

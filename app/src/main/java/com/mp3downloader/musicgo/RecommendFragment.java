@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.facebook.ads.NativeAd;
 import com.mp3downloader.App;
 import com.mp3downloader.R;
 import com.mp3downloader.model.BaseModel;
 import com.mp3downloader.model.IMusicApi;
 import com.mp3downloader.model.jamendo.JamendoApi;
 import com.mp3downloader.model.youtube.YouTubeApi;
+import com.mp3downloader.util.AdViewWrapperAdapter;
+import com.mp3downloader.util.FBAdUtils;
 import com.mp3downloader.view.DownloadBottomSheetDialog;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.Utils;
@@ -56,6 +60,8 @@ public class RecommendFragment extends SupportFragment {
     private IMusicApi mMusicApi;
 
     private static final String TAG = "RecommendFragment";
+
+    private AdViewWrapperAdapter mAdViewWrapperAdapter;
 
     @Nullable
     @Override
@@ -127,7 +133,8 @@ public class RecommendFragment extends SupportFragment {
 
         mRecyclerView = view.findViewById(R.id.recom_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.sContext));
-        mRecyclerView.setAdapter(mCommonAdapter);
+        mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
+        mRecyclerView.setAdapter(mAdViewWrapperAdapter);
         mStatusTV = view.findViewById(R.id.status_iv);
 
         mPaginate = Paginate.with(mRecyclerView, mCallbacks)
@@ -203,16 +210,32 @@ public class RecommendFragment extends SupportFragment {
                     return;
                 }
 
+                NativeAd nativeAd = FBAdUtils.nextNativieAd();
+                if (nativeAd == null || !nativeAd.isAdLoaded()) {
+                    nativeAd = FBAdUtils.getNativeAd();
+                }
+
                 if (mSwipeRefreshLayout.isRefreshing()) {
                     mSwipeRefreshLayout.setRefreshing(false);
                     mArrayList.clear();
+                    mAdViewWrapperAdapter.clearAdView();
                     mArrayList.addAll(arrayList);
                     mPaginate.setHasMoreDataToLoad(true);
-                    mCommonAdapter.notifyDataSetChanged();
+                    if (nativeAd != null && nativeAd.isAdLoaded() && arrayList.size() > 3) {
+                        mAdViewWrapperAdapter.addAdView(2, new AdViewWrapperAdapter.
+                                AdViewItem(FBAdUtils.setUpItemNativeAdView(_mActivity, nativeAd), 2));
+                    }
+                    mAdViewWrapperAdapter.notifyDataSetChanged();
                     return;
                 }
 
-                int positionStart = mArrayList.size();
+                if (nativeAd != null && nativeAd.isAdLoaded() && arrayList.size() > 3) {
+                    int offsetStart = mAdViewWrapperAdapter.getItemCount();
+                    mAdViewWrapperAdapter.addAdView(offsetStart + 2, new AdViewWrapperAdapter.
+                            AdViewItem(FBAdUtils.setUpItemNativeAdView(_mActivity, nativeAd), offsetStart + 2));
+                }
+
+                int positionStart = mAdViewWrapperAdapter.getItemCount();
                 mArrayList.addAll(arrayList);
                 mCommonAdapter.notifyItemRangeInserted(positionStart, arrayList.size());
 

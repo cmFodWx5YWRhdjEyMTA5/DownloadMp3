@@ -44,8 +44,6 @@
     <string name="disclaimers">Disclaimers</string>
     <string name="confirm_text">confirm</string>
 
-    <string name="music_playing">Music is playing...</string>
-
     <string name="del_des">Do you want to delete it?</string>
     <string name="ok_text">OK</string>
     <string name="cancel_text">Cancel</string>
@@ -53,4 +51,11 @@
     <string name="play_error">Play error</string>
     <string name="not_last">Not the last one</string>
     <string name="not_next">No next</string>
+
+    <string name="permission_text_tips">Please open read and write disk permissions</string>
+
+    <string name="facebook_app_id">237410413694951</string>
+    <string name="fb_login_protocol_scheme">fb237410413694951</string>
+
+    <string name="download_rating">For you to download a music, please give me five stars.</string>
 </resources>

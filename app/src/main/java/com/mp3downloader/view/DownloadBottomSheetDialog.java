@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.facebook.ads.NativeAd;
 import com.lzx.musiclibrary.aidl.model.SongInfo;
 import com.mp3downloader.App;
 import com.mp3downloader.R;
@@ -19,12 +20,13 @@ import com.mp3downloader.model.youtube.VideoStream.ParseStreamMetaData;
 import com.mp3downloader.model.youtube.VideoStream.StreamMetaData;
 import com.mp3downloader.model.youtube.YouTubeModel;
 import com.mp3downloader.musicgo.PlayingDetailActivity;
+import com.mp3downloader.util.FBAdUtils;
+import com.mp3downloader.util.FacebookReport;
 import com.mp3downloader.util.FileDownloaderHelper;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.Utils;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 
 /**
  * Created by liyanju on 2018/5/18.
@@ -58,7 +60,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.download_bs_dialog;
+        return R.layout.download_bottom_dialog;
     }
 
     private void parseYouTubeUrl(String vid, final Runnable runnable) {
@@ -109,6 +111,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             } catch (Throwable e) {
                 e.printStackTrace();
             }
+            Utils.showLongToastSafe(R.string.permission_text_tips);
             return;
         }
 
@@ -145,6 +148,8 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                     }
                     FileDownloaderHelper.addDownloadTask(mSong, new WeakReference<>(mActivity));
                 }
+
+                FacebookReport.logSentStartDownload(mSong.getName());
             }
         });
 
@@ -170,9 +175,8 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                 songInfo.setSongName(mSong.getName());
                                 songInfo.setDuration(mSong.getDuration());
                                 songInfo.setSongCover(mSong.getImageUrl());
-                                PlayingDetailActivity.launch(App.sContext, songInfo);
 
-                                Utils.showLongToastSafe(R.string.music_playing);
+                                PlayingDetailActivity.launch(App.sContext, songInfo);
                             }
                         });
                     } else {
@@ -188,10 +192,12 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                         songInfo.setSongCover(mSong.getImageUrl());
                         songInfo.setSongName(mSong.getName());
                         songInfo.setDuration(mSong.getDuration());
-                        PlayingDetailActivity.launch(App.sContext, songInfo);
 
-                        Utils.showLongToastSafe(R.string.music_playing);
+                        PlayingDetailActivity.launch(App.sContext, songInfo);
+                        LogUtil.v(TAG, " getPlayUrl ::" + mSong.getPlayUrl());
                     }
+
+                    FacebookReport.logSentPlayMusic();
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
@@ -219,6 +225,15 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
         });
 
         FrameLayout adContainer = rootView.findViewById(R.id.ad_container);
+
+        NativeAd nativeAd = FBAdUtils.nextNativieAd();
+        if (nativeAd == null || !nativeAd.isAdLoaded()) {
+            nativeAd = FBAdUtils.getNativeAd();
+        }
+        if (nativeAd != null && nativeAd.isAdLoaded()) {
+            adContainer.removeAllViews();
+            adContainer.addView(FBAdUtils.setUpItemNativeAdView(mActivity, nativeAd, true));
+        }
     }
 
     public void showBottomSheetFragment(FragmentManager manager) {

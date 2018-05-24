@@ -20,6 +20,9 @@ import com.mp3downloader.App;
 import com.mp3downloader.R;
 import com.mp3downloader.model.MusicSuggistion;
 import com.mp3downloader.router.Router;
+import com.mp3downloader.util.Constants;
+import com.mp3downloader.util.FBAdUtils;
+import com.mp3downloader.util.FacebookReport;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.Utils;
 
@@ -56,6 +59,9 @@ public class MainActivity extends SupportActivity {
         if (findFragment(HomeFragment.class) == null) {
             loadRootFragment(R.id.fl_container, HomeFragment.newInstance());
         }
+
+        FBAdUtils.showAdDialog(this, Constants.NATIVE_ID);
+        Utils.checkAndRequestPermissions(this);
 
         mSearchView = findViewById(R.id.floating_search_view);
 
@@ -162,6 +168,17 @@ public class MainActivity extends SupportActivity {
                 }
             }
         });
+
+        if (App.sPreferences.getBoolean("isCanRefer", true)) {
+            mSearchView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    App.sPreferences.edit().putBoolean("isCanRefer", false).apply();
+                }
+            }, 1000);
+        }
+
+        FacebookReport.logSentMainPageShow();
     }
 
     private void showDisclaimers() {
@@ -290,5 +307,6 @@ public class MainActivity extends SupportActivity {
         if (mSearchTask != null) {
             mSearchTask.cancel(true);
         }
+        FBAdUtils.loadFBAds(Constants.NATIVE_ID);
     }
 }

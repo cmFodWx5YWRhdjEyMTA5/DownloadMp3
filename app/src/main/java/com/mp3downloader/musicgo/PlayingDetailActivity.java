@@ -20,12 +20,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.ads.Ad;
 import com.lzx.musiclibrary.aidl.listener.OnPlayerEventListener;
 import com.lzx.musiclibrary.aidl.model.SongInfo;
 import com.lzx.musiclibrary.manager.MusicManager;
 import com.lzx.musiclibrary.manager.TimerTaskManager;
 import com.mp3downloader.App;
 import com.mp3downloader.R;
+import com.mp3downloader.util.Constants;
+import com.mp3downloader.util.FBAdUtils;
 import com.mp3downloader.util.FormatUtil;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.SimpleSeekBarChangeListener;
@@ -108,7 +111,7 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         if (songInfos != null) {
             MusicManager.get().playMusic(songInfos, position);
         } else {
-            MusicManager.get().playMusicByInfo(mSongInfo);
+            MusicManager.get().playMusicByInfo(mSongInfo, true);
         }
 
         mTimerTaskManager = new TimerTaskManager();
@@ -119,10 +122,17 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
             }
         });
 
-
         if (MusicManager.isPaused()) {
             MusicManager.get().resumeMusic();
         }
+
+        FBAdUtils.interstitialLoad(Constants.CHA_YE_HEIGH_ID, new FBAdUtils.FBInterstitialAdListener(){
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                super.onInterstitialDismissed(ad);
+                FBAdUtils.destoryInterstitial();
+            }
+        });
     }
 
     private void updateUI(SongInfo music) {
@@ -319,6 +329,8 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
     public void onError(String errorMsg) {
         Toast.makeText(App.sContext, R.string.play_error, Toast.LENGTH_SHORT).show();
         resetCoverAnim();
+        mLoadingPB.setVisibility(View.GONE);
+        setBtnCanClick();
     }
 
     @Override
@@ -339,5 +351,10 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         MusicManager.get().removePlayerEventListener(this);
         MusicManager.get().stopMusic();
         MusicManager.get().stopNotification();
+
+        if (FBAdUtils.isInterstitialLoaded()) {
+            FBAdUtils.showInterstitial();
+        }
+        FBAdUtils.destoryInterstitial();
     }
 }

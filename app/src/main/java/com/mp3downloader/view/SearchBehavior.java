@@ -26,7 +26,6 @@ public class SearchBehavior extends CoordinatorLayout.Behavior<FloatingSearchVie
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, FloatingSearchView child, View dependency) {
-        LogUtil.v("xx", "xxxxxx layoutDependsOn1111 " + dependency);
         if (dependency instanceof AppBarLayout) {
             ViewCompat.setElevation(child, ViewCompat.getElevation(dependency));
             return true;
@@ -36,7 +35,6 @@ public class SearchBehavior extends CoordinatorLayout.Behavior<FloatingSearchVie
 
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingSearchView child, View dependency) {
-        LogUtil.v("xx", "xxxxxx onDependentViewChanged2222 " + dependency.getY() + " dependency " + dependency);
         if (dependency instanceof AppBarLayout) {
             child.setTranslationY(dependency.getY());
             return true;

@@ -17,10 +17,14 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.facebook.ads.NativeAd;
 import com.mp3downloader.App;
 import com.mp3downloader.R;
 import com.mp3downloader.model.DownloadTask;
 import com.mp3downloader.provider.DownloadDao;
+import com.mp3downloader.util.AdViewWrapperAdapter;
+import com.mp3downloader.util.Constants;
+import com.mp3downloader.util.FBAdUtils;
 import com.mp3downloader.util.FileDownloaderHelper;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.Utils;
@@ -47,11 +51,14 @@ public class DownloadFragment extends SupportFragment {
 
     private AsyncTask mLoadTask;
 
+    private ImageView mEmptyIV;
+
+    private AdViewWrapperAdapter mAdViewWrapperAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.download_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.download_fragment, container, false);
     }
 
     @Override
@@ -59,7 +66,10 @@ public class DownloadFragment extends SupportFragment {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = view.findViewById(R.id.download_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.sContext));
-        mRecyclerView.setAdapter(mCommonAdapter);
+        mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
+        mRecyclerView.setAdapter(mAdViewWrapperAdapter);
+
+        mEmptyIV = view.findViewById(R.id.empty_iv);
     }
 
     @Override
@@ -95,10 +105,30 @@ public class DownloadFragment extends SupportFragment {
             @Override
             protected void onPostExecute(ArrayList<DownloadTask> list) {
                 super.onPostExecute(list);
+                if (list.size() == 0) {
+                    mEmptyIV.setVisibility(View.VISIBLE);
+                } else {
+                    mEmptyIV.setVisibility(View.GONE);
+                }
+
+                mAdViewWrapperAdapter.clearAdView();
+
+                NativeAd nativeAd = FBAdUtils.nextNativieAd();
+                if (nativeAd == null || !nativeAd.isAdLoaded()) {
+                    nativeAd = FBAdUtils.getNativeAd();
+                }
+
+                if (nativeAd != null && nativeAd.isAdLoaded() && list.size() > 3) {
+                    int offsetStart = mAdViewWrapperAdapter.getItemCount();
+                    mAdViewWrapperAdapter.addAdView(offsetStart + 2, new AdViewWrapperAdapter.
+                            AdViewItem(FBAdUtils.setUpItemNativeAdView(_mActivity, nativeAd), offsetStart + 2));
+                }
+
                 Collections.reverse(list);
                 mArrayList.clear();
                 mArrayList.addAll(list);
-                mCommonAdapter.notifyDataSetChanged();
+
+                mAdViewWrapperAdapter.notifyDataSetChanged();
             }
         }.executeOnExecutor(Utils.sExecutorService2);
     }
@@ -134,6 +164,7 @@ public class DownloadFragment extends SupportFragment {
                 @Override
                 public void onClick(View v) {
                     Utils.playMusic(App.sContext, baseModel.getPlayUrl());
+                    FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID);
                 }
             });
             holder.setOnLongClickListener(R.id.list_item, new View.OnLongClickListener() {

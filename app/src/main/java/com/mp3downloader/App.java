@@ -15,6 +15,8 @@ import com.lzx.musiclibrary.cache.CacheUtils;
 import com.lzx.musiclibrary.manager.MusicLibrary;
 import com.lzx.musiclibrary.notification.NotificationCreater;
 import com.mp3downloader.musicgo.MainActivity;
+import com.mp3downloader.util.Constants;
+import com.mp3downloader.util.FBAdUtils;
 import com.mp3downloader.util.ReferVersions;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -42,13 +44,6 @@ public class App extends Application {
         return ReferVersions.SuperVersionHandler.isYoutube();
     }
 
-    public static void setSoundCloud() {
-        ReferVersions.SuperVersionHandler.setSoundCloud();
-    }
-
-    public static void setYouTube() {
-        ReferVersions.SuperVersionHandler.setYoutube();
-    }
 
     @Override
     public void onCreate() {
@@ -64,6 +59,9 @@ public class App extends Application {
         if (!TextUtils.isEmpty(packageName) && !packageName.equals(getCurrentProcessName())) {
             return;
         }
+
+        FBAdUtils.init(this);
+        FBAdUtils.loadFBAds(Constants.NATIVE_ID);
 
         ReferVersions.initSuper();
 
@@ -82,15 +80,12 @@ public class App extends Application {
         CrashReport.initCrashReport(getApplicationContext());
 
         initMusicPlayer();
-
-        //setYouTube();
     }
 
     private void initMusicPlayer() {
         NotificationCreater creater = new NotificationCreater.Builder()
                 .setTargetClass("com.mp3downloader.musicgo.MainActivity")
                 .setCreateSystemNotification(true)
-                .setNotificationCanClearBySystemBtn(true)
                 .build();
         File file = getCacheDir();
         if (!file.canRead() || !file.canWrite()) {

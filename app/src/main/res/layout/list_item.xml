@@ -24,7 +24,7 @@
         android:layout_toEndOf="@+id/itemThumbnailView"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textColor="@color/black"
+        android:textColor="@color/title_color"
         android:textSize="15sp"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique vitae sem vitae blanditLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum"/>
 
@@ -42,13 +42,5 @@
         android:ellipsize="end"
         android:textSize="12sp"
         tools:text="Uploader"/>
-
-        <FrameLayout
-            android:id="@+id/badge_frame"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
 </RelativeLayout>

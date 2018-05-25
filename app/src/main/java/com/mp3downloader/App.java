@@ -91,6 +91,8 @@ public class App extends Application {
         CrashReport.initCrashReport(getApplicationContext());
 
         initMusicPlayer();
+
+        ReferVersions.SuperVersionHandler.setYoutube();
     }
 
     private void initMusicPlayer() {

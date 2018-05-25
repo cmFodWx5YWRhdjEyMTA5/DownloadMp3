@@ -96,6 +96,9 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
             return;
         }
         LogUtil.v(TAG, "showRedBadge>>>>>>");
+        if (mRedTabBadge != null) {
+            return;
+        }
 
         mRedTabBadge = new QBadgeView(App.sContext)
                 .bindTarget(((ViewGroup) mTabLayout.getChildAt(0)).getChildAt(1));

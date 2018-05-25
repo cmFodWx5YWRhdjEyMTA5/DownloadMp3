@@ -12,6 +12,7 @@ import com.mp3downloader.util.Constants;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -32,6 +33,14 @@ public class YouTubeApi implements IMusicApi{
     private static YouTubeService sYouTubeService;
 
     private String nextPage = "";
+
+    private static final Random SRANDOM = new Random();
+
+    private static final String KEYS[] = new String[]{
+            "AIzaSyA25ZmI3kQXf50eN3qI_xF_Bw0eMg7bfdA",
+            "AIzaSyACXAuWNTQJvDZQ-Mji9IT43ehHqKz6O-o",
+            "AIzaSyB2x6BIvhdBparpLBGOROWI8g9dccwSxsU"
+    };
 
     private static Cache createDefaultCache(Context context) {
         File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp/");
@@ -63,11 +72,15 @@ public class YouTubeApi implements IMusicApi{
         return sYouTubeService;
     }
 
+    private String getDevelopKey() {
+        return KEYS[SRANDOM.nextInt(KEYS.length)];
+    }
+
     @Override
     public List<BaseModel> getRecommondMusic(Context context) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
-            Call<YouTubeModel> call = youTubeService.getYoutubeMusic(nextPage, Constants.DEVELOPER_KEY);
+            Call<YouTubeModel> call = youTubeService.getYoutubeMusic(nextPage, getDevelopKey());
             Response<YouTubeModel> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().list.size() > 0) {
@@ -85,7 +98,7 @@ public class YouTubeApi implements IMusicApi{
     public List<BaseModel> searchMusic(Context context, String query) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
-            Call<YouTubeModel> call = youTubeService.searchYoutubeMusic(query, nextPage, Constants.DEVELOPER_KEY);
+            Call<YouTubeModel> call = youTubeService.searchYoutubeMusic(query, nextPage, getDevelopKey());
             Response<YouTubeModel> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().list.size() > 0) {

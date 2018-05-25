@@ -273,7 +273,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
                     mPaginate.setHasMoreDataToLoad(true);
                 }
             }
-        }.executeOnExecutor(Utils.sExecutorService);
+        }.executeOnExecutor(Utils.sExecutorService2);
     }
 
     private void showErrorView() {

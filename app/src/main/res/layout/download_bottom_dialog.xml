@@ -131,7 +131,7 @@
 </LinearLayout>
 
     <LinearLayout
-        android:background="#4c000000"
+        android:background="#A6000000"
         android:id="@+id/parse_load_linear"
         android:gravity="center"
         android:visibility="gone"
@@ -149,7 +149,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/parse_url"
             android:textSize="11sp"
-            android:textColor="@color/title_color"
+            android:textColor="@color/material_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

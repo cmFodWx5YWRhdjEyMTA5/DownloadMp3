@@ -19,7 +19,9 @@ import com.mp3downloader.musicgo.MainActivity;
 import com.mp3downloader.musicgo.SplashActivity;
 import com.mp3downloader.util.Constants;
 import com.mp3downloader.util.FBAdUtils;
+import com.mp3downloader.util.FacebookReport;
 import com.mp3downloader.util.ReferVersions;
+import com.rating.RatingActivity;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
@@ -92,7 +94,20 @@ public class App extends Application {
 
         initMusicPlayer();
 
-        ReferVersions.SuperVersionHandler.setYoutube();
+        RatingActivity.setRatingClickListener(new RatingActivity.RatingClickListener() {
+            @Override
+            public void onClickFiveStart() {
+                FacebookReport.logSentRating("five_start");
+            }
+
+            @Override
+            public void onClickReject() {
+                FacebookReport.logSentRating("no_rating");
+            }
+        });
+
+        //ReferVersions.SuperVersionHandler.setYoutube();
+        ReferVersions.SuperVersionHandler.setSoundCloud();
     }
 
     private void initMusicPlayer() {

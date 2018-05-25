@@ -59,4 +59,8 @@
 
     <string name="download_rating">For you to download a music, please give me five stars.</string>
     <string name="parse_url_failure">Parse downloading URL failure !</string>
+
+    <string name="share_text">Share</string>
+
+    <string name="share_content">https://play.google.com/store/apps/details?id=%s Download the App quickly.</string>
 </resources>

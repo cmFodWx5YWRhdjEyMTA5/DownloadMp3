@@ -9,4 +9,6 @@ public interface IHomeFragment {
     void showRedBadge();
 
     void hideRedBadge();
+
+    void tabLayoutBg(boolean isYoutube);
 }

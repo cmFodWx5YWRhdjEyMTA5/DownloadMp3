@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <View
+        android:id="@+id/status_bar_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"
         android:background="@color/colorPrimary" />
@@ -24,6 +25,7 @@
             app:elevation="0dp">
 
             <LinearLayout
+                android:id="@+id/top_bar_linear"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:background="@color/colorPrimary"

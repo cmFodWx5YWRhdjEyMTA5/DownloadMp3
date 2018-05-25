@@ -1,5 +1,6 @@
 package com.mp3downloader.musicgo;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -143,7 +144,7 @@ public class MainActivity extends SupportActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
+                        setMainTopBarBg(true);
                         Utils.showLongToastSafe(R.string.switch_ytb_search);
                         break;
                     case R.id.action_rating:
@@ -162,8 +163,20 @@ public class MainActivity extends SupportActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        setMainTopBarBg(false);
 
                         Utils.showLongToastSafe(R.string.switch_sc_search);
+                        break;
+                    case R.id.action_share:
+                        try {
+                            Intent textIntent = new Intent(Intent.ACTION_SEND);
+                            textIntent.setType("text/plain");
+                            textIntent.putExtra(Intent.EXTRA_TEXT,
+                                    String.format(getString(R.string.share_content), getPackageName()));
+                            startActivity(Intent.createChooser(textIntent, getString(R.string.share_text)));
+                        } catch (Throwable e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
             }
@@ -179,6 +192,42 @@ public class MainActivity extends SupportActivity {
         }
 
         FacebookReport.logSentMainPageShow();
+
+        mStatuBarView = findViewById(R.id.status_bar_view);
+        mTopBarLinear = findViewById(R.id.top_bar_linear);
+
+        if (App.isYoutube() && getSearchType() == YOUTUBE_TYPE) {
+            setMainTopBarBg(true);
+        } else if (App.isYoutube() && getSearchType() == SOUNDClOUND_TYPE) {
+            setMainTopBarBg(false);
+        }
+    }
+
+    private View mStatuBarView;
+    private View mTopBarLinear;
+
+    private void setMainTopBarBg(boolean isYoutube) {
+        if (isYoutube) {
+            mStatuBarView.setBackgroundColor(ContextCompat
+                    .getColor(App.sContext, R.color.colorPrimary));
+            mTopBarLinear.setBackgroundColor(ContextCompat
+                    .getColor(App.sContext, R.color.colorPrimary));
+            try {
+                Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            mStatuBarView.setBackgroundColor(ContextCompat
+                    .getColor(App.sContext, R.color.soundcound_primary));
+            mTopBarLinear.setBackgroundColor(ContextCompat
+                    .getColor(App.sContext, R.color.soundcound_primary));
+            try {
+                Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void showDisclaimers() {

@@ -44,6 +44,15 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
         return view;
     }
 
+    @Override
+    public void tabLayoutBg(boolean isYoutube) {
+        if (isYoutube) {
+            mTabLayout.setBackgroundColor(ContextCompat.getColor(App.sContext, R.color.colorPrimary));
+        } else {
+            mTabLayout.setBackgroundColor(ContextCompat.getColor(App.sContext, R.color.soundcound_primary));
+        }
+    }
+
     private Badge mRedTabBadge;
 
     private ViewPager mViewPager;
@@ -79,6 +88,12 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
 
         if (App.sPreferences.getBoolean("isNewDownload", false)) {
             showRedBadge();
+        }
+
+        if (App.isYoutube() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+            tabLayoutBg(true);
+        } else if (App.isYoutube() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+            tabLayoutBg(false);
         }
     }
 

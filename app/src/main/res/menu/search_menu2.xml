@@ -14,8 +14,8 @@
         android:orderInCategory="1"
         app:showAsAction="never"
         />
-    <item android:id="@+id/action_declare"
-        android:title="@string/declare_text"
+    <item android:id="@+id/action_share"
+        android:title="@string/share_text"
         android:orderInCategory="2"
         app:showAsAction="never"
         />

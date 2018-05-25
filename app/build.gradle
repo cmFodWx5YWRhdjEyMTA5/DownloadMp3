@@ -11,12 +11,35 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("download_music.jks")
+            storePassword "!@c2018"
+            keyAlias "musicdownload"
+            keyPassword "!@c2018"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -74,5 +97,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     compile(name: 'rating-release2', ext: 'aar')
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 }

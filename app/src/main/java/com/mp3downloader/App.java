@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
 import com.liulishuo.filedownloader.FileDownloader;
@@ -47,6 +48,11 @@ public class App extends Application {
         return ReferVersions.SuperVersionHandler.isYoutube();
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

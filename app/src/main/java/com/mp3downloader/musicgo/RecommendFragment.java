@@ -97,6 +97,7 @@ public class RecommendFragment extends SupportFragment {
                 .centerCrop()
                 .placeholder(R.drawable.default_thumbnail)
                 .error(R.drawable.default_thumbnail);
+
         @Override
         protected void convert(ViewHolder holder, final BaseModel baseModel, int position) {
             ImageView itemThumbnialIV = holder.getView(R.id.itemThumbnailView);

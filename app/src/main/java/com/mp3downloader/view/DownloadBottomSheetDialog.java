@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -67,9 +68,14 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
         mParseTask = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... strings) {
-                StreamMetaData streamMetaData = new ParseStreamMetaData(strings[0]).getStreamMetaDataList()
-                        .getDesiredStream();
-                return streamMetaData.getUri().toString();
+                try {
+                    StreamMetaData streamMetaData = new ParseStreamMetaData(strings[0]).getStreamMetaDataList()
+                            .getDesiredStream();
+                    return streamMetaData.getUri().toString();
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
 
             @Override
@@ -133,7 +139,12 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                     e.printStackTrace();
                                 }
                             }
-                            FileDownloaderHelper.addDownloadTask(mSong, new WeakReference<>(mActivity));
+                            if (!TextUtils.isEmpty(mSong.getDownloadUrl())) {
+                                FileDownloaderHelper.addDownloadTask(mSong,
+                                        new WeakReference<>(mActivity));
+                            } else {
+                                Utils.showLongToastSafe(R.string.parse_url_failure);
+                            }
                         }
                     });
                 } else {
@@ -146,7 +157,11 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                     } catch (Throwable e) {
                         e.printStackTrace();
                     }
-                    FileDownloaderHelper.addDownloadTask(mSong, new WeakReference<>(mActivity));
+                    if (!TextUtils.isEmpty(mSong.getDownloadUrl())) {
+                        FileDownloaderHelper.addDownloadTask(mSong, new WeakReference<>(mActivity));
+                    } else {
+                        Utils.showLongToastSafe(R.string.parse_url_failure);
+                    }
                 }
 
                 FacebookReport.logSentStartDownload(mSong.getName());
@@ -168,7 +183,10 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                         e.printStackTrace();
                                     }
                                 }
-
+                                if (TextUtils.isEmpty(mSong.getPlayUrl())) {
+                                    Utils.showLongToastSafe(R.string.parse_url_failure);
+                                    return;
+                                }
                                 SongInfo songInfo = new SongInfo();
                                 songInfo.setSongId(((YouTubeModel.Snippet) mSong).vid);
                                 songInfo.setSongUrl(mSong.getPlayUrl());
@@ -184,6 +202,11 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                             dismiss();
                         } catch (Throwable e) {
                             e.printStackTrace();
+                        }
+
+                        if (TextUtils.isEmpty(mSong.getPlayUrl())) {
+                            Utils.showLongToastSafe(R.string.parse_url_failure);
+                            return;
                         }
 
                         SongInfo songInfo = new SongInfo();

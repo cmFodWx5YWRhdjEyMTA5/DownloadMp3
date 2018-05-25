@@ -64,7 +64,7 @@
             android:id="@+id/music_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/colorAccent" />
+            android:src="@color/black" />
 
         <View
             android:layout_width="40dp"
@@ -99,7 +99,8 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="43dp">
 
-        <SeekBar
+
+        <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,6 +108,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_toLeftOf="@+id/total_time"
+            android:layout_toStartOf="@id/total_time"
+            android:layout_toEndOf="@id/start_time"
             android:layout_toRightOf="@+id/start_time"
             android:maxHeight="1.5dp"
             android:paddingEnd="7.5dp"
@@ -114,7 +117,7 @@
             android:paddingRight="7.5dp"
             android:paddingStart="7.5dp"
             android:progressDrawable="@drawable/seekbar_progress"
-            android:secondaryProgressTint="@color/colorAccent"
+            android:secondaryProgressTint="@color/colorPrimary_60"
             android:thumb="@drawable/seekbar_thumb" />
 
         <TextView

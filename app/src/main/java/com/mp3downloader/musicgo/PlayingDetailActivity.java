@@ -5,7 +5,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDelegate;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.ads.Ad;
 import com.lzx.musiclibrary.aidl.listener.OnPlayerEventListener;
 import com.lzx.musiclibrary.aidl.model.SongInfo;
@@ -141,7 +139,6 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         }
         mSeekBar.setMax((int) music.getDuration());
         mSongName.setText(music.getSongName());
-        mTotalTime.setText(FormatUtil.formatMusicTime(music.getDuration()));
 
         Glide.with(this).load(music.getSongCover()).into(mMusicCover);
         Glide.with(this).load(music.getSongCover()).into(mBlueBg);
@@ -181,7 +178,7 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         });
     }
 
-    private void setBtnCanClick() {
+    private void setBtnCanEnabled() {
         mBtnPre.setEnabled(true);
         mBtnPlayPause.setEnabled(true);
         mBtnNext.setEnabled(true);
@@ -330,14 +327,16 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         Toast.makeText(App.sContext, R.string.play_error, Toast.LENGTH_SHORT).show();
         resetCoverAnim();
         mLoadingPB.setVisibility(View.GONE);
-        setBtnCanClick();
+        setBtnCanEnabled();
+        LogUtil.e(TAG, " onError errorMsg " + errorMsg);
     }
 
     @Override
     public void onAsyncLoading(boolean isFinishLoading) {
         LogUtil.v(TAG, "onAsyncLoading  isFinishLoading " + isFinishLoading);
         if (!isFinishLoading) {
-            setBtnCanClick();
+            setBtnCanEnabled();
+            mTotalTime.setText(FormatUtil.formatMusicTime(MusicManager.get().getDuration()));
             mLoadingPB.setVisibility(View.GONE);
         }
     }

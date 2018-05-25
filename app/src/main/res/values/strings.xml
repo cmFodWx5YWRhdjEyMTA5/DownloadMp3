@@ -58,4 +58,5 @@
     <string name="fb_login_protocol_scheme">fb237410413694951</string>
 
     <string name="download_rating">For you to download a music, please give me five stars.</string>
+    <string name="parse_url_failure">Parse downloading URL failure !</string>
 </resources>

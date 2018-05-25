@@ -149,7 +149,7 @@
             android:layout_marginTop="4dp"
             android:text="@string/parse_url"
             android:textSize="11sp"
-            android:textColor="@color/des_color"
+            android:textColor="@color/title_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

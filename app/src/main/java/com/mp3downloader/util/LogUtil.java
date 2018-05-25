@@ -18,7 +18,7 @@ public class LogUtil {
 
     public static void e(String tag, String message) {
         if (BuildConfig.DEBUG) {
-            Log.v(tag, message);
+            Log.e(tag, message);
         }
     }
 }

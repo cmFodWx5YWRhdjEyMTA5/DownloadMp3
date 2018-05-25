@@ -139,8 +139,10 @@ public class FileDownloaderHelper {
                             }
                         });
 
-                        RatingActivity.launch(App.sContext, "",
-                                App.sContext.getString(R.string.download_rating));
+                        if (App.isYoutube() || App.isSoundCloud()) {
+                            RatingActivity.launch(App.sContext, "",
+                                    App.sContext.getString(R.string.download_rating));
+                        }
 
                         FacebookReport.logSentDownloadFinish(song.getName());
                     } else {

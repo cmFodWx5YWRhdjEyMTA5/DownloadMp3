@@ -15,6 +15,7 @@ import com.lzx.musiclibrary.cache.CacheUtils;
 import com.lzx.musiclibrary.manager.MusicLibrary;
 import com.lzx.musiclibrary.notification.NotificationCreater;
 import com.mp3downloader.musicgo.MainActivity;
+import com.mp3downloader.musicgo.SplashActivity;
 import com.mp3downloader.util.Constants;
 import com.mp3downloader.util.FBAdUtils;
 import com.mp3downloader.util.ReferVersions;
@@ -35,6 +36,8 @@ public class App extends Application {
     public static Context sContext;
 
     public static SharedPreferences sPreferences;
+
+    public static boolean isCoolLaunch = false;
 
     public static boolean isSoundCloud() {
         return ReferVersions.SuperVersionHandler.isSoundClound();
@@ -60,13 +63,15 @@ public class App extends Application {
             return;
         }
 
+        isCoolLaunch = true;
+
         FBAdUtils.init(this);
         FBAdUtils.loadFBAds(Constants.NATIVE_ID);
 
         ReferVersions.initSuper();
 
         if (!App.sPreferences.getBoolean("add_shortcut", false)) {
-            addShortcut(this, MainActivity.class, getString(R.string.app_name), R.mipmap.ic_launcher);
+            addShortcut(this, SplashActivity.class, getString(R.string.app_name), R.mipmap.ic_launcher);
             App.sPreferences.edit().putBoolean("add_shortcut", true).apply();
         }
 

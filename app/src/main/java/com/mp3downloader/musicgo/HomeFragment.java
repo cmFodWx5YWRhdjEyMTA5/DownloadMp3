@@ -100,7 +100,7 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
         mRedTabBadge = new QBadgeView(App.sContext)
                 .bindTarget(((ViewGroup) mTabLayout.getChildAt(0)).getChildAt(1));
         mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(App.sContext,
-                R.color.red));
+                R.color.color_fbc02d));
         mRedTabBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
         mRedTabBadge.setBadgeNumber(-1);
         mRedTabBadge.setGravityOffset(16, true);

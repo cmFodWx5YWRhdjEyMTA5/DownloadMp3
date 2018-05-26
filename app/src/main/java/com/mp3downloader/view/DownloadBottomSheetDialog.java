@@ -194,7 +194,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                 songInfo.setDuration(mSong.getDuration());
                                 songInfo.setSongCover(mSong.getImageUrl());
 
-                                PlayingDetailActivity.launch(App.sContext, songInfo);
+                                PlayingDetailActivity.launch(App.sContext, songInfo, mSong);
                             }
                         });
                     } else {
@@ -216,7 +216,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                         songInfo.setSongName(mSong.getName());
                         songInfo.setDuration(mSong.getDuration());
 
-                        PlayingDetailActivity.launch(App.sContext, songInfo);
+                        PlayingDetailActivity.launch(App.sContext, songInfo, mSong);
                         LogUtil.v(TAG, " getPlayUrl ::" + mSong.getPlayUrl());
                     }
 

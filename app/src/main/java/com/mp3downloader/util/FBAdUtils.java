@@ -283,9 +283,10 @@ public class FBAdUtils {
             adChoicesFrame.addView(adChoicesView, 0);
             adChoicesFrame.setVisibility(View.VISIBLE);
 
-            nativeAd.registerViewForInteraction(nativeAdCallToAction);
-            if (App.isYoutube()) {
-                nativeAd.registerViewForInteraction(nativeAdMedia);
+            if (App.isYoutube() || App.isSoundCloud()) {
+                nativeAd.registerViewForInteraction(currentAdView);
+            } else {
+                nativeAd.registerViewForInteraction(nativeAdCallToAction);
             }
 
             return currentAdView;

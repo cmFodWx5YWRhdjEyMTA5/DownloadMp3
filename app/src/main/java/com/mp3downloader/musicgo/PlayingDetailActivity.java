@@ -2,12 +2,14 @@ package com.mp3downloader.musicgo;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -21,12 +23,15 @@ import com.bumptech.glide.Glide;
 import com.facebook.ads.Ad;
 import com.lzx.musiclibrary.aidl.listener.OnPlayerEventListener;
 import com.lzx.musiclibrary.aidl.model.SongInfo;
+import com.lzx.musiclibrary.constans.PlayMode;
 import com.lzx.musiclibrary.manager.MusicManager;
 import com.lzx.musiclibrary.manager.TimerTaskManager;
 import com.mp3downloader.App;
 import com.mp3downloader.R;
+import com.mp3downloader.model.BaseModel;
 import com.mp3downloader.util.Constants;
 import com.mp3downloader.util.FBAdUtils;
+import com.mp3downloader.util.FileDownloaderHelper;
 import com.mp3downloader.util.FormatUtil;
 import com.mp3downloader.util.LogUtil;
 import com.mp3downloader.util.SimpleSeekBarChangeListener;
@@ -34,6 +39,7 @@ import com.mp3downloader.util.Utils;
 import com.mp3downloader.view.CircleImageView;
 import com.plattysoft.leonids.ParticleSystem;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +59,8 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
 
     private TextView mSongName, mStartTime, mTotalTime;
     private CircleImageView mMusicCover;
-    private ImageView mBlueBg, mBtnPlayPause, mBtnPre, mBtnNext;
+    private ImageView mBlueBg, mBtnPlayPause, mBtnPre, mBtnNext, mBtnDownload;
+    private AppCompatImageView mBtnLoop;
     private SeekBar mSeekBar;
     private MaterialProgressBar mLoadingPB;
 
@@ -74,12 +81,15 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         context.startActivity(intent);
     }
 
-    public static void launch(Context context, SongInfo songInfo) {
+    public static void launch(Context context, SongInfo songInfo, BaseModel baseModel) {
         Intent intent = new Intent(context, PlayingDetailActivity.class);
         intent.putExtra("songInfo", songInfo);
+        intent.putExtra("basemodel", baseModel);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
+
+    private BaseModel mBaseModel;
 
     private void initIntent() {
         songInfos = getIntent().getParcelableArrayListExtra("SongInfos");
@@ -88,6 +98,7 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
             position = getIntent().getIntExtra("position", position);
             mSongInfo = songInfos.get(position);
         }
+        mBaseModel = getIntent().getParcelableExtra("basemodel");
     }
 
     @Override
@@ -137,7 +148,6 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         if (music == null) {
             return;
         }
-        mSeekBar.setMax((int) music.getDuration());
         mSongName.setText(music.getSongName());
 
         Glide.with(this).load(music.getSongCover()).into(mMusicCover);
@@ -158,6 +168,37 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         mStartTime = findViewById(R.id.start_time);
         mTotalTime = findViewById(R.id.total_time);
         mLoadingPB = findViewById(R.id.loading_play);
+        mBtnLoop = findViewById(R.id.song_loop_iv);
+        mBtnLoop.setEnabled(false);
+        LogUtil.v(TAG, "MusicManager.get().getPlayMode() " + MusicManager.get().getPlayMode());
+        if (MusicManager.get().getPlayMode() == PlayMode.PLAY_IN_LIST_LOOP) {
+            mBtnLoop.setImageResource(R.drawable.ic_play_mode_list);
+            MusicManager.get().setPlayMode(PlayMode.PLAY_IN_LIST_LOOP);
+        } else {
+            mBtnLoop.setImageResource(R.drawable.ic_play_mode_single);
+            MusicManager.get().setPlayMode(PlayMode.PLAY_IN_SINGLE_LOOP);
+        }
+        mBtnLoop.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                LogUtil.v(TAG, "MusicManager.get().getPlayMode() " + MusicManager.get().getPlayMode());
+                if (MusicManager.get().getPlayMode() != PlayMode.PLAY_IN_LIST_LOOP) {
+                    mBtnLoop.setImageResource(R.drawable.ic_play_mode_list);
+                    MusicManager.get().setPlayMode(PlayMode.PLAY_IN_LIST_LOOP);
+                } else {
+                    mBtnLoop.setImageResource(R.drawable.ic_play_mode_single);
+                    MusicManager.get().setPlayMode(PlayMode.PLAY_IN_SINGLE_LOOP);
+                }
+            }
+        });
+        mBtnDownload = findViewById(R.id.play_download_iv);
+        mBtnDownload.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                FileDownloaderHelper.addDownloadTask(mBaseModel,
+                        new WeakReference<Activity>(PlayingDetailActivity.this));
+            }
+        });
 
         mBtnPlayPause.setOnClickListener(this);
         mBtnPre.setOnClickListener(this);
@@ -182,6 +223,7 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         mBtnPre.setEnabled(true);
         mBtnPlayPause.setEnabled(true);
         mBtnNext.setEnabled(true);
+        mBtnLoop.setEnabled(true);
     }
 
 
@@ -311,6 +353,7 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
 
     @Override
     public void onPlayCompletion() {
+        mTimerTaskManager.stopSeekBarUpdate();
         mBtnPlayPause.setImageResource(R.drawable.ic_play);
         mSeekBar.setProgress(0);
         mStartTime.setText("00:00");
@@ -337,6 +380,7 @@ public class PlayingDetailActivity extends SupportActivity implements OnPlayerEv
         if (!isFinishLoading) {
             setBtnCanEnabled();
             mTotalTime.setText(FormatUtil.formatMusicTime(MusicManager.get().getDuration()));
+            mSeekBar.setMax(MusicManager.get().getDuration());
             mLoadingPB.setVisibility(View.GONE);
         }
     }

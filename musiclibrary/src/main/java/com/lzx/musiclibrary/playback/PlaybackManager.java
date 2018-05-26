@@ -155,6 +155,8 @@ public class PlaybackManager implements Playback.Callback {
      * @param amount 负数为上一首，正数为下一首
      */
     public void playNextOrPre(int amount) {
+        boolean isPlayModeSaveLocal = (boolean) SPUtils.get(mQueueManager.getContext(), KEY_PLAY_MODE_IS_SAVE_LOCAL, false);
+        currPlayMode = isPlayModeSaveLocal ? mPlayMode.getCurrPlayMode(mQueueManager.getContext()) : mPlayMode.getCurrPlayMode();
         switch (currPlayMode) {
             //单曲循环
             case PlayMode.PLAY_IN_SINGLE_LOOP:

@@ -179,7 +179,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="48dp"
         android:layout_toLeftOf="@id/ic_play_frame"
-        android:adjustViewBounds="true"
         app:srcCompat="@drawable/ic_play_last" />
 
     <android.support.v7.widget.AppCompatImageView
@@ -191,7 +190,28 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="48dp"
         android:layout_toRightOf="@id/ic_play_frame"
-        android:adjustViewBounds="true"
         app:srcCompat="@drawable/ic_play_next" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/song_loop_iv"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/btn_pre"
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/seekBar_layout"
+        app:srcCompat="@drawable/ic_play_mode_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/play_download_iv"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/btn_next"
+        android:layout_below="@+id/seekBar_layout"
+        android:src="@drawable/ic_play_down_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -105,9 +105,6 @@ public class App extends Application {
                 FacebookReport.logSentRating("no_rating");
             }
         });
-
-        //ReferVersions.SuperVersionHandler.setYoutube();
-        ReferVersions.SuperVersionHandler.setSoundCloud();
     }
 
     private void initMusicPlayer() {

@@ -30,7 +30,7 @@
     <string name="finish_download">Download complete</string>
     <string name="error_download">Download error</string>
 
-    <string name="parse_url">Parse Download URL</string>
+    <string name="parse_url">Parse URL ...</string>
 
     <string name="declare_text">Disclaimers</string>
 

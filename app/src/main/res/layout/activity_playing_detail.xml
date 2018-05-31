@@ -29,7 +29,7 @@
          />
 
     <View
-        android:background="@color/material_white"
+        android:background="#cccccc"
         android:id="@+id/space_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"/>
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_arrow_back_black_24dp" />>
+            android:src="@drawable/ic_arrow_back_black_24dp" />
 
     </RelativeLayout>
 

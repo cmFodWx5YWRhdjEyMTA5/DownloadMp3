@@ -52,7 +52,7 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class MusicPlayerActivity extends SupportActivity implements OnPlayerEventListener, View.OnClickListener{
 
-    public static final String TAG = "PlayingDetail";
+    public static final String TAG = "MusicPlayerActivity";
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -195,6 +195,10 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
         mBtnDownload.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                if (!Utils.checkAndStoreRequestPermissions(MusicPlayerActivity.this)) {
+                    Utils.showLongToastSafe(R.string.permission_text_tips);
+                    return;
+                }
                 FileDownloaderHelper.addDownloadTask(mBaseModel,
                         new WeakReference<Activity>(MusicPlayerActivity.this));
             }

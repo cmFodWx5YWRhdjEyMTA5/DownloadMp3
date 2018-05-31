@@ -6,12 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.downloadermp3.R;
-import com.downloadermp3.ui.RecommendFragment;
+import com.downloadermp3.ui.HotFragment;
 import com.downloadermp3.ui.DownloadFragment;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -23,17 +21,17 @@ public class HomePageAdapter extends FragmentPagerAdapter {
 
     private ArrayList<SupportFragment> mList = new ArrayList<>();
 
-    private final String[] titles;
+//    private final String[] titles;
 
     public HomePageAdapter(Context context,  FragmentManager fm) {
         super(fm);
-        mList.add(new RecommendFragment());
+        mList.add(new HotFragment());
         mList.add(new DownloadFragment());
 
-        titles = new String[]{
-                context.getResources().getString(R.string.recommend),
-                context.getResources().getString(R.string.download),
-        };
+//        titles = new String[]{
+//                context.getResources().getString(R.string.recommend),
+//                context.getResources().getString(R.string.download),
+//        };
     }
 
     @Override
@@ -44,8 +42,7 @@ public class HomePageAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles[position]
-                .toUpperCase(Locale.getDefault());
+        return "";
     }
 
     @Override

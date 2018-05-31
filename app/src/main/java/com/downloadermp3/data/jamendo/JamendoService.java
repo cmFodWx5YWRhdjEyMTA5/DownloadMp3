@@ -14,8 +14,8 @@ public interface JamendoService {
 
     String ClIENT_ID = "1c5d732e";
 
-    String DOWNLOADS_TOTAL_ORDER = "downloads_total";
-    String POPULARITY_TOTAL_ORDER = "popularity_total";
+   // String DOWNLOADS_TOTAL_ORDER = "downloads_total";
+   String POPULARITY_TOTAL_ORDER = "popularity_total";
 
     int PAGE_LIMIT = 25;
 

@@ -20,7 +20,7 @@ public class Mp3DownloadProvider extends BaseContentProvider {
 
     @Override
     public String onDataBaseName() {
-        return "Download";
+        return "Mp3Download";
     }
 
     @Override

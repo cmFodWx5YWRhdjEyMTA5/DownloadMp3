@@ -39,7 +39,7 @@ import java.util.ArrayList;
 
 public class FileDownloaderHelper {
 
-    public static final String TAG = "FileDownloader";
+    public static final String TAG = "Downloader";
     public static File defaultfile = new File(Environment.getExternalStorageDirectory(),
             Mp3App.sContext.getString(R.string.app_name));
 
@@ -129,7 +129,7 @@ public class FileDownloaderHelper {
 
                         showCompletedNotification(task.getId(), song.getName());
 
-                        Mp3App.sPreferences.edit().putBoolean("isNewDownload", true).apply();
+                        Mp3App.sPreferences.edit().putBoolean("DownloadNew", true).apply();
                         Utils.runUIThread(new Runnable() {
                             @Override
                             public void run() {

@@ -88,7 +88,7 @@ public class ApiClient {
         try {
             JamendoService jamendoService = getJamendoService(context);
             Call<JamendoModel> call = jamendoService
-                    .getJamendoDataByOrder(JamendoService.DOWNLOADS_TOTAL_ORDER, offset);
+                    .getJamendoDataByOrder(JamendoService.POPULARITY_TOTAL_ORDER, offset);
             Response<JamendoModel> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 return response.body().arrayList;

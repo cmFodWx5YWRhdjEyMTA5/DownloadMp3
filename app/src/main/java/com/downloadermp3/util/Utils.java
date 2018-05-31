@@ -16,6 +16,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.widget.Toast;
@@ -44,6 +45,14 @@ public class Utils {
 
     public static void runSingleThread(Runnable runnable) {
         sExecutorService2.execute(runnable);
+    }
+
+
+    public static DisplayMetrics getMetrics(Activity activity) {
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        return metrics;
     }
 
     public static boolean checkAndRequestPermissions(Activity activity) {

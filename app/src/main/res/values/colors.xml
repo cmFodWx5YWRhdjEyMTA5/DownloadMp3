@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#D32F2F</color>
     <color name="colorPrimaryDark">#D32F2F</color>
-    <color name="colorAccent">#D32F2F</color>
+    <color name="colorAccent">#ff0000</color>
     <color name="colorPrimary_60">#60D32F2F</color>
 
     <color name="light_shadow_start_color">#5a000000</color>
@@ -24,6 +24,12 @@
     <color name="red">#C5025E</color>
     <color name="color_fbc02d">#FBC02D</color>
     <color name="soundcound_primary">#f8840f</color>
+
+    <color name="white">#ffffff</color>
+    <color name="white_d">#f9f9f9</color>
+    <color name="white_d_d">#c1c0c0</color>
+    <color name="white_d_d_d">#a1a1a1</color>
+    <color name="white_d_d_d_d">#818181</color>
 
 
 </resources>

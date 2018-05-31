@@ -3,6 +3,7 @@ package com.downloadermp3.ui;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -36,6 +37,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -51,27 +53,51 @@ public class MainActivity extends SupportActivity {
 
     private Badge mRedMenuBadge;
 
+    public static boolean sIsInActivity;
+
+    private static final int VOICE_RECOGNITION_REQUEST_CODE = 111;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Utils.transparence(this);
-        setContentView(R.layout.activity_main);
-
-        if (findFragment(HomeFragment.class) == null) {
-            loadRootFragment(R.id.fl_container, HomeFragment.newInstance());
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
+            ArrayList<String> results = data
+                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            if (results != null && results.size() > 0) {
+                start(SearchFragment.newInstance(results.get(0)), ISupportFragment.SINGLETOP);
+            }
         }
+    }
 
-        FBAdUtils.showAdDialog(this, Constants.NATIVE_ID);
-        Utils.checkAndRequestPermissions(this);
+    private void startVoiceRecognitionActivity() {
+        try {
+            // 通过Intent传递语音识别的模式，开启语音
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            // 语言模式和自由模式的语音识别
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            // 提示语音开始
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getResources().getString(R.string.start_speech));
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault().getLanguage());
+            // 开始语音识别
+            startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    private void initSearchView() {
         mSearchView = findViewById(R.id.floating_search_view);
 
-        if (Mp3App.isYTB() && Mp3App.sPreferences.getBoolean("isShowRed", true)) {
+        mSearchView.setSearchHint(getString(R.string.app_name));
+
+        if (Mp3App.isYTB() && Mp3App.sPreferences.getBoolean("ShowRed", true)) {
             updateSearchMenu();
             mRedMenuBadge = new QBadgeView(Mp3App.sContext)
                     .bindTarget(findViewById(com.arlib.floatingsearchview.R.id.menu_view));
             mRedMenuBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
-                    R.color.colorAccent));
+                    R.color.color_fbc02d));
             mRedMenuBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
             mRedMenuBadge.setBadgeNumber(-1);
             mRedMenuBadge.setGravityOffset(6, true);
@@ -124,7 +150,7 @@ public class MainActivity extends SupportActivity {
             @Override
             public void onActionMenuItemSelected(MenuItem item) {
                 if (mRedMenuBadge != null) {
-                    Mp3App.sPreferences.edit().putBoolean("isShowRed", false).apply();
+                    Mp3App.sPreferences.edit().putBoolean("ShowRed", false).apply();
                     mSearchView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -134,6 +160,9 @@ public class MainActivity extends SupportActivity {
                     });
                 }
                 switch (item.getItemId())  {
+                    case R.id.action_voice_rec:
+                        startVoiceRecognitionActivity();
+                        break;
                     case R.id.action_youtube:
                         mSearchView.inflateOverflowMenu(R.menu.search_menu3);
                         setSearchType(YOUTUBE_TYPE);
@@ -181,6 +210,25 @@ public class MainActivity extends SupportActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Utils.transparence(this);
+        setContentView(R.layout.activity_main);
+
+        Utils.checkAndRequestPermissions(this);
+
+        sIsInActivity = true;
+
+        if (findFragment(HomeFragment.class) == null) {
+            loadRootFragment(R.id.fl_container, HomeFragment.newInstance());
+        }
+
+        FBAdUtils.showAdDialog(this, Constants.NATIVE_ID);
+
+        initSearchView();
 
         if (Mp3App.sPreferences.getBoolean("isReceiverRefer", true)) {
             mSearchView.postDelayed(new Runnable() {
@@ -193,6 +241,10 @@ public class MainActivity extends SupportActivity {
 
         FacebookReport.logSentMainPageShow();
 
+        initTopBarBG();
+    }
+
+    private void initTopBarBG() {
         mStatuBarView = findViewById(R.id.status_bar_view);
         mTopBarLinear = findViewById(R.id.top_bar_linear);
 
@@ -200,6 +252,18 @@ public class MainActivity extends SupportActivity {
             setMainTopBarBg(true);
         } else if (Mp3App.isYTB() && getSearchType() == SOUNDClOUND_TYPE) {
             setMainTopBarBg(false);
+        } else {
+            setMainTopBarBg(true);
+        }
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        LogUtil.v(TAG, "onBackPressedSupport");
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            pop();
+        } else {
+            moveTaskToBack(true);
         }
     }
 

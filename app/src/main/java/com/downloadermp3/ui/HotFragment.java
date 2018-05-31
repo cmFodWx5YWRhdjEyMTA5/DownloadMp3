@@ -42,7 +42,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by liyanju on 2018/5/7.
  */
 
-public class RecommendFragment extends SupportFragment {
+public class HotFragment extends SupportFragment {
 
     private ArrayList<BaseModel> mArrayList = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class RecommendFragment extends SupportFragment {
 
     private IMusicApi mMusicApi;
 
-    private static final String TAG = "RecommendFragment";
+    private static final String TAG = "HotFragment";
 
     private AdViewWrapperAdapter mAdViewWrapperAdapter;
 

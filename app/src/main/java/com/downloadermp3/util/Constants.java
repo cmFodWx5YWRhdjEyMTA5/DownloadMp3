@@ -6,9 +6,9 @@ package com.downloadermp3.util;
 
 public class Constants {
 
-    public static final String KEY_SOUNDCLOUD = "soundcloud_key";
+    public static final String KEY_SOUNDCLOUD = "scloud_key";
 
-    public static final String KEY_YOUTUBE = "youtube_key";
+    public static final String KEY_YOUTUBE = "ytb_key";
 
     public static final String CHA_YE_ID = "237410413694951_237414880361171";
     public static final String CHA_YE_HEIGH_ID = "237410413694951_237415667027759";

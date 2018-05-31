@@ -85,7 +85,7 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
 
         Router.getInstance().register(this);
 
-        if (Mp3App.sPreferences.getBoolean("isNewDownload", false)) {
+        if (Mp3App.sPreferences.getBoolean("DownloadNew", false)) {
             showRedBadge();
         }
 
@@ -94,6 +94,9 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
         } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
             tabLayoutBg(false);
         }
+
+        mTabLayout.getTabAt(0).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_whatshot_white_24dp));
+        mTabLayout.getTabAt(1).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_file_download_white_24dp));
     }
 
     @Override
@@ -104,7 +107,7 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
 
     @Override
     public void showRedBadge() {
-        Mp3App.sPreferences.edit().putBoolean("isNewDownload", false).apply();
+        Mp3App.sPreferences.edit().putBoolean("DownloadNew", false).apply();
         if (_mActivity.isFinishing() || mViewPager.getCurrentItem() == 1) {
             LogUtil.e(TAG, "isFinishing getCurrentItem == 0");
             return;

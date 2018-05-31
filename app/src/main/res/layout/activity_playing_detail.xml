@@ -60,7 +60,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp">
 
-        <com.mp3downloader.view.CircleImageView
+        <com.downloadermp3.view.CircleImageView
             android:id="@+id/music_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

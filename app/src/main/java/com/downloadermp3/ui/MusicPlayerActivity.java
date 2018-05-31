@@ -215,12 +215,6 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
             }
         });
 
-        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     private void setBtnCanEnabled() {

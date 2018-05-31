@@ -19,7 +19,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/bar_layout"
         android:background="@drawable/shadow2_white_top" />
 
     <View
@@ -34,31 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"/>
 
-    <RelativeLayout
-        android:layout_below="@id/space_view"
-        android:background="@color/material_white"
-        android:id="@+id/bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
-
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_arrow_back_black_24dp" />
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/cover_layout"
         android:layout_width="220dp"
         android:layout_height="220dp"
-        android:layout_below="@+id/bar_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="66dp">
 
         <com.downloadermp3.view.CircleImageView
             android:id="@+id/music_cover"
@@ -195,9 +176,9 @@
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/song_loop_iv"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/btn_pre"
+        android:layout_toRightOf="@id/btn_next"
         android:layout_marginTop="48dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_below="@+id/seekBar_layout"
         app:srcCompat="@drawable/ic_play_mode_list"
         android:layout_width="wrap_content"
@@ -205,10 +186,10 @@
 
     <ImageView
         android:id="@+id/play_download_iv"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="48dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/btn_next"
+        android:layout_toLeftOf="@id/btn_pre"
         android:layout_below="@+id/seekBar_layout"
         android:src="@drawable/ic_play_down_load"
         android:layout_width="wrap_content"

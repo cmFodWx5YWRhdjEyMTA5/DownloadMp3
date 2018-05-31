@@ -35,6 +35,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+
+        debug {
+            multiDexEnabled true
+            debuggable true
+            applicationIdSuffix ".wedebug"
+        }
     }
 
     lintOptions {
@@ -99,5 +105,8 @@ dependencies {
     compile(name: 'rating-release2', ext: 'aar')
 
     implementation 'com.android.support:multidex:1.0.3'
+
+
+    compile 'com.github.iammert:MusicPlayerView:e3b937c729'
 
 }

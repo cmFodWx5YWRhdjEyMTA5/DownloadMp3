@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * Created by liyanju on 2018/5/18.
  */
 
-public class YouTubeModel {
+public class YTbeModel {
 
     public String nextPageToken;
 
     public ArrayList<BaseModel> list = new ArrayList<>();
 
-    public static class Snippet extends BaseModel{
+    public static class YTBSnippet extends BaseModel{
 
 
 
@@ -143,8 +143,8 @@ public class YouTubeModel {
                 return true;
             }
 
-            if (obj instanceof Snippet
-                    && (((Snippet) obj).title.equals(title) && (((Snippet) obj).description
+            if (obj instanceof YTBSnippet
+                    && (((YTBSnippet) obj).title.equals(title) && (((YTBSnippet) obj).description
                     .equals(description)))) {
                 return true;
             }
@@ -614,10 +614,10 @@ public class YouTubeModel {
             dest.writeString(this.downloadurl);
         }
 
-        public Snippet() {
+        public YTBSnippet() {
         }
 
-        protected Snippet(Parcel in) {
+        protected YTBSnippet(Parcel in) {
             this.publishedAt = in.readString();
             this.channelId = in.readString();
             this.title = in.readString();
@@ -629,15 +629,15 @@ public class YouTubeModel {
             this.downloadurl = in.readString();
         }
 
-        public static final Creator<Snippet> CREATOR = new Creator<Snippet>() {
+        public static final Creator<YTBSnippet> CREATOR = new Creator<YTBSnippet>() {
             @Override
-            public Snippet createFromParcel(Parcel source) {
-                return new Snippet(source);
+            public YTBSnippet createFromParcel(Parcel source) {
+                return new YTBSnippet(source);
             }
 
             @Override
-            public Snippet[] newArray(int size) {
-                return new Snippet[size];
+            public YTBSnippet[] newArray(int size) {
+                return new YTBSnippet[size];
             }
         };
     }

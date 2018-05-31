@@ -1,6 +1,6 @@
 package com.downloadermp3.data.youtube;
 
-import com.downloadermp3.bean.YouTubeModel;
+import com.downloadermp3.bean.YTbeModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,8 +13,8 @@ import retrofit2.http.Query;
 public interface YouTubeService {
 
     @GET("videos?part=snippet&videoCategoryId=10&chart=mostPopular&maxResults=45")
-    Call<YouTubeModel> getYoutubeMusic(@Query("pageToken") String pageToken, @Query("key") String key);
+    Call<YTbeModel> getYoutubeMusic(@Query("pageToken") String pageToken, @Query("key") String key);
 
     @GET("search?part=snippet&type=video&maxResults=45")
-    Call<YouTubeModel> searchYoutubeMusic(@Query("q") String search, @Query("pageToken") String pageToken, @Query("key") String key);
+    Call<YTbeModel> searchYoutubeMusic(@Query("q") String search, @Query("pageToken") String pageToken, @Query("key") String key);
 }

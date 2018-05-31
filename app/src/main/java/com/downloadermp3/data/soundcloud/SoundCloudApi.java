@@ -2,7 +2,7 @@ package com.downloadermp3.data.soundcloud;
 
 import android.content.Context;
 
-import com.downloadermp3.bean.SoundCloudModel;
+import com.downloadermp3.bean.SCloudModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.downloadermp3.data.BaseModel;
@@ -45,7 +45,7 @@ public class SoundCloudApi implements IMusicApi{
     private static SoundCloudService getSoundCloudService(Context context) {
         if (sSoundCloudService == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(SoundCloudModel.class, new SoundCloudDesrializer());
+            gsonBuilder.registerTypeAdapter(SCloudModel.class, new SoundCloudDesrializer());
             Gson gson = gsonBuilder.create();
             GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
 
@@ -78,8 +78,8 @@ public class SoundCloudApi implements IMusicApi{
     public List<BaseModel> searchMusic(Context context, String query) {
         try {
             SoundCloudService soundCloudService = getSoundCloudService(context);
-            Call<SoundCloudModel> call = soundCloudService.getSearchMusicList(query);
-            Response<SoundCloudModel> response = call.execute();
+            Call<SCloudModel> call = soundCloudService.getSearchMusicList(query);
+            Response<SCloudModel> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 return response.body().arrayList;
             }

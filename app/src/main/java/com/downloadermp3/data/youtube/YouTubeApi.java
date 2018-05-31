@@ -3,7 +3,7 @@ package com.downloadermp3.data.youtube;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.downloadermp3.bean.YouTubeModel;
+import com.downloadermp3.bean.YTbeModel;
 import com.downloadermp3.data.BaseModel;
 import com.downloadermp3.data.IMusicApi;
 import com.google.gson.Gson;
@@ -52,7 +52,7 @@ public class YouTubeApi implements IMusicApi {
     private static YouTubeService getYouTubeService(Context context) {
         if (sYouTubeService == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(YouTubeModel.class, new YouTubeDesrializer());
+            gsonBuilder.registerTypeAdapter(YTbeModel.class, new YouTubeDesrializer());
             Gson gson = gsonBuilder.create();
             GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
 
@@ -79,8 +79,8 @@ public class YouTubeApi implements IMusicApi {
     public List<BaseModel> getRecommondMusic(Context context) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
-            Call<YouTubeModel> call = youTubeService.getYoutubeMusic(nextPage, getDevelopKey());
-            Response<YouTubeModel> response = call.execute();
+            Call<YTbeModel> call = youTubeService.getYoutubeMusic(nextPage, getDevelopKey());
+            Response<YTbeModel> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().list.size() > 0) {
                     nextPage = response.body().nextPageToken;
@@ -97,8 +97,8 @@ public class YouTubeApi implements IMusicApi {
     public List<BaseModel> searchMusic(Context context, String query) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
-            Call<YouTubeModel> call = youTubeService.searchYoutubeMusic(query, nextPage, getDevelopKey());
-            Response<YouTubeModel> response = call.execute();
+            Call<YTbeModel> call = youTubeService.searchYoutubeMusic(query, nextPage, getDevelopKey());
+            Response<YTbeModel> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().list.size() > 0) {
                     nextPage = response.body().nextPageToken;

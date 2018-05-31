@@ -88,7 +88,7 @@ public class MainActivity extends SupportActivity {
 
 
     private void initSearchView() {
-        mSearchView = findViewById(R.id.floating_search_view);
+        mSearchView = findViewById(R.id.floating2_search_view);
 
         mSearchView.setSearchHint(getString(R.string.app_name));
 
@@ -97,7 +97,7 @@ public class MainActivity extends SupportActivity {
             mRedMenuBadge = new QBadgeView(Mp3App.sContext)
                     .bindTarget(findViewById(com.arlib.floatingsearchview.R.id.menu_view));
             mRedMenuBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
-                    R.color.color_fbc02d));
+                    R.color.colorPrimary));
             mRedMenuBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
             mRedMenuBadge.setBadgeNumber(-1);
             mRedMenuBadge.setGravityOffset(6, true);
@@ -245,8 +245,8 @@ public class MainActivity extends SupportActivity {
     }
 
     private void initTopBarBG() {
-        mStatuBarView = findViewById(R.id.status_bar_view);
-        mTopBarLinear = findViewById(R.id.top_bar_linear);
+        mStatuBarView = findViewById(R.id.status_bar_view2);
+        mTopBarLinear = findViewById(R.id.top_bar_linear2);
 
         if (Mp3App.isYTB() && getSearchType() == YOUTUBE_TYPE) {
             setMainTopBarBg(true);
@@ -283,9 +283,9 @@ public class MainActivity extends SupportActivity {
             }
         } else {
             mStatuBarView.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.soundcound_primary));
+                    .getColor(Mp3App.sContext, R.color.sdcound_primary));
             mTopBarLinear.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.soundcound_primary));
+                    .getColor(Mp3App.sContext, R.color.sdcound_primary));
             try {
                 Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(false);
             } catch (Exception e) {

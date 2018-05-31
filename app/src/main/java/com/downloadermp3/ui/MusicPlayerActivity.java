@@ -105,7 +105,7 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.transparence(this);
-        setContentView(R.layout.activity_playing_detail);
+        setContentView(R.layout.music_player_detail_activity);
 
         initIntent();
 
@@ -199,7 +199,7 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
                     Utils.showLongToastSafe(R.string.permission_text_tips);
                     return;
                 }
-                FileDownloaderHelper.addDownloadTask(mBaseModel,
+                FileDownloaderHelper.addDownloadTask(Mp3App.sContext, mBaseModel,
                         new WeakReference<Activity>(MusicPlayerActivity.this));
             }
         });
@@ -275,9 +275,9 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
     }
 
     private Integer[] starArray = new Integer[]{
-            R.drawable.pl_blue,
-            R.drawable.pl_red,
-            R.drawable.pl_yellow
+            R.drawable.ic_pl_blue,
+            R.drawable.ic_pl_red,
+            R.drawable.ic_pl_yellow
     };
 
     private ParticleSystem ps;

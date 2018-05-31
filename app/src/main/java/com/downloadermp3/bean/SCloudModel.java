@@ -13,11 +13,11 @@ import java.util.ArrayList;
  * Created by liyanju on 2018/5/16.
  */
 
-public class SoundCloudModel {
+public class SCloudModel {
 
     public ArrayList<BaseModel> arrayList = new ArrayList<>();
 
-    public static class SoundCloudResult extends BaseModel {
+    public static class SCloudResult extends BaseModel {
 
 
         @SerializedName("stream_url")
@@ -119,10 +119,10 @@ public class SoundCloudModel {
             dest.writeLong(this.duration);
         }
 
-        public SoundCloudResult() {
+        public SCloudResult() {
         }
 
-        protected SoundCloudResult(Parcel in) {
+        protected SCloudResult(Parcel in) {
             this.mStreamURL = in.readString();
             this.mArtworkURL = in.readString();
             this.created_at = in.readString();
@@ -131,15 +131,15 @@ public class SoundCloudModel {
             this.duration = in.readLong();
         }
 
-        public static final Creator<SoundCloudResult> CREATOR = new Creator<SoundCloudResult>() {
+        public static final Creator<SCloudResult> CREATOR = new Creator<SCloudResult>() {
             @Override
-            public SoundCloudResult createFromParcel(Parcel source) {
-                return new SoundCloudResult(source);
+            public SCloudResult createFromParcel(Parcel source) {
+                return new SCloudResult(source);
             }
 
             @Override
-            public SoundCloudResult[] newArray(int size) {
-                return new SoundCloudResult[size];
+            public SCloudResult[] newArray(int size) {
+                return new SCloudResult[size];
             }
         };
     }

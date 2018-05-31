@@ -1,30 +1,10 @@
 package com.downloadermp3.util;
 
-import android.text.TextUtils;
-
 /**
  * Created by liyanju on 2018/5/23.
  */
 
 public class FormatUtil {
-
-
-    public static String formatNum(String num) {
-        if (TextUtils.isEmpty(num)) {
-            num = "0";
-        }
-        long number = Long.parseLong(num);
-        long result = 0;
-        if (number > 10000) {
-            result = number / 10000;
-            return String.valueOf(result) + "万";
-        } else if (number > 1000) {
-            result = number / 1000;
-            return String.valueOf(result) + "千";
-        } else {
-            return String.valueOf(number);
-        }
-    }
 
     /**
      * time的单位是秒

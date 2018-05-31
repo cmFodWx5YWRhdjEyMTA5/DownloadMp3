@@ -1,4 +1,4 @@
-package com.downloadermp3.provider;
+package com.downloadermp3.db;
 
 import android.content.ContentProvider;
 import android.content.ContentProviderOperation;

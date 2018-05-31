@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
 import com.downloadermp3.R;
 import com.downloadermp3.util.Utils;
 import com.facebook.ads.Ad;
@@ -23,9 +24,6 @@ import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdsManager;
 import com.downloadermp3.Mp3App;
-
-
-import java.util.Random;
 
 /**
  * Created by liyanju on 2018/4/9.
@@ -258,7 +256,7 @@ public class FBAdUtils {
     private static View setupAdView(NativeAd nativeAd) {
         try {
             View currentAdView = LayoutInflater.from(sContext)
-                    .inflate(R.layout.fb_big_ad_layout, null);
+                    .inflate(R.layout.big_ad_fb_layout, null);
             MediaView nativeAdMedia = currentAdView.findViewById(R.id.fb_half_mv_view);
             FrameLayout adChoicesFrame = currentAdView.findViewById(R.id.fb_adChoices_view);
             ImageView nativeAdIcon = currentAdView.findViewById(R.id.fb_half_icon_iv);
@@ -271,13 +269,13 @@ public class FBAdUtils {
             nativeAdTitle.setText(nativeAd.getAdTitle());
             nativeAdBody.setText(nativeAd.getAdBody());
 
-            // Downloading and setting the ad icon.
-            NativeAd.Image adIcon = nativeAd.getAdIcon();
-            NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
-
             // Download and setting the cover image.
             NativeAd.Image adCoverImage = nativeAd.getAdCoverImage();
             nativeAdMedia.setNativeAd(nativeAd);
+
+            // Downloading and setting the ad icon.
+            NativeAd.Image adIcon = nativeAd.getAdIcon();
+            Glide.with(Mp3App.sContext).load(adIcon.getUrl()).into(nativeAdIcon);
 
             // Add adChoices icon
             AdChoicesView adChoicesView = new AdChoicesView(sContext, nativeAd, true);
@@ -301,13 +299,11 @@ public class FBAdUtils {
         return setUpItemNativeAdView(activity, nativeAd, false);
     }
 
-    private static int DRAWABLEIDS []= {R.drawable.fb_ad_bg1,R.drawable.fb_ad_bg2,R.drawable.fb_ad_bg3,R.drawable.fb_ad_bg4 };
-
     public static View setUpItemNativeAdView(Activity activity, NativeAd nativeAd, boolean isSmallItem) {
         nativeAd.unregisterView();
 
-        View adView = LayoutInflater.from(activity).inflate(R.layout.fb_ad_list_item, null);
-        FrameLayout imageAdFrame = adView.findViewById(R.id.image_ad_frame);
+        View adView = LayoutInflater.from(activity).inflate(R.layout.ad_list_fb_item, null);
+        FrameLayout imageAdFrame = adView.findViewById(R.id.image2_ad_frame);
 
         ImageView nativeAdIcon;
         if (isSmallItem) {
@@ -315,10 +311,9 @@ public class FBAdUtils {
             nativeAdIcon = adView.findViewById(R.id.image_ad2);
             nativeAdIcon.setVisibility(View.VISIBLE);
         } else {
-            nativeAdIcon = adView.findViewById(R.id.image_ad);
+            nativeAdIcon = adView.findViewById(R.id.image2_ad);
             imageAdFrame.setVisibility(View.VISIBLE);
-            imageAdFrame.setBackground(ContextCompat.getDrawable(activity,
-                    (DRAWABLEIDS[new Random().nextInt(DRAWABLEIDS.length)])));
+            imageAdFrame.setBackground(ContextCompat.getDrawable(activity, R.drawable.default_thumbnail));
             adView.findViewById(R.id.image_ad2).setVisibility(View.GONE);
         }
 

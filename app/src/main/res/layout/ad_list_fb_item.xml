@@ -18,7 +18,7 @@
         android:orientation="horizontal">
 
         <FrameLayout
-            android:id="@+id/image_ad_frame"
+            android:id="@+id/image2_ad_frame"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:layout_width="124dp"
@@ -26,12 +26,12 @@
 
             <ImageView
                 android:elevation="4dp"
-                android:id="@+id/image_ad"
+                android:id="@+id/image2_ad"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_fb_ad_icon"
+                android:src="@drawable/ic_ad_fb_icon"
                 tools:ignore="ContentDescription" />
 
         </FrameLayout>
@@ -49,7 +49,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_fb_ad_icon"
+            android:src="@drawable/ic_ad_fb_icon"
             tools:ignore="ContentDescription" />
 
         <RelativeLayout
@@ -64,7 +64,6 @@
             android:paddingStart="6dp">
 
             <TextView
-                android:text="2222222"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +100,6 @@
             android:gravity="center"
             android:paddingEnd="9dp"
             android:paddingStart="9dp"
-            android:text="2222222"
             android:textColor="@android:color/white"
             android:textSize="12dp" />
 

@@ -1,4 +1,4 @@
-package com.downloadermp3.provider;
+package com.downloadermp3.db;
 
 import android.net.Uri;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class DownloadTable extends TableInfo{
 
-    public static final String TABLE_NAME = "DownloadedMp3";
+    public static final String TABLE_NAME = "downloadedmp3";
 
     public static final Uri URI = Uri.parse("content://" + Mp3DownloadProvider.AUTHORITIES + "/" + TABLE_NAME);
 
@@ -37,9 +37,9 @@ public class DownloadTable extends TableInfo{
         columnsMap.put(ID, "int");
         columnsMap.put(PATH, "text");
         columnsMap.put(NAME, "text");
-        columnsMap.put(IMAGE, "text");
-        columnsMap.put(DURATION, "int");
         columnsMap.put(NEWDOWLOAD, "int");
         columnsMap.put(ARTIST, "text");
+        columnsMap.put(IMAGE, "text");
+        columnsMap.put(DURATION, "int");
     }
 }

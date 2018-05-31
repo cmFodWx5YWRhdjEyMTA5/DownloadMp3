@@ -68,8 +68,8 @@
         </provider>
 
         <provider
-            android:name="com.downloadermp3.provider.Mp3DownloadProvider"
-            android:authorities="com.downloadermp3.provider.MyDownloadProvider"/>
+            android:name="com.downloadermp3.db.Mp3DownloadProvider"
+            android:authorities="com.downloadermp3.db.MyDownloadProvider"/>
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>

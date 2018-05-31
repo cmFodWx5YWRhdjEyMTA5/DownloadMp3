@@ -19,7 +19,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.downloadermp3.Mp3App;
 import com.downloadermp3.R;
+import com.downloadermp3.bean.YTbeModel;
 import com.downloadermp3.facebook.FBAdUtils;
+import com.downloadermp3.util.FormatUtil;
 import com.facebook.ads.NativeAd;
 import com.downloadermp3.data.BaseModel;
 import com.downloadermp3.data.IMusicApi;
@@ -65,7 +67,7 @@ public class HotFragment extends SupportFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recommend_fragment, container, false);
+        View view = inflater.inflate(R.layout.hot_fragment, container, false);
 
         initApiClient();
 
@@ -99,14 +101,22 @@ public class HotFragment extends SupportFragment {
 
         @Override
         protected void convert(ViewHolder holder, final BaseModel baseModel, int position) {
-            ImageView itemThumbnialIV = holder.getView(R.id.itemThumbnailView);
+            ImageView itemThumbnialIV = holder.getView(R.id.itemThIV);
             Glide.with(_mActivity).load(baseModel.getImageUrl()).apply(options).into(itemThumbnialIV);
 
-            TextView titleTV = holder.getView(R.id.itemVideoTitleView);
+            TextView titleTV = holder.getView(R.id.itemTitleView);
             titleTV.setText(baseModel.getName());
 
             TextView textTV = holder.getView(R.id.itemTextView);
             textTV.setText(baseModel.getArtistName());
+
+            TextView timeTV = holder.getView(R.id.time_tv);
+            if (!(baseModel instanceof YTbeModel.YTBSnippet)) {
+                timeTV.setVisibility(View.VISIBLE);
+                timeTV.setText(FormatUtil.formatMusicTime(baseModel.getDuration()));
+            } else {
+                timeTV.setVisibility(View.INVISIBLE);
+            }
 
             holder.setOnClickListener(R.id.list_item, new View.OnClickListener() {
                 @Override
@@ -131,7 +141,7 @@ public class HotFragment extends SupportFragment {
             }
         });
 
-        mRecyclerView = view.findViewById(R.id.recom_rv);
+        mRecyclerView = view.findViewById(R.id.hot_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(Mp3App.sContext));
         mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
         mRecyclerView.setAdapter(mAdViewWrapperAdapter);

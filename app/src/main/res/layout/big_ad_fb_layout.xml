@@ -18,7 +18,7 @@
 
         <ImageView
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_fb_ad_img"
+            android:src="@drawable/ic_ad_fb_img"
             android:id="@+id/fb_half_iv"
             android:layout_width="match_parent"
             android:layout_height="240dp"
@@ -32,7 +32,7 @@
             android:visibility="invisible" />
 
         <LinearLayout
-            android:background="@drawable/fb_ad_bottom_bg"
+            android:background="@drawable/ad_bottom_fb_bg"
             android:padding="5dp"
             android:orientation="horizontal"
             android:layout_gravity="bottom"
@@ -42,7 +42,7 @@
 
             <ImageView
                 android:id="@+id/fb_half_icon_iv"
-                android:src="@drawable/ic_fb_ad_icon"
+                android:src="@drawable/ic_ad_fb_icon"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:layout_gravity="center_vertical" />
@@ -84,7 +84,7 @@
         <ImageView
             android:id="@+id/ad_close_iv"
             android:padding="4dp"
-            android:src="@drawable/ic_fb_ad_close"
+            android:src="@drawable/ic_ad_fb_close"
             android:layout_gravity="top|right"
             android:layout_width="30dp"
             android:layout_height="30dp" />

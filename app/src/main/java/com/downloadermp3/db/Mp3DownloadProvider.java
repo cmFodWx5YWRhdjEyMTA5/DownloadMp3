@@ -1,4 +1,4 @@
-package com.downloadermp3.provider;
+package com.downloadermp3.db;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.SparseArray;
@@ -9,7 +9,7 @@ import android.util.SparseArray;
 
 public class Mp3DownloadProvider extends BaseContentProvider {
 
-    public static final String AUTHORITIES = "com.downloadermp3.provider.MyDownloadProvider";
+    public static final String AUTHORITIES = "com.downloadermp3.db.MyDownloadProvider";
 
     public static final int DOWNLOADEDKEY = 102;
 

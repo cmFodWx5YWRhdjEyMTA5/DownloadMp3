@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <View
-        android:id="@+id/status_bar_view"
+        android:id="@+id/status_bar_view2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"
         android:background="@color/colorPrimary" />
@@ -25,7 +25,7 @@
             app:elevation="0dp">
 
             <LinearLayout
-                android:id="@+id/top_bar_linear"
+                android:id="@+id/top_bar_linear2"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:background="@color/colorPrimary"
@@ -42,15 +42,15 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.arlib.floatingsearchview.FloatingSearchView
-            android:id="@+id/floating_search_view"
+            android:id="@+id/floating2_search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:floatingSearch_close_search_on_keyboard_dismiss="true"
             app:floatingSearch_leftActionMode="showSearch"
             app:floatingSearch_menu="@menu/search_menu"
-            app:floatingSearch_searchBarMarginLeft="@dimen/search_view_inset"
-            app:floatingSearch_searchBarMarginRight="@dimen/search_view_inset"
-            app:floatingSearch_searchBarMarginTop="@dimen/search_view_inset"
+            app:floatingSearch_searchBarMarginLeft="@dimen/search2_view_inset"
+            app:floatingSearch_searchBarMarginRight="@dimen/search2_view_inset"
+            app:floatingSearch_searchBarMarginTop="@dimen/search2_view_inset"
             app:floatingSearch_searchHint="Search..."
             app:floatingSearch_showSearchKey="true"
             app:floatingSearch_suggestionsListAnimDuration="250"

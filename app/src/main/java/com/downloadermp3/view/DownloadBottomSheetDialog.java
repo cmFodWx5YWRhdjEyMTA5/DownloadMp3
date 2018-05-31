@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.downloadermp3.Mp3App;
 import com.downloadermp3.R;
-import com.downloadermp3.bean.YouTubeModel;
+import com.downloadermp3.bean.YTbeModel;
 import com.downloadermp3.facebook.FBAdUtils;
 import com.downloadermp3.util.Utils;
 import com.facebook.ads.NativeAd;
@@ -35,7 +35,7 @@ import java.lang.ref.WeakReference;
 
 public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
 
-    public static final String TAG = "DownloadBottomSheet";
+    public static final String TAG = "DownloadSheet";
 
     private BaseModel mSong;
 
@@ -61,7 +61,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.download_bottom_dialog;
+        return R.layout.download_dialog;
     }
 
     private void parseYouTubeUrl(String vid, final Runnable runnable) {
@@ -89,8 +89,8 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                 LogUtil.v(TAG, "onPostExecute url " + url);
                 super.onPostExecute(url);
                 mLoadingView.setVisibility(View.GONE);
-                if (mSong != null && mSong instanceof YouTubeModel.Snippet) {
-                    ((YouTubeModel.Snippet)mSong).downloadurl = url;
+                if (mSong != null && mSong instanceof YTbeModel.YTBSnippet) {
+                    ((YTbeModel.YTBSnippet)mSong).downloadurl = url;
                     if (runnable != null) {
                         runnable.run();
                     }
@@ -125,11 +125,11 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
         TextView titleTV = rootView.findViewById(R.id.title_tv);
         titleTV.setText(mSong.getName());
 
-        rootView.findViewById(R.id.download_linear).setOnClickListener(new View.OnClickListener(){
+        rootView.findViewById(R.id.download2_linear).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if (mSong.getType() == BaseModel.YOUTUBE_TYPE) {
-                    parseYouTubeUrl(((YouTubeModel.Snippet) mSong).vid, new Runnable() {
+                    parseYouTubeUrl(((YTbeModel.YTBSnippet) mSong).vid, new Runnable() {
                         @Override
                         public void run() {
                             if (isShowing()) {
@@ -140,7 +140,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                 }
                             }
                             if (!TextUtils.isEmpty(mSong.getDownloadUrl())) {
-                                FileDownloaderHelper.addDownloadTask(mSong,
+                                FileDownloaderHelper.addDownloadTask(Mp3App.sContext, mSong,
                                         new WeakReference<>(mActivity));
                             } else {
                                 Utils.showLongToastSafe(R.string.parse_url_failure);
@@ -158,7 +158,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                         e.printStackTrace();
                     }
                     if (!TextUtils.isEmpty(mSong.getDownloadUrl())) {
-                        FileDownloaderHelper.addDownloadTask(mSong, new WeakReference<>(mActivity));
+                        FileDownloaderHelper.addDownloadTask(Mp3App.sContext, mSong, new WeakReference<>(mActivity));
                     } else {
                         Utils.showLongToastSafe(R.string.parse_url_failure);
                     }
@@ -168,12 +168,12 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             }
         });
 
-        rootView.findViewById(R.id.play_linear).setOnClickListener(new View.OnClickListener(){
+        rootView.findViewById(R.id.play2_linear).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 try {
                     if (mSong.getType() == BaseModel.YOUTUBE_TYPE) {
-                        parseYouTubeUrl(((YouTubeModel.Snippet) mSong).vid, new Runnable() {
+                        parseYouTubeUrl(((YTbeModel.YTBSnippet) mSong).vid, new Runnable() {
                             @Override
                             public void run() {
                                 if (isShowing()) {
@@ -187,14 +187,8 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                     Utils.showLongToastSafe(R.string.parse_url_failure);
                                     return;
                                 }
-                                SongInfo songInfo = new SongInfo();
-                                songInfo.setSongId(((YouTubeModel.Snippet) mSong).vid);
-                                songInfo.setSongUrl(mSong.getPlayUrl());
-                                songInfo.setSongName(mSong.getName());
-                                songInfo.setDuration(mSong.getDuration());
-                                songInfo.setSongCover(mSong.getImageUrl());
 
-                                MusicPlayerActivity.launch(Mp3App.sContext, songInfo, mSong);
+                                MusicPlayerActivity.launch(Mp3App.sContext, toSongInfo(), mSong);
                             }
                         });
                     } else {
@@ -209,14 +203,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                             return;
                         }
 
-                        SongInfo songInfo = new SongInfo();
-                        songInfo.setSongId(String.valueOf(System.currentTimeMillis()));
-                        songInfo.setSongUrl(mSong.getPlayUrl());
-                        songInfo.setSongCover(mSong.getImageUrl());
-                        songInfo.setSongName(mSong.getName());
-                        songInfo.setDuration(mSong.getDuration());
-
-                        MusicPlayerActivity.launch(Mp3App.sContext, songInfo, mSong);
+                        MusicPlayerActivity.launch(Mp3App.sContext, toSongInfo(), mSong);
                         LogUtil.v(TAG, " getPlayUrl ::" + mSong.getPlayUrl());
                     }
 
@@ -227,7 +214,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             }
         });
 
-        rootView.findViewById(R.id.license_linear).setOnClickListener(new View.OnClickListener(){
+        rootView.findViewById(R.id.license2_linear).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 try {
@@ -247,7 +234,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             }
         });
 
-        FrameLayout adContainer = rootView.findViewById(R.id.ad_container);
+        FrameLayout adContainer = rootView.findViewById(R.id.ad2_container);
 
         NativeAd nativeAd = FBAdUtils.nextNativieAd();
         if (nativeAd == null || !nativeAd.isAdLoaded()) {
@@ -257,6 +244,20 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             adContainer.removeAllViews();
             adContainer.addView(FBAdUtils.setUpItemNativeAdView(mActivity, nativeAd, true));
         }
+    }
+
+    private SongInfo toSongInfo() {
+        SongInfo songInfo = new SongInfo();
+        if (mSong instanceof YTbeModel.YTBSnippet) {
+            songInfo.setSongId(((YTbeModel.YTBSnippet) mSong).vid);
+        } else {
+            songInfo.setSongId(String.valueOf(System.currentTimeMillis()));
+        }
+        songInfo.setSongUrl(mSong.getPlayUrl());
+        songInfo.setSongCover(mSong.getImageUrl());
+        songInfo.setSongName(mSong.getName());
+        songInfo.setDuration(mSong.getDuration());
+        return songInfo;
     }
 
     public void showBottomSheetFragment(FragmentManager manager) {

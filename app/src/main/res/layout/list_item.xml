@@ -8,20 +8,39 @@
     android:layout_width="match_parent"
     android:layout_height="94dp">
 
+    <FrameLayout
+        android:id="@+id/itemThIV_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/itemThumbnailView"
+        android:id="@+id/itemThIV"
+        android:src="@drawable/default_thumbnail"
         android:scaleType="centerCrop"
         android:layout_width="124dp"
         android:layout_height="70dp" />
 
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/time_tv"
+            android:textSize="11sp"
+            android:layout_margin="3dp"
+            android:padding="2dp"
+            android:text="22:22"
+            android:textColor="@color/white"
+            android:background="@color/title_color"
+            android:layout_gravity="bottom|right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
     <TextView
         android:paddingStart="12dp"
         android:paddingLeft="12dp"
-        android:id="@+id/itemVideoTitleView"
+        android:id="@+id/itemTitleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/itemThumbnailView"
-        android:layout_toEndOf="@+id/itemThumbnailView"
+        android:layout_toRightOf="@+id/itemThIV_frame"
+        android:layout_toEndOf="@+id/itemThIV_frame"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/title_color"
@@ -34,9 +53,9 @@
         android:paddingLeft="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/itemVideoTitleView"
-        android:layout_toRightOf="@+id/itemThumbnailView"
-        android:layout_toEndOf="@+id/itemThumbnailView"
+        android:layout_below="@+id/itemTitleView"
+        android:layout_toRightOf="@+id/itemThIV_frame"
+        android:layout_toEndOf="@+id/itemThIV_frame"
         android:lines="3"
         android:textColor="@color/des_color"
         android:ellipsize="end"

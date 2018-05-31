@@ -1,4 +1,4 @@
-package com.downloadermp3.provider;
+package com.downloadermp3.db;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

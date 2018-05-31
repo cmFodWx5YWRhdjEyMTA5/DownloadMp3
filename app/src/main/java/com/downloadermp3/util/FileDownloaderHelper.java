@@ -15,7 +15,7 @@ import com.downloadermp3.data.BaseModel;
 import com.downloadermp3.data.DownloadTask;
 import com.downloadermp3.facebook.FBAdUtils;
 import com.downloadermp3.facebook.FacebookReport;
-import com.downloadermp3.provider.DownloadDao;
+import com.downloadermp3.db.DownloadDao;
 import com.downloadermp3.router.Router;
 import com.downloadermp3.ui.IHomeFragment;
 import com.downloadermp3.ui.MainActivity;
@@ -46,7 +46,7 @@ public class FileDownloaderHelper {
     private static Context sContext = Mp3App.sContext;
 
 
-    public static void addDownloadTask(BaseModel song, final WeakReference<Activity> activityWeakReference) {
+    public static void addDownloadTask(Context context, BaseModel song, final WeakReference<Activity> activityWeakReference) {
         if (song == null) {
             return;
         }

@@ -16,14 +16,14 @@ public abstract class BaseModel implements Parcelable{
 
     public abstract String getPlayUrl();
 
+    public abstract int getType();
+
+    public abstract long getDuration();
+
     public abstract String getName();
 
     public abstract String getImageUrl();
 
     public abstract String getArtistName();
-
-    public abstract int getType();
-
-    public abstract long getDuration();
 
 }

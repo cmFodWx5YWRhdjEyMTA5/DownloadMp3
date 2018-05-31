@@ -22,18 +22,14 @@ public class AdViewWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
         mInnerAdapter = adapter;
     }
 
-    public void addAdView(int viewType, AdViewItem adViewItem) {
-        mADViews.put(viewType, adViewItem);
-    }
-
-    public void clearAdView() {
-        mADViews.clear();
-    }
-
     @Override
     public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
         super.registerAdapterDataObserver(observer);
         mInnerAdapter.registerAdapterDataObserver(observer);
+    }
+
+    public void clearAdView() {
+        mADViews.clear();
     }
 
     @Override
@@ -50,6 +46,10 @@ public class AdViewWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
         return mADViews.size();
     }
 
+    public void addAdView(int viewType, AdViewItem adViewItem) {
+        mADViews.put(viewType, adViewItem);
+    }
+
     @Override
     public int getItemViewType(int position) {
         int viewType = findAdViewTypeByPostion(position);
@@ -59,12 +59,7 @@ public class AdViewWrapperAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         int count = getAdViewCountBeforeByPostion(position);
 
-        try {
-            return mInnerAdapter.getItemViewType(position - count);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
+        return mInnerAdapter.getItemViewType(position - count);
     }
 
     public int getAdViewCountBeforeByPostion(int postion) {

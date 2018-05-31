@@ -8,14 +8,15 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_keyboard_voice_6060_24dp"/>
 
-    <item android:id="@+id/action_declare"
-        android:title="@string/declare_text"
-        android:orderInCategory="1"
-        app:showAsAction="never"
-        />
     <item android:id="@+id/action_share"
         android:title="@string/share_text"
         android:orderInCategory="2"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/action_declare"
+        android:title="@string/declare_text"
+        android:orderInCategory="1"
         app:showAsAction="never"
         />
 </menu>

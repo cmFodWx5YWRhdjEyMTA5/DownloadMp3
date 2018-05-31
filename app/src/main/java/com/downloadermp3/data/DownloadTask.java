@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 
-import com.downloadermp3.provider.DownloadTable;
+import com.downloadermp3.db.DownloadTable;
 
 /**
  * Created by liyanju on 2018/5/21.

@@ -18,11 +18,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.downloadermp3.Mp3App;
 import com.downloadermp3.R;
+import com.downloadermp3.bean.YTbeModel;
 import com.downloadermp3.data.IMusicApi;
 import com.downloadermp3.data.soundcloud.SoundCloudApi;
 import com.downloadermp3.util.AdViewWrapperAdapter;
 import com.downloadermp3.util.Constants;
 import com.downloadermp3.facebook.FBAdUtils;
+import com.downloadermp3.util.FormatUtil;
 import com.downloadermp3.util.Utils;
 import com.downloadermp3.view.DownloadBottomSheetDialog;
 import com.facebook.ads.Ad;
@@ -135,14 +137,22 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
 
         @Override
         protected void convert(ViewHolder holder, final BaseModel baseModel, int position) {
-            ImageView itemThumbnialIV = holder.getView(R.id.itemThumbnailView);
+            ImageView itemThumbnialIV = holder.getView(R.id.itemThIV);
             Glide.with(_mActivity).load(baseModel.getImageUrl()).apply(options).into(itemThumbnialIV);
 
-            TextView titleTV = holder.getView(R.id.itemVideoTitleView);
+            TextView titleTV = holder.getView(R.id.itemTitleView);
             titleTV.setText(baseModel.getName());
 
             TextView textTV = holder.getView(R.id.itemTextView);
             textTV.setText(baseModel.getArtistName());
+
+            TextView timeTV = holder.getView(R.id.time_tv);
+            if (!(baseModel instanceof YTbeModel.YTBSnippet)) {
+                timeTV.setVisibility(View.VISIBLE);
+                timeTV.setText(FormatUtil.formatMusicTime(baseModel.getDuration()));
+            } else {
+                timeTV.setVisibility(View.INVISIBLE);
+            }
 
             holder.setOnClickListener(R.id.list_item, new View.OnClickListener() {
                 @Override
@@ -155,7 +165,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
     };
 
     private void initView(View view) {
-        mRecyclerView = view.findViewById(R.id.search_rv);
+        mRecyclerView = view.findViewById(R.id.search_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(Mp3App.sContext));
         mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
         mRecyclerView.setAdapter(mAdViewWrapperAdapter);

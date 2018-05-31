@@ -20,7 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.downloadermp3.Mp3App;
 import com.downloadermp3.R;
 import com.downloadermp3.data.DownloadTask;
-import com.downloadermp3.provider.DownloadDao;
+import com.downloadermp3.db.DownloadDao;
 import com.downloadermp3.util.AdViewWrapperAdapter;
 import com.downloadermp3.util.Constants;
 import com.downloadermp3.facebook.FBAdUtils;
@@ -64,7 +64,7 @@ public class DownloadFragment extends SupportFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = view.findViewById(R.id.download_rv);
+        mRecyclerView = view.findViewById(R.id.download_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(Mp3App.sContext));
         mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
         mRecyclerView.setAdapter(mAdViewWrapperAdapter);
@@ -151,10 +151,10 @@ public class DownloadFragment extends SupportFragment {
 
         @Override
         protected void convert(ViewHolder holder, final DownloadTask baseModel, int position) {
-            ImageView itemThumbnialIV = holder.getView(R.id.itemThumbnailView);
+            ImageView itemThumbnialIV = holder.getView(R.id.itemThIV);
             Glide.with(_mActivity).load(baseModel.getImageUrl()).apply(options).into(itemThumbnialIV);
 
-            TextView titleTV = holder.getView(R.id.itemVideoTitleView);
+            TextView titleTV = holder.getView(R.id.itemTitleView);
             titleTV.setText(baseModel.getName());
 
             TextView textTV = holder.getView(R.id.itemTextView);

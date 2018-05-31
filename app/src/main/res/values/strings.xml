@@ -3,13 +3,10 @@
 
     <string name="ratting_name">Rating</string>
 
-    <string name="recommend">Recommend</string>
-    <string name="download">Download</string>
-
     <string name="action_voice_rec">Voice</string>
 
-    <string name="load_error">Network Error</string>
-    <string name="empty_error">Data Empty</string>
+    <string name="load_error">Network is Error</string>
+    <string name="empty_error">Data Is Empty</string>
 
     <string name="error_video_streams_empty">The video %s has no streams.</string>
     <string name="error_video_streams">An error has occurred while retrieving video\'s streams.</string>
@@ -26,7 +23,7 @@
 
     <string name="download_added">Download already added</string>
 
-    <string name="download_add_success">Download add success</string>
+    <string name="download_add_success">Add a download queue</string>
 
     <string name="download_video_success">Download Finish</string>
     <string name="finish_download">Download complete</string>
@@ -42,7 +39,7 @@
     <string name="switch_ytb_search">Switch YouTube Search</string>
     <string name="switch_sc_search">Switch SoundCloud Search</string>
 
-    <string name="disclaimer_text">Music is provided by "www.jamendo.com".All songs, available through this application, are intended only for your personal non-commercial use.You can visit Jamendo privacy policy https://api.jamendo.com/ App authorized to use Jamendo API. All tracks available is under CC license(author and license link properly mentioned for each song). You can find and contact authors on www.jamendo.com</string>
+    <string name="disclaimer_text">Mp3 Music Downloader Music is provided by "www.jamendo.com".All songs, available through this application, are intended only for your personal non-commercial use.You can visit Jamendo privacy policy https://devportal.jamendo.com/api_terms_of_use App authorized to use Jamendo API. All tracks available is under CC license(author and license link properly mentioned for each song). You can find and contact authors on www.jamendo.com</string>
     <string name="disclaimers">Disclaimers</string>
     <string name="confirm_text">confirm</string>
 
@@ -60,11 +57,11 @@
     <string name="fb_login_protocol_scheme">fb237410413694951</string>
 
     <string name="download_rating">For you to download a music, please give me five stars.</string>
-    <string name="parse_url_failure">Parse downloading URL failure !</string>
+    <string name="parse_url_failure">Parse URL failure !</string>
 
     <string name="share_text">Share</string>
 
-    <string name="share_content">https://play.google.com/store/apps/details?id=%s Download the App quickly.</string>
+    <string name="share_content">https://play.google.com/store/apps/details?id=%s Recommended Downloads</string>
 
     <string name="start_speech">Start speech</string>
 </resources>

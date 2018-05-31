@@ -48,7 +48,7 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
         if (isYoutube) {
             mTabLayout.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
         } else {
-            mTabLayout.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.soundcound_primary));
+            mTabLayout.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
         }
     }
 
@@ -57,8 +57,8 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
     private ViewPager mViewPager;
 
     private void initView(View view) {
-        mTabLayout = view.findViewById(R.id.home_tabs);
-        mViewPager = view.findViewById(R.id.viewpager);
+        mTabLayout = view.findViewById(R.id.home_tablayout);
+        mViewPager = view.findViewById(R.id.home_viewpager);
 
         HomePageAdapter homePageAdapter = new HomePageAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(homePageAdapter);
@@ -120,7 +120,7 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
         mRedTabBadge = new QBadgeView(Mp3App.sContext)
                 .bindTarget(((ViewGroup) mTabLayout.getChildAt(0)).getChildAt(1));
         mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
-                R.color.color_fbc02d));
+                R.color.color2_fbc02d));
         mRedTabBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
         mRedTabBadge.setBadgeNumber(-1);
         mRedTabBadge.setGravityOffset(16, true);

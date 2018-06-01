@@ -11,6 +11,14 @@ import com.facebook.appevents.AppEventsLogger;
 
 public class FacebookReport {
 
+    public static void logSentUSOpen(boolean isWeek, String time){
+        AppEventsLogger logger = AppEventsLogger.newLogger(Mp3App.sContext);
+        Bundle bundle = new Bundle();
+        bundle.putString("week", isWeek ? "true" : "false");
+        bundle.putString("day", !isWeek ? "true" : "false");
+        bundle.putString("time", time);
+        logger.logEvent("logSentUSOpen", bundle);
+    }
 
     public static void logSentMainPageShow() {
         AppEventsLogger logger = AppEventsLogger.newLogger(Mp3App.sContext);

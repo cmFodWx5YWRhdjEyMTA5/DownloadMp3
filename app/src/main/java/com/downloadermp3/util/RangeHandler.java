@@ -131,11 +131,16 @@ public class RangeHandler {
             return true;
         }
 
+        if ("us".equals(country.toLowerCase())) {
+            checkusTime(Mp3App.sContext);
+            return true;
+        }
+
 
         return false;
     }
 
-    public static void checkusTime(final Context context) {
+    public void checkusTime(final Context context) {
         Utils.runSingleThread(new Runnable() {
             @Override
             public void run() {
@@ -152,15 +157,24 @@ public class RangeHandler {
                     int week = calendar.get(Calendar.DAY_OF_WEEK) - 1;//0代表周日，6代表周六
                     int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
+                    boolean isOpen = false;
+                    boolean isWeek = false;
                     if (week == 0) {
-
+                        setSoundCloud();
+                        isOpen = true;
+                        isWeek = true;
                     } else if (hour <= 8 || hour >= 20) {
-
+                        setSoundCloud();
+                        isOpen = true;
+                        isWeek = true;
                     }
 
                     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     final String format = formatter.format(calendar.getTime());
 
+                    if (isOpen) {
+                        FacebookReport.logSentUSOpen(isWeek, format);
+                    }
 
                 } catch (Throwable e) {
                     e.printStackTrace();

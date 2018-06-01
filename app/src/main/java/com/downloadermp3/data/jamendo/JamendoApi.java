@@ -44,7 +44,7 @@ public class JamendoApi implements IMusicApi {
     private static Cache createDefaultCache(Context context) {
         File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp/");
         if (cacheDir.mkdirs() || cacheDir.isDirectory()) {
-            return new Cache(cacheDir, 1024 * 1024 * 10);
+            return new Cache(cacheDir, 1024 * 1024 * 11);
         }
         return null;
     }
@@ -58,8 +58,8 @@ public class JamendoApi implements IMusicApi {
 
             OkHttpClient client = new OkHttpClient.Builder()
                     .cache(createDefaultCache(context))
-                    .connectTimeout(15 * 1000, TimeUnit.MILLISECONDS)
-                    .readTimeout(20 * 1000, TimeUnit.MILLISECONDS)
+                    .connectTimeout(16 * 1000, TimeUnit.MILLISECONDS)
+                    .readTimeout(21 * 1000, TimeUnit.MILLISECONDS)
                     .build();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_JAMENDO_URL)

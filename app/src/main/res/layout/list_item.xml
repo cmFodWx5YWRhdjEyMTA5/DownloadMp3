@@ -16,8 +16,8 @@
         android:id="@+id/itemThIV"
         android:src="@drawable/default_thumbnail"
         android:scaleType="centerCrop"
-        android:layout_width="124dp"
-        android:layout_height="70dp" />
+        android:layout_width="128dp"
+        android:layout_height="80dp" />
 
         <TextView
             android:visibility="invisible"

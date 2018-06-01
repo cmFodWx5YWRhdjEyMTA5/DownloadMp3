@@ -13,13 +13,13 @@ import com.arlib.floatingsearchview.FloatingSearchView;
  * Created by liyanju on 2018/5/22.
  */
 
-public class SearchBehavior extends CoordinatorLayout.Behavior<FloatingSearchView> {
+public class FloatSearchBehavior extends CoordinatorLayout.Behavior<FloatingSearchView> {
 
-    public SearchBehavior() {
+    public FloatSearchBehavior() {
         super();
     }
 
-    public SearchBehavior(Context context, AttributeSet attrs) {
+    public FloatSearchBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

@@ -170,6 +170,8 @@ public class MainActivity extends SupportActivity {
                         try {
                             Router.getInstance().getReceiver(ISearchFragment.class)
                                     .switchYouTubeSearch();
+                            Router.getInstance().getReceiver(IHotFragment.class)
+                                    .switchYouTubeSearch();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -188,6 +190,8 @@ public class MainActivity extends SupportActivity {
 
                         try {
                             Router.getInstance().getReceiver(ISearchFragment.class)
+                                    .switchSoundCloudSearch();
+                            Router.getInstance().getReceiver(IHotFragment.class)
                                     .switchSoundCloudSearch();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -318,11 +322,11 @@ public class MainActivity extends SupportActivity {
     public static final int YOUTUBE_TYPE = 2;
 
     public static void setSearchType(int type) {
-        Mp3App.sPreferences.edit().putInt("search_type", type).apply();
+        Mp3App.sPreferences.edit().putInt("searchType", type).apply();
     }
 
     public static int getSearchType() {
-        return Mp3App.sPreferences.getInt("search_type", YOUTUBE_TYPE);
+        return Mp3App.sPreferences.getInt("searchType", YOUTUBE_TYPE);
     }
 
     private void updateSearchMenu() {

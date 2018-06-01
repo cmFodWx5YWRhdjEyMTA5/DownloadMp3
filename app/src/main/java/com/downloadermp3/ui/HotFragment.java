@@ -21,6 +21,7 @@ import com.downloadermp3.Mp3App;
 import com.downloadermp3.R;
 import com.downloadermp3.bean.YTbeModel;
 import com.downloadermp3.facebook.FBAdUtils;
+import com.downloadermp3.router.Router;
 import com.downloadermp3.util.FormatUtil;
 import com.facebook.ads.NativeAd;
 import com.downloadermp3.data.BaseModel;
@@ -32,6 +33,10 @@ import com.downloadermp3.view.DownloadBottomSheetDialog;
 import com.downloadermp3.util.LogUtil;
 import com.downloadermp3.util.Utils;
 import com.paginate.Paginate;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -44,12 +49,12 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by liyanju on 2018/5/7.
  */
 
-public class HotFragment extends SupportFragment {
+public class HotFragment extends SupportFragment implements IHotFragment{
 
     private ArrayList<BaseModel> mArrayList = new ArrayList<>();
 
     private TextView mStatusTV;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SmartRefreshLayout mSwipeRefreshLayout;
     private Paginate mPaginate;
     private RecyclerView mRecyclerView;
 
@@ -84,11 +89,24 @@ public class HotFragment extends SupportFragment {
         }
     }
 
+    private BezierRadarHeader bezierRadarHeader;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mSwipeRefreshLayout.setRefreshing(true);
-        initData();
+        int color_bg = R.color.colorPrimary2;
+        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+            color_bg = R.color.colorPrimary;
+        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+            color_bg = R.color.sdcound_primary;
+        }
+        bezierRadarHeader = new BezierRadarHeader(_mActivity);
+        bezierRadarHeader.setEnableHorizontalDrag(true);
+        bezierRadarHeader.setPrimaryColor(ContextCompat.getColor(_mActivity, color_bg));
+        mSwipeRefreshLayout.setRefreshHeader(bezierRadarHeader);
+        mSwipeRefreshLayout.autoRefresh(400);
+
+        Router.getInstance().register(this);
     }
 
     private CommonAdapter mCommonAdapter = new CommonAdapter<BaseModel>(Mp3App.sContext,
@@ -130,10 +148,11 @@ public class HotFragment extends SupportFragment {
 
     private void initView(View view) {
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
-        mSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(Mp3App.sContext, R.color.colorAccent));
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//        mSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(Mp3App.sContext, R.color.colorAccent));
+        mSwipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshLayout) {
+                LogUtil.v(TAG, "onRefresh>>>>");
                 if (mMusicApi != null) {
                     mMusicApi.resetPaging();
                 }
@@ -206,17 +225,17 @@ public class HotFragment extends SupportFragment {
                 isLoading = false;
 
                 if (arrayList == null && mArrayList.size() == 0) {
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    mSwipeRefreshLayout.finishRefresh(false);
                     showErrorView();
                     return;
                 } else if (arrayList.size() == 0 && mArrayList.size() == 0) {
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    mSwipeRefreshLayout.finishRefresh(false);
                     showEmptyView();
                     return;
                 }
 
                 if (arrayList == null || arrayList.size() == 0) {
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    mSwipeRefreshLayout.finishRefresh(false);
                     return;
                 }
 
@@ -226,7 +245,7 @@ public class HotFragment extends SupportFragment {
                 }
 
                 if (mSwipeRefreshLayout.isRefreshing()) {
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    mSwipeRefreshLayout.finishRefresh(true);
                     mArrayList.clear();
                     mAdViewWrapperAdapter.clearAdView();
                     mArrayList.addAll(arrayList);
@@ -265,6 +284,7 @@ public class HotFragment extends SupportFragment {
         if (mLoadTask != null) {
             mLoadTask.cancel(true);
         }
+        Router.getInstance().unregister(this);
     }
 
     Paginate.Callbacks mCallbacks = new Paginate.Callbacks() {
@@ -283,4 +303,18 @@ public class HotFragment extends SupportFragment {
             return isLoaded;
         }
     };
+
+    @Override
+    public void switchYouTubeSearch() {
+        if (bezierRadarHeader != null) {
+            bezierRadarHeader.setPrimaryColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary));
+        }
+    }
+
+    @Override
+    public void switchSoundCloudSearch() {
+        if (bezierRadarHeader != null) {
+            bezierRadarHeader.setPrimaryColor(ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
+        }
+    }
 }

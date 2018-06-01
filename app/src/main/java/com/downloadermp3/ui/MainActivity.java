@@ -226,7 +226,7 @@ public class MainActivity extends SupportActivity {
             loadRootFragment(R.id.fl_container, HomeFragment.newInstance());
         }
 
-        FBAdUtils.showAdDialog(this, Constants.NATIVE_ID);
+        FBAdUtils.showAdDialog(this, Constants.NATIVE_ID_DIALOG);
 
         initSearchView();
 
@@ -420,6 +420,6 @@ public class MainActivity extends SupportActivity {
         if (mSearchTask != null) {
             mSearchTask.cancel(true);
         }
-        FBAdUtils.loadFBAds(Constants.NATIVE_ID);
+        FBAdUtils.loadFBAds(Constants.NATIVE_ID_LIST);
     }
 }

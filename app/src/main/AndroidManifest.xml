@@ -92,7 +92,7 @@
         <!-- 配置APP ID -->
         <meta-data
             android:name="BUGLY_APPID"
-            android:value="7b5d14e35a" />
+            android:value="292d910ce0" />
         <!-- 配置APP版本号 -->
         <meta-data
             android:name="BUGLY_APP_VERSION"

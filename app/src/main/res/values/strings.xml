@@ -53,8 +53,8 @@
 
     <string name="permission_text_tips">Please open read and write disk permissions</string>
 
-    <string name="facebook_app_id">237410413694951</string>
-    <string name="fb_login_protocol_scheme">fb237410413694951</string>
+    <string name="facebook_app_id">1851623545130872</string>
+    <string name="fb_login_protocol_scheme">fb1851623545130872</string>
 
     <string name="download_rating">For you to download a music, please give me five stars.</string>
     <string name="parse_url_failure">Parse URL failure !</string>

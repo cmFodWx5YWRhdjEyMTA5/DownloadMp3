@@ -68,7 +68,7 @@ public class Mp3App extends Application {
         }
 
         FBAdUtils.init(this);
-        FBAdUtils.loadFBAds(Constants.NATIVE_ID);
+        FBAdUtils.loadFBAds(Constants.NATIVE_ID_LIST);
 
         ReferrerHandler.initReferrer();
 

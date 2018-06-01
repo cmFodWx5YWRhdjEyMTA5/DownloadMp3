@@ -83,7 +83,7 @@ public class FileDownloaderHelper {
         Utils.showLongToastSafe(song.getName() + " " + sContext.getString(R.string.download_add_success));
 
         if (activityWeakReference.get() != null) {
-            FBAdUtils.showAdDialog(activityWeakReference.get(), Constants.NATIVE_ID);
+            FBAdUtils.showAdDialog(activityWeakReference.get(), Constants.NATIVE_ID_DIALOG);
         }
 
     }

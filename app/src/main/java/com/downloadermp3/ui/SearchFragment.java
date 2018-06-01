@@ -218,7 +218,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
         }
         FBAdUtils.destoryInterstitial();
 
-        FBAdUtils.loadAd(Constants.NATIVE_ID);
+        FBAdUtils.loadAd(Constants.NATIVE_ID_LIST);
     }
 
     private void initData() {

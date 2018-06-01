@@ -164,7 +164,7 @@ public class DownloadFragment extends SupportFragment {
                 @Override
                 public void onClick(View v) {
                     Utils.playMusic(Mp3App.sContext, baseModel.getPlayUrl());
-                    FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID);
+                    FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID_DIALOG);
                 }
             });
             holder.setOnLongClickListener(R.id.list_item, new View.OnLongClickListener() {

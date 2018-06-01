@@ -52,6 +52,11 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
         }
     }
 
+    @Override
+    public void tabLayoutJamendo() {
+        mTabLayout.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary2));
+    }
+
     private Badge mRedTabBadge;
 
     private ViewPager mViewPager;
@@ -93,6 +98,9 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
             tabLayoutBg(true);
         } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
             tabLayoutBg(false);
+        } else {
+            mTabLayout.setBackgroundColor(ContextCompat
+                    .getColor(Mp3App.sContext, R.color.colorPrimary2));
         }
 
         mTabLayout.getTabAt(0).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_whatshot_white_24dp));

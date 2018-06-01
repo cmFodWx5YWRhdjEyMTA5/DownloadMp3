@@ -20,7 +20,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("download_music.jks")
+            storeFile file("mp3_downloader.jks")
             storePassword "!@c2018"
             keyAlias "musicdownload"
             keyPassword "!@c2018"

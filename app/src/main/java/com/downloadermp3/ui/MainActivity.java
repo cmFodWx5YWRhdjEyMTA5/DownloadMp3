@@ -253,7 +253,10 @@ public class MainActivity extends SupportActivity {
         } else if (Mp3App.isYTB() && getSearchType() == SOUNDClOUND_TYPE) {
             setMainTopBarBg(false);
         } else {
-            setMainTopBarBg(true);
+            mStatuBarView.setBackgroundColor(ContextCompat
+                    .getColor(Mp3App.sContext, R.color.colorPrimary2));
+            mTopBarLinear.setBackgroundColor(ContextCompat
+                    .getColor(Mp3App.sContext, R.color.colorPrimary2));
         }
     }
 
@@ -313,7 +316,6 @@ public class MainActivity extends SupportActivity {
 
     public static final int SOUNDClOUND_TYPE = 1;
     public static final int YOUTUBE_TYPE = 2;
-    public static final int JAMENDO_TYPE = 0;
 
     public static void setSearchType(int type) {
         Mp3App.sPreferences.edit().putInt("search_type", type).apply();

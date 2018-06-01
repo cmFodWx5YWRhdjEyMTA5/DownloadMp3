@@ -11,4 +11,6 @@ public interface IHomeFragment {
     void hideRedBadge();
 
     void tabLayoutBg(boolean isYoutube);
+
+    void tabLayoutJamendo();
 }

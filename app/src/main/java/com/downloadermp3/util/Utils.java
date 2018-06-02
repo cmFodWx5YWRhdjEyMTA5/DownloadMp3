@@ -59,7 +59,6 @@ public class Utils {
         try {
             ArrayList<String> permissionList = new ArrayList<>();
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            permissionList.add(Manifest.permission.READ_PHONE_STATE);
             return checkAndRequestPermissions(activity, permissionList);
         } catch (Throwable e) {
             e.printStackTrace();

@@ -58,24 +58,18 @@ public class DownloadFragment extends SupportFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.download_fragment, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view = inflater.inflate(R.layout.download_fragment, container, false);
         mRecyclerView = view.findViewById(R.id.download_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(Mp3App.sContext));
         mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
         mRecyclerView.setAdapter(mAdViewWrapperAdapter);
-
         mEmptyIV = view.findViewById(R.id.empty_iv);
+        return view;
     }
 
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
-        LogUtil.v(TAG, "onSupportVisible>>>>>>");
         FileDownloaderHelper.registerDownloadFinishListener(mRunnable);
         mRunnable.run();
     }
@@ -91,7 +85,6 @@ public class DownloadFragment extends SupportFragment {
     @Override
     public void onSupportInvisible() {
         super.onSupportInvisible();
-        LogUtil.v(TAG, "onSupportInvisible22>>>>>>");
         FileDownloaderHelper.removeDownloadFinishListener(mRunnable);
     }
 
@@ -119,9 +112,9 @@ public class DownloadFragment extends SupportFragment {
                 }
 
                 if (nativeAd != null && nativeAd.isAdLoaded() && list.size() > 3) {
-                    int offsetStart = mAdViewWrapperAdapter.getItemCount();
-                    mAdViewWrapperAdapter.addAdView(offsetStart + 2, new AdViewWrapperAdapter.
-                            AdViewItem(FBAdUtils.setUpItemNativeAdView(_mActivity, nativeAd), offsetStart + 2));
+
+                    mAdViewWrapperAdapter.addAdView(1, new AdViewWrapperAdapter.
+                            AdViewItem(FBAdUtils.setUpItemNativeAdView(_mActivity, nativeAd), 1));
                 }
 
                 Collections.reverse(list);
@@ -213,6 +206,6 @@ public class DownloadFragment extends SupportFragment {
                 }
                 initData();
             }
-        }.executeOnExecutor(Utils.sExecutorService2, downloadTask);
+        }.executeOnExecutor(Utils.sExecutorService, downloadTask);
     }
 }

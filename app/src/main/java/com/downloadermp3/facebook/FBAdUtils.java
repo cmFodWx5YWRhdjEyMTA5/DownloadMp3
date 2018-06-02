@@ -140,7 +140,7 @@ public class FBAdUtils {
     }
 
     public static void loadAd(String adId, final AdListener adListener) {
-        Log.v("fabad", "loadAd....." + isLoadAding);
+        Log.v("facebook", "loadAd....." + isLoadAding);
         if (isLoadAding) {
             return;
         }
@@ -151,7 +151,7 @@ public class FBAdUtils {
         sNativeAd.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
-                Log.v("fabad", "onError....." + adError.getErrorMessage());
+                Log.v("facebook", "onError....." + adError.getErrorMessage());
                 if (adListener != null) {
                     adListener.onError(ad, adError);
                 }
@@ -160,7 +160,7 @@ public class FBAdUtils {
 
             @Override
             public void onAdLoaded(Ad ad) {
-                Log.v("fabad", "onAdLoaded.....");
+                Log.v("facebook", "onAdLoaded.....");
                 if (adListener != null) {
                     adListener.onAdLoaded(ad);
                 }

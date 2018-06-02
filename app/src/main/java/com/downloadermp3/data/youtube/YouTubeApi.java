@@ -36,9 +36,9 @@ public class YouTubeApi implements IMusicApi {
     private static final Random SRANDOM = new Random();
 
     private static final String KEYS[] = new String[]{
-            "AIzaSyA25ZmI3kQXf50eN3qI_xF_Bw0eMg7bfdA",
-            "AIzaSyACXAuWNTQJvDZQ-Mji9IT43ehHqKz6O-o",
-            "AIzaSyB2x6BIvhdBparpLBGOROWI8g9dccwSxsU"
+            "AIzaSyBGMm_BbAX_fo2VWO-5oDdPCwthdCEZjQ4",
+            "AIzaSyCeAdoPkQwNeJgHzKUN3uF-hKmy1GII-Vg",
+            "AIzaSyAyOFXjB7LQUnBs88s-Cx8vIY9SednWEn4"
     };
 
     private static Cache createDefaultCache(Context context) {

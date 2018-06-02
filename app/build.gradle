@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.mp3downloader.masetrgo"
+        applicationId "com.tubemusic.mp3downloader.faster"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -20,15 +20,15 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("mp3_downloader.jks")
-            storePassword "!@c2018"
-            keyAlias "musicdownload"
-            keyPassword "!@c2018"
-
 //            storeFile file("mp3_downloader.jks")
-//            storePassword "!@c20181212"
-//            keyAlias "mp3downloader"
-//            keyPassword "!@c20181212"
+//            storePassword "!@c2018"
+//            keyAlias "musicdownload"
+//            keyPassword "!@c2018"
+
+            storeFile file("mp3_downloader.jks")
+            storePassword "!@c20181212"
+            keyAlias "mp3downloader"
+            keyPassword "!@c20181212"
         }
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mp3 Music Downloader</string>
+    <string name="app_name">Free Music Downloader</string>
 
     <string name="ratting_name">Rating</string>
 
@@ -53,8 +53,8 @@
 
     <string name="permission_text_tips">Please open read and write disk permissions</string>
 
-    <string name="facebook_app_id">1851623545130872</string>
-    <string name="fb_login_protocol_scheme">fb1851623545130872</string>
+    <string name="facebook_app_id">1848756022085767</string>
+    <string name="fb_login_protocol_scheme">fb1848756022085767</string>
 
     <string name="download_rating">For you to download a music, please give me five stars.</string>
     <string name="parse_url_failure">Parse URL failure !</string>
@@ -64,4 +64,6 @@
     <string name="share_content">https://play.google.com/store/apps/details?id=%s Recommended Downloads</string>
 
     <string name="start_speech">Start speech</string>
+
+    <string name="hot_text">Hot</string>
 </resources>

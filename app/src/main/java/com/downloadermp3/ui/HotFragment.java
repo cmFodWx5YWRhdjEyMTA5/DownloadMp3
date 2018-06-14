@@ -41,6 +41,7 @@ import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import me.yokeyword.fragmentation.SupportFragment;
@@ -224,7 +225,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
 
                 isLoading = false;
 
-                if (arrayList == null || mArrayList.size() == 0) {
+                if (arrayList == null) {
                     mSwipeRefreshLayout.finishRefresh(false);
                     showErrorView();
                     return;
@@ -243,6 +244,8 @@ public class HotFragment extends SupportFragment implements IHotFragment{
                 if (nativeAd == null || !nativeAd.isAdLoaded()) {
                     nativeAd = FBAdUtils.getNativeAd();
                 }
+
+                Collections.shuffle(arrayList);
 
                 if (mSwipeRefreshLayout.isRefreshing()) {
                     mSwipeRefreshLayout.finishRefresh(true);

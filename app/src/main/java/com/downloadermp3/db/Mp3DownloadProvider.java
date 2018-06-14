@@ -9,7 +9,7 @@ import android.util.SparseArray;
 
 public class Mp3DownloadProvider extends BaseContentProvider {
 
-    public static final String AUTHORITIES = "com.downloadermp3.db.MyDownloadProvider";
+    public static final String AUTHORITIES = "com.downloadmusic.db.downloadprovider";
 
     public static final int DOWNLOADEDKEY = 102;
 

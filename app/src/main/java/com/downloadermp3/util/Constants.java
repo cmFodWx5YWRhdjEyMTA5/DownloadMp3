@@ -10,9 +10,9 @@ public class Constants {
 
     public static final String KEY_YOUTUBE = "ytb_key";
 
-    public static final String CHA_YE_ID = "1851623545130872_1851623808464179";
-    public static final String CHA_YE_HEIGH_ID = "1851623545130872_1851624671797426";
+    public static final String CHA_YE_ID = "1848756022085767_1848756942085675";
+    public static final String CHA_YE_HEIGH_ID = "1848756022085767_1848757118752324";
 
-    public static final String NATIVE_ID_LIST = "1851623545130872_1851623971797496";
-    public static final String NATIVE_ID_DIALOG = "1851623545130872_1851624468464113";
+    public static final String NATIVE_ID_LIST = "1848756022085767_1848756582085711";
+    public static final String NATIVE_ID_DIALOG = "1848756022085767_1848757278752308";
 }

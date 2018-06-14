@@ -271,6 +271,7 @@ public class MainActivity extends SupportActivity {
             pop();
         } else {
             moveTaskToBack(true);
+            FBAdUtils.loadFBAds(Constants.NATIVE_ID_DIALOG);
         }
     }
 

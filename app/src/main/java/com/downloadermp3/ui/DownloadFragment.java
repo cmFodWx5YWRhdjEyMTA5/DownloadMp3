@@ -28,6 +28,7 @@ import com.downloadermp3.util.Utils;
 import com.facebook.ads.NativeAd;
 import com.downloadermp3.util.FileDownloaderHelper;
 import com.downloadermp3.util.LogUtil;
+import com.rating.RatingActivity;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -134,6 +135,20 @@ public class DownloadFragment extends SupportFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (sIsPlayMusic) {
+            sIsPlayMusic = false;
+            if (Mp3App.isYTB() || Mp3App.isSCloud()) {
+                RatingActivity.launch(Mp3App.sContext, "",
+                        Mp3App.sContext.getString(R.string.download_rating));
+            }
+        }
+    }
+
+    private static boolean sIsPlayMusic = false;
+
     private CommonAdapter mCommonAdapter = new CommonAdapter<DownloadTask>(Mp3App.sContext,
             R.layout.list_item, mArrayList) {
 
@@ -158,6 +173,7 @@ public class DownloadFragment extends SupportFragment {
                 public void onClick(View v) {
                     Utils.playMusic(Mp3App.sContext, baseModel.getPlayUrl());
                     FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID_DIALOG);
+                    sIsPlayMusic = true;
                 }
             });
             holder.setOnLongClickListener(R.id.list_item, new View.OnLongClickListener() {

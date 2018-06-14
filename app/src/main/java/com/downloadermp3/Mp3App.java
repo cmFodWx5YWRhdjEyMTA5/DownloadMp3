@@ -113,6 +113,7 @@ public class Mp3App extends Application {
                 FacebookReport.logSentRating("no_rating");
             }
         });
+        RatingActivity.setPopTotalCount(this, 2);
     }
 
     private void initMusicPlayer() {

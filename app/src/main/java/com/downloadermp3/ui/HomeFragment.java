@@ -1,13 +1,17 @@
 package com.downloadermp3.ui;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,7 +29,7 @@ import q.rorbin.badgeview.QBadgeView;
  * Created by liyanju on 2018/5/7.
  */
 
-public class HomeFragment extends SupportFragment implements IHomeFragment{
+public class HomeFragment extends SupportFragment implements IHomeFragment, BottomNavigationView.OnNavigationItemSelectedListener{
 
     public static final String TAG = "HomeFragment";
 
@@ -33,7 +37,6 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
         return new HomeFragment();
     }
 
-    private TabLayout mTabLayout;
 
     @Nullable
     @Override
@@ -45,16 +48,16 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
 
     @Override
     public void tabLayoutBg(boolean isYoutube) {
-        if (isYoutube) {
-            mTabLayout.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
-        } else {
-            mTabLayout.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
-        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mViewPager.setCurrentItem(item.getOrder());
+        return true;
     }
 
     @Override
     public void tabLayoutJamendo() {
-        mTabLayout.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary2));
     }
 
     private Badge mRedTabBadge;
@@ -62,50 +65,56 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
     private ViewPager mViewPager;
 
     private void initView(View view) {
-        mTabLayout = view.findViewById(R.id.home_tablayout);
         mViewPager = view.findViewById(R.id.home_viewpager);
 
         HomePageAdapter homePageAdapter = new HomePageAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(homePageAdapter);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
                     hideRedBadge();
                 }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+                int menuId = mBNavigation.getMenu().getItem(position).getItemId();
+                mBNavigation.setSelectedItemId(menuId);
             }
         });
 
-        mTabLayout.setupWithViewPager(mViewPager);
-
         Router.getInstance().register(this);
+        mBNavigation = view.findViewById(R.id.main_navigation);
+        mBNavigation.setOnNavigationItemSelectedListener(this);
+
+        int[][] states = new int[][]{                new int[]{-android.R.attr.state_checked},
+                new int[]{android.R.attr.state_checked}
+        };
+        int[] colors;
+        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+            colors = new int[]{ getResources().getColor(R.color.color_606060),
+                    getResources().getColor(R.color.colorPrimary)
+            };
+        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+            colors = new int[]{ getResources().getColor(R.color.color_606060),
+                    getResources().getColor(R.color.sdcound_primary)
+            };
+        } else {
+            colors = new int[]{ getResources().getColor(R.color.color_606060),
+                    getResources().getColor(R.color.colorPrimary2)
+            };
+        }
+
+        ColorStateList csl = new ColorStateList(states, colors);
+        mBNavigation.setItemIconTintList(csl);
+        mBNavigation.setItemTextColor(csl);
 
         if (Mp3App.sPreferences.getBoolean("DownloadNew", false)) {
             showRedBadge();
         }
 
-        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            tabLayoutBg(true);
-        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            tabLayoutBg(false);
-        } else {
-            mTabLayout.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.colorPrimary2));
-        }
 
-        mTabLayout.getTabAt(0).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_whatshot_white_24dp));
-        mTabLayout.getTabAt(1).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_file_download_white_24dp));
     }
+
+    private BottomNavigationView mBNavigation;
 
     @Override
     public void onDestroyView() {
@@ -125,8 +134,9 @@ public class HomeFragment extends SupportFragment implements IHomeFragment{
             return;
         }
 
+        BottomNavigationItemView itemView = (BottomNavigationItemView)mBNavigation.getChildAt(1);
         mRedTabBadge = new QBadgeView(Mp3App.sContext)
-                .bindTarget(((ViewGroup) mTabLayout.getChildAt(0)).getChildAt(1));
+                .bindTarget(itemView);
         mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
                 R.color.color2_fbc02d));
         mRedTabBadge.setBadgeGravity(Gravity.END | Gravity.TOP);

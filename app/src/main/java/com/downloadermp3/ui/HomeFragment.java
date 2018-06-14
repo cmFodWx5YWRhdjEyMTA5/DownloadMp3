@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -134,11 +135,17 @@ public class HomeFragment extends SupportFragment implements IHomeFragment, Bott
             return;
         }
 
-        BottomNavigationItemView itemView = (BottomNavigationItemView)mBNavigation.getChildAt(1);
+        BottomNavigationMenuView view = (BottomNavigationMenuView)mBNavigation.getChildAt(0);
+        BottomNavigationItemView itemView = (BottomNavigationItemView)view.getChildAt(1);
         mRedTabBadge = new QBadgeView(Mp3App.sContext)
                 .bindTarget(itemView);
-        mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
-                R.color.color2_fbc02d));
+        if (Mp3App.isYTB()) {
+            mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
+                    R.color.colorPrimary));
+        } else {
+            mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
+                    R.color.colorPrimary2));
+        }
         mRedTabBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
         mRedTabBadge.setBadgeNumber(-1);
         mRedTabBadge.setGravityOffset(16, true);

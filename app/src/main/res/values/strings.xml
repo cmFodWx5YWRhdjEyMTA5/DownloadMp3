@@ -39,7 +39,7 @@
     <string name="switch_ytb_search">Switch YouTube Search</string>
     <string name="switch_sc_search">Switch SoundCloud Search</string>
 
-    <string name="disclaimer_text">Mp3 Music Downloader Music is provided by "www.jamendo.com".All songs, available through this application, are intended only for your personal non-commercial use.You can visit Jamendo privacy policy https://devportal.jamendo.com/api_terms_of_use App authorized to use Jamendo API. All tracks available is under CC license(author and license link properly mentioned for each song). You can find and contact authors on www.jamendo.com</string>
+    <string name="disclaimer_text">Free Music Downloader Music is provided by "www.jamendo.com".All songs, available through this application, are intended only for your personal non-commercial use.You can visit Jamendo privacy policy https://devportal.jamendo.com/api_terms_of_use App authorized to use Jamendo API. All tracks available is under CC license(author and license link properly mentioned for each song). You can find and contact authors on www.jamendo.com</string>
     <string name="disclaimers">Disclaimers</string>
     <string name="confirm_text">confirm</string>
 

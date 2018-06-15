@@ -224,7 +224,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
 
                 isLoading = false;
 
-                if (arrayList == null || mArrayList.size() == 0) {
+                if (arrayList == null) {
                     mSwipeRefreshLayout.finishRefresh(false);
                     showErrorView();
                     return;

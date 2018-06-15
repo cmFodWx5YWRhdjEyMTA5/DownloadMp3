@@ -25,10 +25,10 @@ android {
 //            keyAlias "musicdownload"
 //            keyPassword "!@c2018"
 
-            storeFile file("downloader.jks")
-            storePassword "!@c20181212"
-            keyAlias "mp3downloader"
-            keyPassword "!@c20181212"
+            storeFile file("downoadmusic.jks")
+            storePassword "we12345678"
+            keyAlias "downloadmusic"
+            keyPassword "we12345678"
         }
     }
 

@@ -190,19 +190,25 @@ public class FBAdUtils {
     }
 
     public static void showAdDialog(final Activity activity, final String adId,final Runnable errorCallBack) {
-        NativeAd nativeAd = nextNativieAd();
-        if (nativeAd != null && nativeAd.isAdLoaded()) {
-            View view = setupAdView(nativeAd);
-            showDialog(view, activity);
-            loadAd(adId, null);
-            return;
-        }
+//        NativeAd nativeAd = nextNativieAd();
+//        if (nativeAd != null && nativeAd.isAdLoaded()) {
+//            View view = setupAdView(nativeAd);
+//            showDialog(view, activity);
+//            loadAd(adId, null);
+//            return;
+//        }
 
         loadAd(adId, new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
                 if (errorCallBack != null) {
                     errorCallBack.run();
+                } else{
+                    NativeAd nativeAd = nextNativieAd();
+                    if (nativeAd != null && nativeAd.isAdLoaded()) {
+                        View view = setupAdView(nativeAd);
+                        showDialog(view, activity);
+                    }
                 }
             }
 
@@ -309,7 +315,7 @@ public class FBAdUtils {
         } else {
             nativeAdIcon = adView.findViewById(R.id.image2_ad);
             imageAdFrame.setVisibility(View.VISIBLE);
-            imageAdFrame.setBackground(ContextCompat.getDrawable(activity, R.drawable.default_thumbnail));
+            imageAdFrame.setBackground(ContextCompat.getDrawable(activity, R.drawable.fb_ad_bg1));
             adView.findViewById(R.id.image_ad2).setVisibility(View.GONE);
         }
 

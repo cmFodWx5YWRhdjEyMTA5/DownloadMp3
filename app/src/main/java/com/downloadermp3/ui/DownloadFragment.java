@@ -28,6 +28,7 @@ import com.downloadermp3.util.Utils;
 import com.facebook.ads.NativeAd;
 import com.downloadermp3.util.FileDownloaderHelper;
 import com.downloadermp3.util.LogUtil;
+import com.rating.RatingActivity;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -157,6 +158,10 @@ public class DownloadFragment extends SupportFragment {
                 @Override
                 public void onClick(View v) {
                     Utils.playMusic(Mp3App.sContext, baseModel.getPlayUrl());
+                    if (Mp3App.isYTB() || Mp3App.isSCloud()) {
+                        RatingActivity.launch(Mp3App.sContext, "",
+                                Mp3App.sContext.getString(R.string.download_rating));
+                    }
                     FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID_DIALOG);
                 }
             });

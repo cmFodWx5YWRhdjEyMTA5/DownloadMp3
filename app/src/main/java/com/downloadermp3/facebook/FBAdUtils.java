@@ -190,19 +190,25 @@ public class FBAdUtils {
     }
 
     public static void showAdDialog(final Activity activity, final String adId,final Runnable errorCallBack) {
-        NativeAd nativeAd = nextNativieAd();
-        if (nativeAd != null && nativeAd.isAdLoaded()) {
-            View view = setupAdView(nativeAd);
-            showDialog(view, activity);
-            loadAd(adId, null);
-            return;
-        }
+//        NativeAd nativeAd = nextNativieAd();
+//        if (nativeAd != null && nativeAd.isAdLoaded()) {
+//            View view = setupAdView(nativeAd);
+//            showDialog(view, activity);
+//            loadAd(adId, null);
+//            return;
+//        }
 
         loadAd(adId, new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
                 if (errorCallBack != null) {
                     errorCallBack.run();
+                } else {
+                    NativeAd nativeAd = nextNativieAd();
+                    if (nativeAd != null && nativeAd.isAdLoaded()) {
+                        View view = setupAdView(nativeAd);
+                        showDialog(view, activity);
+                     }
                 }
             }
 
@@ -282,11 +288,7 @@ public class FBAdUtils {
             adChoicesFrame.addView(adChoicesView, 0);
             adChoicesFrame.setVisibility(View.VISIBLE);
 
-            if (Mp3App.isYTB() || Mp3App.isSCloud()) {
-                nativeAd.registerViewForInteraction(currentAdView);
-            } else {
-                nativeAd.registerViewForInteraction(nativeAdCallToAction);
-            }
+            nativeAd.registerViewForInteraction(nativeAdCallToAction);
 
             return currentAdView;
         } catch (Throwable e) {

@@ -282,11 +282,7 @@ public class FBAdUtils {
             adChoicesFrame.addView(adChoicesView, 0);
             adChoicesFrame.setVisibility(View.VISIBLE);
 
-            if (Mp3App.isYTB() || Mp3App.isSCloud()) {
-                nativeAd.registerViewForInteraction(currentAdView);
-            } else {
-                nativeAd.registerViewForInteraction(nativeAdCallToAction);
-            }
+            nativeAd.registerViewForInteraction(nativeAdCallToAction);
 
             return currentAdView;
         } catch (Throwable e) {

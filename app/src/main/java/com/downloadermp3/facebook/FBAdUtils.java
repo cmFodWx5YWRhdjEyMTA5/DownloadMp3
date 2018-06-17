@@ -315,7 +315,7 @@ public class FBAdUtils {
         } else {
             nativeAdIcon = adView.findViewById(R.id.image2_ad);
             imageAdFrame.setVisibility(View.VISIBLE);
-            imageAdFrame.setBackground(ContextCompat.getDrawable(activity, R.drawable.default_thumbnail));
+            imageAdFrame.setBackground(ContextCompat.getDrawable(activity, R.drawable.fb_ad_item_bg));
             adView.findViewById(R.id.image_ad2).setVisibility(View.GONE);
         }
 

@@ -2,6 +2,7 @@ package com.downloadermp3.util;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -164,6 +165,7 @@ public class FileDownloaderHelper {
             PendingIntent pendingIntent = PendingIntent.getActivity(sContext, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setDefaults(Notification.DEFAULT_LIGHTS)
+                    .setOnlyAlertOnce(true)
                     .setAutoCancel(true)
                     .setContentTitle(title)
                     .setContentText(Mp3App.sContext.getResources().getString(R.string.finish_download))
@@ -211,10 +213,18 @@ public class FileDownloaderHelper {
             this.pendingIntent = PendingIntent.getActivity(sContext, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            builder = new NotificationCompat.
-                    Builder(FileDownloadHelper.getAppContext(), "file_downloader");
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel("11", FileDownloadHelper.getAppContext().getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT);
+                getManager().createNotificationChannel(channel);
+                builder = new NotificationCompat.Builder(FileDownloadHelper.getAppContext(), "11");
+            } else {
+                builder = new NotificationCompat.
+                        Builder(FileDownloadHelper.getAppContext(), FileDownloadHelper.getAppContext().getString(R.string.app_name));
+            }
 
             builder.setDefaults(Notification.DEFAULT_LIGHTS)
+                    .setOnlyAlertOnce(true)
                     .setOngoing(true)
                     .setAutoCancel(true)
                     .setContentTitle(getTitle())
@@ -263,6 +273,7 @@ public class FileDownloaderHelper {
             }
 
             builder.setProgress(getTotal(), getSofar(), !isShowProgress);
+
             getManager().notify(getId(), builder.build());
         }
 

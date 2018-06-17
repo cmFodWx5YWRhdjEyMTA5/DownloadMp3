@@ -162,7 +162,12 @@ public class DownloadFragment extends SupportFragment {
                         RatingActivity.launch(Mp3App.sContext, "",
                                 Mp3App.sContext.getString(R.string.download_rating));
                     }
-                    FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID_DIALOG);
+                    Utils.runUIThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID_DIALOG);
+                        }
+                    }, 200);
                 }
             });
             holder.setOnLongClickListener(R.id.list_item, new View.OnLongClickListener() {

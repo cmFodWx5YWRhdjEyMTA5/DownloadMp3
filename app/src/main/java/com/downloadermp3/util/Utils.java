@@ -149,6 +149,10 @@ public class Utils {
         sHandler.post(runnable);
     }
 
+    public static void runUIThread(Runnable runnable, long delay) {
+        sHandler.postDelayed(runnable, delay);
+    }
+
     public static void showLongToastSafe(final String string) {
         sHandler.post(new Runnable() {
             @Override

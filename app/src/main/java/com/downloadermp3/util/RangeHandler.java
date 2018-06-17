@@ -136,6 +136,45 @@ public class RangeHandler {
             return true;
         }
 
+        if ("jp".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("ec".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("nz".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("co".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("bg".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("my".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("bo".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("dz".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("ma".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("lk".equals(country.toLowerCase())) {
+            return true;
+        }
 
         return false;
     }
@@ -159,7 +198,7 @@ public class RangeHandler {
 
                     boolean isOpen = false;
                     boolean isWeek = false;
-                    if (week == 0) {
+                    if (week == 0 || week == 6) {
                         setSoundCloud();
                         isOpen = true;
                         isWeek = true;

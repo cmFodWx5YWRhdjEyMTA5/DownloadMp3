@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface JamendoService {
 
-    String ClIENT_ID = "cf4a7613"; //cf4a7613 //1c5d732e
+    String ClIENT_ID = "1c5d732e"; //cf4a7613 //1c5d732e
 
    // String DOWNLOADS_TOTAL_ORDER = "downloads_total";
    String POPULARITY_TOTAL_ORDER = "popularity_total";

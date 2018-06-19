@@ -7,8 +7,8 @@ android {
         applicationId "com.tubemusic.mp3downloader.faster"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -105,7 +105,7 @@ dependencies {
     compile 'com.plattysoft.leonids:LeonidsLib:1.3.2'
 
     compile 'com.facebook.android:audience-network-sdk:4.28.2'
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
 
     compile(name: 'rating-release2', ext: 'aar')
 

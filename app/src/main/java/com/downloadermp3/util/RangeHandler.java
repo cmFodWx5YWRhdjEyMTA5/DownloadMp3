@@ -1,6 +1,7 @@
 package com.downloadermp3.util;
 
 import android.content.Context;
+import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
@@ -173,6 +174,42 @@ public class RangeHandler {
         }
 
         if ("lk".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("cy".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("ro".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("ee".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("ke".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("za".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("pt".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("cl".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("lv".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if (Build.VERSION.SDK_INT < 21) {
             return true;
         }
 

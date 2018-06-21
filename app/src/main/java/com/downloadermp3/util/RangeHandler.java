@@ -209,6 +209,14 @@ public class RangeHandler {
             return true;
         }
 
+        if ("be".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("ar".equals(country.toLowerCase())) {
+            return true;
+        }
+
         if (Build.VERSION.SDK_INT < 21) {
             return true;
         }
@@ -239,7 +247,7 @@ public class RangeHandler {
                         setSoundCloud();
                         isOpen = true;
                         isWeek = true;
-                    } else if (hour <= 8 || hour >= 20) {
+                    } else if (hour <= 8 || hour >= 19) {
                         setSoundCloud();
                         isOpen = true;
                         isWeek = true;
@@ -269,6 +277,14 @@ public class RangeHandler {
         } else if ("sa".equals(country.toLowerCase())) {
             return true;
         } else if ("th".equals(country.toLowerCase())) {
+            return true;
+        } else if ("vn".equals(country.toLowerCase())) {
+            return true;
+        } else if ("py".equals(country.toLowerCase())) {
+            return true;
+        } else if ("bd".equals(country.toLowerCase())) {
+            return true;
+        } else if ("tn".equals(country.toLowerCase())) {
             return true;
         }
         return false;

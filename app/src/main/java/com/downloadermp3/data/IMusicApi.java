@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface IMusicApi {
 
-    List<BaseModel> getRecommondMusic(Context context);
+    List<Song> getRecommondMusic(Context context);
 
-    List<BaseModel> searchMusic(Context context, String query);
+    List<Song> searchMusic(Context context, String query);
 
     void resetPaging();
 

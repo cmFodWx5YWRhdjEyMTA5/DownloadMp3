@@ -24,7 +24,7 @@ import com.downloadermp3.facebook.FBAdUtils;
 import com.downloadermp3.router.Router;
 import com.downloadermp3.util.FormatUtil;
 import com.facebook.ads.NativeAd;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.data.IMusicApi;
 import com.downloadermp3.data.jamendo.JamendoApi;
 import com.downloadermp3.data.youtube.YouTubeApi;
@@ -33,10 +33,6 @@ import com.downloadermp3.view.DownloadBottomSheetDialog;
 import com.downloadermp3.util.LogUtil;
 import com.downloadermp3.util.Utils;
 import com.paginate.Paginate;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -52,10 +48,10 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public class HotFragment extends SupportFragment implements IHotFragment{
 
-    private ArrayList<BaseModel> mArrayList = new ArrayList<>();
+    private ArrayList<Song> mArrayList = new ArrayList<>();
 
     private TextView mStatusTV;
-    private SmartRefreshLayout mSwipeRefreshLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private Paginate mPaginate;
     private RecyclerView mRecyclerView;
 
@@ -90,27 +86,15 @@ public class HotFragment extends SupportFragment implements IHotFragment{
         }
     }
 
-    private BezierRadarHeader bezierRadarHeader;
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        int color_bg = R.color.colorPrimary2;
-        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            color_bg = R.color.colorPrimary;
-        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            color_bg = R.color.sdcound_primary;
-        }
-        bezierRadarHeader = new BezierRadarHeader(_mActivity);
-        bezierRadarHeader.setEnableHorizontalDrag(true);
-        bezierRadarHeader.setPrimaryColor(ContextCompat.getColor(_mActivity, color_bg));
-        mSwipeRefreshLayout.setRefreshHeader(bezierRadarHeader);
-        mSwipeRefreshLayout.autoRefresh(400);
-
         Router.getInstance().register(this);
+        mSwipeRefreshLayout.setRefreshing(true);
+        initData();
     }
 
-    private CommonAdapter mCommonAdapter = new CommonAdapter<BaseModel>(Mp3App.sContext,
+    private CommonAdapter mCommonAdapter = new CommonAdapter<Song>(Mp3App.sContext,
             R.layout.list_item, mArrayList) {
 
         RequestOptions options = new RequestOptions()
@@ -119,7 +103,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
                 .error(R.drawable.default_thumbnail);
 
         @Override
-        protected void convert(ViewHolder holder, final BaseModel baseModel, int position) {
+        protected void convert(ViewHolder holder, final Song baseModel, int position) {
             ImageView itemThumbnialIV = holder.getView(R.id.itemThIV);
             Glide.with(_mActivity).load(baseModel.getImageUrl()).apply(options).into(itemThumbnialIV);
 
@@ -149,10 +133,13 @@ public class HotFragment extends SupportFragment implements IHotFragment{
 
     private void initView(View view) {
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
-//        mSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(Mp3App.sContext, R.color.colorAccent));
-        mSwipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        mSwipeRefreshLayout.setProgressViewOffset(true, 0,Utils.dip2px(getContext(), 60));
+        mSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(_mActivity, R.color.colorPrimary2),
+                ContextCompat.getColor(_mActivity, R.color.colorPrimary),
+                ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
+            public void onRefresh() {
                 LogUtil.v(TAG, "onRefresh>>>>");
                 if (mMusicApi != null) {
                     mMusicApi.resetPaging();
@@ -181,7 +168,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
-        mStatusTV.setText(R.string.load_error);
+        mStatusTV.setText(R.string.network_error);
     }
 
     private void showEmptyView() {
@@ -198,7 +185,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
         if (mLoadTask != null) {
             mLoadTask.cancel(true);
         }
-        mLoadTask = new AsyncTask<Void, Void, List<BaseModel>>() {
+        mLoadTask = new AsyncTask<Void, Void, List<Song>>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -208,7 +195,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
             }
 
             @Override
-            protected List<BaseModel> doInBackground(Void... Void) {
+            protected List<Song> doInBackground(Void... Void) {
                 LogUtil.v(TAG, "doInBackground getRecommondMusic");
                 if (mMusicApi != null) {
                     return mMusicApi.getRecommondMusic(Mp3App.sContext);
@@ -217,7 +204,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
             }
 
             @Override
-            protected void onPostExecute(List<BaseModel> arrayList) {
+            protected void onPostExecute(List<Song> arrayList) {
                 super.onPostExecute(arrayList);
                 if (_mActivity.isFinishing()) {
                     return;
@@ -226,17 +213,17 @@ public class HotFragment extends SupportFragment implements IHotFragment{
                 isLoading = false;
 
                 if (arrayList == null) {
-                    mSwipeRefreshLayout.finishRefresh(false);
+                    mSwipeRefreshLayout.setRefreshing(false);
                     showErrorView();
                     return;
                 } else if (arrayList.size() == 0 && mArrayList.size() == 0) {
-                    mSwipeRefreshLayout.finishRefresh(false);
+                    mSwipeRefreshLayout.setRefreshing(false);
                     showEmptyView();
                     return;
                 }
 
                 if (arrayList == null || arrayList.size() == 0) {
-                    mSwipeRefreshLayout.finishRefresh(false);
+                    mSwipeRefreshLayout.setRefreshing(false);
                     return;
                 }
 
@@ -248,7 +235,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
                 Collections.shuffle(arrayList);
 
                 if (mSwipeRefreshLayout.isRefreshing()) {
-                    mSwipeRefreshLayout.finishRefresh(true);
+                    mSwipeRefreshLayout.setRefreshing(false);
                     mArrayList.clear();
                     mAdViewWrapperAdapter.clearAdView();
                     mArrayList.addAll(arrayList);
@@ -309,15 +296,10 @@ public class HotFragment extends SupportFragment implements IHotFragment{
 
     @Override
     public void switchYouTubeSearch() {
-        if (bezierRadarHeader != null) {
-            bezierRadarHeader.setPrimaryColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary));
-        }
     }
 
     @Override
     public void switchSoundCloudSearch() {
-        if (bezierRadarHeader != null) {
-            bezierRadarHeader.setPrimaryColor(ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
-        }
+
     }
 }

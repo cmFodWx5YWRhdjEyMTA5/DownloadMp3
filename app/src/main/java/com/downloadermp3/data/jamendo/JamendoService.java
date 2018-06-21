@@ -14,7 +14,7 @@ public interface JamendoService {
 
     String ClIENT_ID = "1c5d732e"; //cf4a7613 //
 
-   // String DOWNLOADS_TOTAL_ORDER = "downloads_total";
+   String DOWNLOADS_TOTAL_ORDER = "downloads_total";
    String POPULARITY_TOTAL_ORDER = "popularity_total";
 
     int PAGE_LIMIT = 25;
@@ -24,4 +24,7 @@ public interface JamendoService {
 
     @GET("tracks?client_id="+ClIENT_ID+"&format=json&limit="+PAGE_LIMIT+"&type=single+albumtrack")
     Call<JamendoModel> getJamendoDataByOrder(@Query("order") String order, @Query("offset") int offset);
+
+    @GET("tracks?client_id="+ClIENT_ID+"&format=json&include=lyrics&limit=25&type=single+albumtrack")
+    Call<JamendoModel> getJamendoDataByTags(@Query("tags") String tags, @Query("offset") int offset);
 }

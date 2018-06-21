@@ -41,6 +41,26 @@
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 
+        <activity android:name=".ui.HomeListActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/windowIsTranslucen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".ui.HomeGridActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/windowIsTranslucen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
+        <activity android:name=".ui.HomeRecommendActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/windowIsTranslucen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+
         <receiver
             android:name="com.downloadermp3.facebook.FacebookReferrerBroadcastReceiver"
             android:exported="true">

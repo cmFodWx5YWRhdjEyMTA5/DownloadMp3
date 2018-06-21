@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.downloadermp3.ui.HomeFragment;
 import com.downloadermp3.ui.HotFragment;
 import com.downloadermp3.ui.DownloadFragment;
 
@@ -17,21 +18,15 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by liyanju on 2018/5/7.
  */
 
-public class HomePageAdapter extends FragmentPagerAdapter {
+public class MainPageAdapter extends FragmentPagerAdapter {
 
     private ArrayList<SupportFragment> mList = new ArrayList<>();
 
-//    private final String[] titles;
-
-    public HomePageAdapter(Context context,  FragmentManager fm) {
+    public MainPageAdapter(Context context, FragmentManager fm) {
         super(fm);
+        mList.add(new HomeFragment());
         mList.add(new HotFragment());
         mList.add(new DownloadFragment());
-
-//        titles = new String[]{
-//                context.getResources().getString(R.string.recommend),
-//                context.getResources().getString(R.string.download),
-//        };
     }
 
     @Override

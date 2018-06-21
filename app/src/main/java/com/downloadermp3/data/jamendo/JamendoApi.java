@@ -6,7 +6,7 @@ import com.downloadermp3.bean.JamendoModel;
 import com.downloadermp3.data.IMusicApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class JamendoApi implements IMusicApi {
         return null;
     }
 
-    private static JamendoService getJamendoService(Context context) {
+    public static JamendoService getJamendoService(Context context) {
         if (sJamendoService == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(JamendoModel.class, new JamendoDeserializer());
@@ -74,7 +74,7 @@ public class JamendoApi implements IMusicApi {
     private int offset;
 
     @Override
-    public ArrayList<BaseModel> getRecommondMusic(Context context) {
+    public ArrayList<Song> getRecommondMusic(Context context) {
         try {
             JamendoService jamendoService = getJamendoService(context);
             Call<JamendoModel> call = jamendoService
@@ -98,7 +98,7 @@ public class JamendoApi implements IMusicApi {
     }
 
     @Override
-    public ArrayList<BaseModel> searchMusic(Context context, String query) {
+    public ArrayList<Song> searchMusic(Context context, String query) {
         try {
             JamendoService jamendoService = getJamendoService(context);
             Call<JamendoModel> call = jamendoService.searchJamendoData(query, offset);

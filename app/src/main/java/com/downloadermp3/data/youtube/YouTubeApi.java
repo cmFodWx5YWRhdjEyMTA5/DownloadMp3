@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.downloadermp3.bean.YTbeModel;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.data.IMusicApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -76,7 +76,7 @@ public class YouTubeApi implements IMusicApi {
     }
 
     @Override
-    public List<BaseModel> getRecommondMusic(Context context) {
+    public List<Song> getRecommondMusic(Context context) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
             Call<YTbeModel> call = youTubeService.getYoutubeMusic(nextPage, getDevelopKey());
@@ -94,7 +94,7 @@ public class YouTubeApi implements IMusicApi {
     }
 
     @Override
-    public List<BaseModel> searchMusic(Context context, String query) {
+    public List<Song> searchMusic(Context context, String query) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
             Call<YTbeModel> call = youTubeService.searchYoutubeMusic(query, nextPage, getDevelopKey());

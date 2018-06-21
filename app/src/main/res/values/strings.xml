@@ -5,7 +5,8 @@
 
     <string name="action_voice_rec">Voice</string>
 
-    <string name="load_error">Network is Error</string>
+    <string name="network_error">Network is Error</string>
+    <string name="load_error">Load Data Error</string>
     <string name="empty_error">Data Is Empty</string>
 
     <string name="error_video_streams_empty">The video %s has no streams.</string>
@@ -66,4 +67,65 @@
     <string name="start_speech">Start speech</string>
 
     <string name="hot_text">Hot</string>
+
+    <string name="home_text">Home</string>
+
+    <string name="pop_text">pop</string>
+    <string name="Electronic_text">Electronic</string>
+    <string name="rock_text">Rock</string>
+    <string name="ambient_text">Ambient</string>
+    <string name="intrumental_text">Intrumental</string>
+    <string name="hiphop_text">Hiphop</string>
+    <string name="indie_text">Indie</string>
+    <string name="jazz_text">Jazz</string>
+    <string name="world_text">world</string>
+    <string name="metal_text">Metal</string>
+    <string name="experimental_text">Experimental</string>
+    <string name="Chillout_text">Chillout</string>
+    <string name="Dance_text">Dance</string>
+    <string name="Country_text">Country</string>
+    <string name="Classical_text">Classical</string>
+    <string name="Reggae_text">Reggae</string>
+    <string name="Lounge_text">Lounge</string>
+    <string name="Techno_text">Techno</string>
+    <string name="Trance_text">Trance</string>
+    <string name="Punk_text">Punk</string>
+    <string name="Folk_text">Folk</string>
+    <string name="Rap_text">Rap</string>
+    <string name="Triphop_text">Triphop</string>
+    <string name="Rnb_text">Rnb</string>
+    <string name="newage_text">newage</string>
+    <string name="Dubstep_text">Dubstep</string>
+    <string name="Acoustic_text">Acoustic</string>
+    <string name="Blues_text">Blues</string>
+    <string name="Funk_text">Funk</string>
+    <string name="Disco_text">Disco</string>
+
+    <string name="Piano">Piano</string>
+    <string name="Bass">Bass</string>
+    <string name="Drum">Drum</string>
+    <string name="Electricguitar">Electricguitar</string>
+    <string name="Computer">Computer</string>
+    <string name="Acousticguitar">Acousticguitar</string>
+    <string name="Keyboard">Keyboard</string>
+    <string name="Synthesizer">Synthesizer</string>
+    <string name="Violin">Violin</string>
+    <string name="Flute">Flute</string>
+    <string name="Organ">Organ</string>
+    <string name="Viola">Viola</string>
+    <string name="Cello">Cello</string>
+    <string name="Saxophone">Saxophone</string>
+    <string name="Classicalguitar">Classicalguitar</string>
+    <string name="Accordion">Accordion</string>
+
+    <string name="recommend_text">Recommend</string>
+    <string name="top_download_text">Top Download</string>
+    <string name="top_listened_text">Top listened</string>
+    <string name="genre_text">Genre</string>
+    <string name="instrument_text">Instrument</string>
+
+    <string name="featuer_text">Featuer</string>
+    <string name="recent_text">Recent</string>
+
+
 </resources>

@@ -19,11 +19,18 @@ import android.support.v4.content.FileProvider;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.downloadermp3.Mp3App;
+import com.downloadermp3.R;
+import com.downloadermp3.ui.MainActivity;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
@@ -42,11 +49,61 @@ public class Utils {
 
     public static final ExecutorService sExecutorService = Executors.newSingleThreadExecutor();
     public static final ExecutorService sExecutorService2 = Executors.newSingleThreadExecutor();
+    public static final ExecutorService sExecutorService3 = Executors.newSingleThreadExecutor();
+
+    public static RequestOptions requestOptions = new RequestOptions()
+            .placeholder(R.drawable.default_thumbnail_corners)
+            .transforms(new RoundedCorners(Utils.dip2px(Mp3App.sContext, 4)));
+
+    public static void setViewBackgroud(View view) {
+        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
+        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+        } else if (Mp3App.isSCloud()) {
+            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+        } else {
+            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary2));
+        }
+    }
+
+    public static void setActivityStatusColor(Activity activity) {
+        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
+        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+        } else if (Mp3App.isSCloud()) {
+            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+        } else {
+            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary2));
+        }
+    }
 
     public static void runSingleThread(Runnable runnable) {
         sExecutorService2.execute(runnable);
     }
 
+    public static int getScreenWhith() {
+        WindowManager wm = (WindowManager) Mp3App.sContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        return display.getWidth();
+    }
+
+    public static int dip2px(Context context, float dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
+
+    public static int durationChange(String time) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+            int time2 = simpleDateFormat.parse(time).getMinutes();
+            return time2 * 60 + simpleDateFormat.parse(time).getMinutes();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     public static DisplayMetrics getMetrics(Activity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
@@ -133,6 +190,15 @@ public class Utils {
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             decorView.setSystemUiVisibility(option);
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    public static void setStatusColor(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = activity.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
         }
     }
 

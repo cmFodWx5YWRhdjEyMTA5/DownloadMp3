@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.downloadermp3.Mp3App;
 import com.downloadermp3.R;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.data.DownloadTask;
 import com.downloadermp3.facebook.FBAdUtils;
 import com.downloadermp3.facebook.FacebookReport;
@@ -47,7 +47,7 @@ public class FileDownloaderHelper {
     private static Context sContext = Mp3App.sContext;
 
 
-    public static void addDownloadTask(Context context, BaseModel song, final WeakReference<Activity> activityWeakReference) {
+    public static void addDownloadTask(Context context, Song song, final WeakReference<Activity> activityWeakReference) {
         if (song == null) {
             return;
         }
@@ -102,7 +102,7 @@ public class FileDownloaderHelper {
 
         @Override
         protected BaseNotificationItem create(BaseDownloadTask task) {
-            return new NotificationItem(task.getId(), ((BaseModel) task.getTag()).getName(),
+            return new NotificationItem(task.getId(), ((Song) task.getTag()).getName(),
                     "");
         }
 
@@ -114,7 +114,7 @@ public class FileDownloaderHelper {
                 public void run() {
                     LogUtil.v(TAG, "destroyNotification getStatus " + task.getStatus());
                     if (task.getStatus() == FileDownloadStatus.completed) {
-                        BaseModel song = (BaseModel) task.getTag();
+                        Song song = (Song) task.getTag();
                         String path = task.getPath();
                         int id = task.getId();
                         LogUtil.v(TAG, "destroyNotification completed id :" + id + " getTitle:: "

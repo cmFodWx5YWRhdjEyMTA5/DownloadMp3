@@ -2,6 +2,7 @@ package com.downloadermp3.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 /**
  * Created by liyanju on 2018/5/31.
@@ -46,6 +47,8 @@ public class ReferrerHandler {
     public boolean isReferrerOpen(String referrer) {
         if (referrer.startsWith("campaigntype=")
                 && referrer.contains("campaignid=")) {
+            return true;
+        } else if (!TextUtils.isEmpty(referrer) && referrer.contains("not set")) {
             return true;
         } else {
             return false;

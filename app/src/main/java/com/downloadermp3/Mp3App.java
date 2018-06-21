@@ -52,16 +52,6 @@ public class Mp3App extends Application {
         MultiDex.install(this);
     }
 
-    private int iii;
-
-    private void init() {
-        iii = iii + 1;
-        iii++;
-        if (iii > 2) {
-            iii = iii++;
-        }
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -69,8 +59,6 @@ public class Mp3App extends Application {
         sContext = this;
 
         FileDownloader.setup(sContext);
-
-        init();
 
         sPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -97,8 +85,6 @@ public class Mp3App extends Application {
         }).install();
 
         initMusicPlayer();
-
-        init();
 
         CrashReport.initCrashReport(getApplicationContext());
 

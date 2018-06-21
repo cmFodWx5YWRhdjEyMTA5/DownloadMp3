@@ -3,19 +3,40 @@ package com.downloadermp3.bean;
 import android.os.Parcel;
 import android.text.TextUtils;
 
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by liyanju on 2018/5/11.
  */
 
-public class JamendoModel {
+public class JamendoModel implements Serializable{
 
-    public ArrayList<BaseModel> arrayList = new ArrayList<>();
+    public ArrayList<Song> arrayList = new ArrayList<>();
 
-    public static class JamendoResult extends BaseModel{
+
+    public int type;
+
+    public String name;
+
+    public int imageRes;
+
+    public String tags;
+
+
+    public JamendoModel(String name, String tags, int imageRes, int type) {
+        this.name = name;
+        this.tags = tags;
+        this.imageRes = imageRes;
+        this.type = type;
+    }
+
+    public JamendoModel(){}
+
+
+    public static class JamendoResult extends Song {
 
 
         public String name;
@@ -71,7 +92,7 @@ public class JamendoModel {
 
         @Override
         public int getType() {
-            return BaseModel.JAMENDO_TYPE;
+            return Song.JAMENDO_TYPE;
         }
 
         @Override

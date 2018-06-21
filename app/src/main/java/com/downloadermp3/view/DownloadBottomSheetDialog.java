@@ -19,7 +19,7 @@ import com.downloadermp3.facebook.FBAdUtils;
 import com.downloadermp3.util.Utils;
 import com.facebook.ads.NativeAd;
 import com.lzx.musiclibrary.aidl.model.SongInfo;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.data.youtube.VideoStream.ParseStreamMetaData;
 import com.downloadermp3.data.youtube.VideoStream.StreamMetaData;
 import com.downloadermp3.ui.MusicPlayerActivity;
@@ -37,7 +37,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
 
     public static final String TAG = "DownloadSheet";
 
-    private BaseModel mSong;
+    private Song mSong;
 
     private View mLoadingView;
 
@@ -51,7 +51,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
         mActivity = getActivity();
     }
 
-    public static DownloadBottomSheetDialog newInstance(BaseModel song) {
+    public static DownloadBottomSheetDialog newInstance(Song song) {
         DownloadBottomSheetDialog fragment = new DownloadBottomSheetDialog();
         Bundle bundle = new Bundle();
         bundle.putParcelable("song", song);
@@ -128,7 +128,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
         rootView.findViewById(R.id.download2_linear).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (mSong.getType() == BaseModel.YOUTUBE_TYPE) {
+                if (mSong.getType() == Song.YOUTUBE_TYPE) {
                     parseYouTubeUrl(((YTbeModel.YTBSnippet) mSong).vid, new Runnable() {
                         @Override
                         public void run() {
@@ -172,7 +172,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             @Override
             public void onClick(View view) {
                 try {
-                    if (mSong.getType() == BaseModel.YOUTUBE_TYPE) {
+                    if (mSong.getType() == Song.YOUTUBE_TYPE) {
                         parseYouTubeUrl(((YTbeModel.YTBSnippet) mSong).vid, new Runnable() {
                             @Override
                             public void run() {

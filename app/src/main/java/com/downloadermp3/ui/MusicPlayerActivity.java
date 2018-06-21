@@ -33,7 +33,7 @@ import com.lzx.musiclibrary.aidl.model.SongInfo;
 import com.lzx.musiclibrary.constans.PlayMode;
 import com.lzx.musiclibrary.manager.MusicManager;
 import com.lzx.musiclibrary.manager.TimerTaskManager;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.util.FileDownloaderHelper;
 import com.downloadermp3.util.LogUtil;
 import com.downloadermp3.view.CircleImageView;
@@ -81,15 +81,15 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
         context.startActivity(intent);
     }
 
-    public static void launch(Context context, SongInfo songInfo, BaseModel baseModel) {
+    public static void launch(Context context, SongInfo songInfo, Song baseModel) {
         Intent intent = new Intent(context, MusicPlayerActivity.class);
         intent.putExtra("songInfo", songInfo);
-        intent.putExtra("basemodel", baseModel);
+        intent.putExtra("basemodel", (Parcelable) baseModel);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
-    private BaseModel mBaseModel;
+    private Song mBaseModel;
 
     private void initIntent() {
         songInfos = getIntent().getParcelableArrayListExtra("SongInfos");

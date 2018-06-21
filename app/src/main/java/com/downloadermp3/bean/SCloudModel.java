@@ -3,21 +3,22 @@ package com.downloadermp3.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.data.soundcloud.SoundCloudService;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by liyanju on 2018/5/16.
  */
 
-public class SCloudModel {
+public class SCloudModel implements Serializable{
 
-    public ArrayList<BaseModel> arrayList = new ArrayList<>();
+    public ArrayList<Song> arrayList = new ArrayList<>();
 
-    public static class SCloudResult extends BaseModel {
+    public static class SCloudResult extends Song {
 
 
         @SerializedName("stream_url")
@@ -101,7 +102,7 @@ public class SCloudModel {
 
         @Override
         public int getType() {
-            return BaseModel.SOUNDCLOUD_TYPE;
+            return Song.SOUNDCLOUD_TYPE;
         }
 
         @Override

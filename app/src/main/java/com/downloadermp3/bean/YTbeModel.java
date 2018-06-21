@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 
 import java.util.ArrayList;
 
@@ -16,9 +16,9 @@ public class YTbeModel {
 
     public String nextPageToken;
 
-    public ArrayList<BaseModel> list = new ArrayList<>();
+    public ArrayList<Song> list = new ArrayList<>();
 
-    public static class YTBSnippet extends BaseModel{
+    public static class YTBSnippet extends Song {
 
 
 

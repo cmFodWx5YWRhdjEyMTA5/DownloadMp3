@@ -5,7 +5,7 @@ import android.content.Context;
 import com.downloadermp3.bean.SCloudModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.data.IMusicApi;
 
 import java.io.File;
@@ -70,12 +70,12 @@ public class SoundCloudApi implements IMusicApi{
     }
 
     @Override
-    public List<BaseModel> getRecommondMusic(Context context) {
+    public List<Song> getRecommondMusic(Context context) {
         return null;
     }
 
     @Override
-    public List<BaseModel> searchMusic(Context context, String query) {
+    public List<Song> searchMusic(Context context, String query) {
         try {
             SoundCloudService soundCloudService = getSoundCloudService(context);
             Call<SCloudModel> call = soundCloudService.getSearchMusicList(query);

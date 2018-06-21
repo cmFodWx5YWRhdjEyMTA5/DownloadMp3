@@ -226,8 +226,8 @@ public class MainActivity extends SupportActivity {
 
         sIsInActivity = true;
 
-        if (findFragment(HomeFragment.class) == null) {
-            loadRootFragment(R.id.fl_container, HomeFragment.newInstance());
+        if (findFragment(MainFragment.class) == null) {
+            loadRootFragment(R.id.fl_container, MainFragment.newInstance());
         }
 
         FBAdUtils.showAdDialog(this, Constants.NATIVE_ID_DIALOG);

@@ -10,7 +10,7 @@ import com.downloadermp3.db.DownloadTable;
  * Created by liyanju on 2018/5/21.
  */
 
-public class DownloadTask extends BaseModel{
+public class DownloadTask extends Song {
 
     private String title;
     private String path;

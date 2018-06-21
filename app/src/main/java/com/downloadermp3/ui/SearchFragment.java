@@ -29,7 +29,7 @@ import com.downloadermp3.util.Utils;
 import com.downloadermp3.view.DownloadBottomSheetDialog;
 import com.facebook.ads.Ad;
 import com.facebook.ads.NativeAd;
-import com.downloadermp3.data.BaseModel;
+import com.downloadermp3.data.Song;
 import com.downloadermp3.data.jamendo.JamendoApi;
 import com.downloadermp3.data.youtube.YouTubeApi;
 import com.downloadermp3.router.Router;
@@ -62,7 +62,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
 
     private AsyncTask mLoadTask;
 
-    private ArrayList<BaseModel> mArrayList = new ArrayList<>();
+    private ArrayList<Song> mArrayList = new ArrayList<>();
 
     private IMusicApi mMusicApi;
 
@@ -127,7 +127,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
         return view;
     }
 
-    private CommonAdapter mCommonAdapter = new CommonAdapter<BaseModel>(Mp3App.sContext,
+    private CommonAdapter mCommonAdapter = new CommonAdapter<Song>(Mp3App.sContext,
             R.layout.list_item, mArrayList) {
 
         RequestOptions options = new RequestOptions()
@@ -136,7 +136,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
                 .error(R.drawable.default_thumbnail);
 
         @Override
-        protected void convert(ViewHolder holder, final BaseModel baseModel, int position) {
+        protected void convert(ViewHolder holder, final Song baseModel, int position) {
             ImageView itemThumbnialIV = holder.getView(R.id.itemThIV);
             Glide.with(_mActivity).load(baseModel.getImageUrl()).apply(options).into(itemThumbnialIV);
 
@@ -225,7 +225,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
         if (mLoadTask != null) {
             mLoadTask.cancel(true);
         }
-        mLoadTask = new AsyncTask<Void, Void, List<BaseModel>>() {
+        mLoadTask = new AsyncTask<Void, Void, List<Song>>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -235,7 +235,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
             }
 
             @Override
-            protected List<BaseModel> doInBackground(Void... integers) {
+            protected List<Song> doInBackground(Void... integers) {
                 if (mMusicApi != null) {
                     return mMusicApi.searchMusic(Mp3App.sContext, mCurrentQuery);
                 }
@@ -243,7 +243,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
             }
 
             @Override
-            protected void onPostExecute(List<BaseModel> arrayList) {
+            protected void onPostExecute(List<Song> arrayList) {
                 super.onPostExecute(arrayList);
                 if (_mActivity.isFinishing()) {
                     return;
@@ -293,7 +293,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
-        mStatusTV.setText(R.string.load_error);
+        mStatusTV.setText(R.string.network_error);
     }
 
     private void showEmptyView() {

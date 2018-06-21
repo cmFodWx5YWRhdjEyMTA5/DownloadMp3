@@ -71,18 +71,6 @@ public class HomeRecommendActivity extends AppCompatActivity {
     private ArrayList<Song> recentList;
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        LogUtil.v("HomeRecomd", "onSaveInstanceState featuerList >>" + featuerList);
-        if (featuerList != null) {
-            outState.putParcelableArrayList("featuerList", featuerList);
-        }
-        if (recentList != null) {
-            outState.putParcelableArrayList("recentList", recentList);
-        }
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_recommed_layout);

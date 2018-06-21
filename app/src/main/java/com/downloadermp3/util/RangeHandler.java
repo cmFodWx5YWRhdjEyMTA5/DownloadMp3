@@ -217,10 +217,10 @@ public class RangeHandler {
             return true;
         }
 
-        if ("in".equals(country.toLowerCase())) {
-            checkusTime(Mp3App.sContext);
-            return false;
-        }
+//        if ("in".equals(country.toLowerCase())) {
+//            checkusTime(Mp3App.sContext);
+//            return false;
+//        }
 
         if ("fr".equals(country.toLowerCase())) {
             return true;

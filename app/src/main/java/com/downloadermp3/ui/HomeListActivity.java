@@ -283,7 +283,7 @@ public class HomeListActivity extends AppCompatActivity {
     };
 
     private void requestHomeList() {
-        String order = JamendoService.POPULARITY_TOTAL_ORDER;
+        String order = JamendoService.LISTEN_TOTAL_ORDER;
         if (mType == TitleModel.TOP_DOWNLOAD_TYPE) {
             order = JamendoService.DOWNLOADS_TOTAL_ORDER;
         }

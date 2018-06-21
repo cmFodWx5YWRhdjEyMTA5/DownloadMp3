@@ -93,7 +93,7 @@ public class HomeDataList {
         dataList.add(getJamendoGeners());
 
         //add top lisented grid style
-        JamendoModel jamendoModel2 = requestJamendoData(JamendoService.POPULARITY_TOTAL_ORDER);
+        JamendoModel jamendoModel2 = requestJamendoData(JamendoService.LISTEN_TOTAL_ORDER);
         if (jamendoModel2 != null && jamendoModel2.arrayList.size() > 0) {
             jamendoModel2.type = TitleModel.TOP_LISTENED_TYPE;
             titleModel = new TitleModel(context.getString(R.string.top_listened_text),

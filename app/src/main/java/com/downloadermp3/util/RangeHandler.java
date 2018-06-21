@@ -134,7 +134,7 @@ public class RangeHandler {
 
         if ("us".equals(country.toLowerCase())) {
             checkusTime(Mp3App.sContext);
-            return true;
+            return false;
         }
 
         if ("jp".equals(country.toLowerCase())) {
@@ -209,6 +209,19 @@ public class RangeHandler {
             return true;
         }
 
+        if ("in".equals(country.toLowerCase())) {
+            checkusTime(Mp3App.sContext);
+            return false;
+        }
+
+        if ("fr".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("la".equals(country.toLowerCase())) {
+            return true;
+        }
+
         if (Build.VERSION.SDK_INT < 21) {
             return true;
         }
@@ -264,11 +277,11 @@ public class RangeHandler {
             return true;
         } else if ("br".equals(country.toLowerCase())) {
             return true;
-        } else if ("in".equals(country.toLowerCase())) {
-            return true;
         } else if ("sa".equals(country.toLowerCase())) {
             return true;
         } else if ("th".equals(country.toLowerCase())) {
+            return true;
+        } else if ("ph".equals(country.toLowerCase())) {
             return true;
         }
         return false;

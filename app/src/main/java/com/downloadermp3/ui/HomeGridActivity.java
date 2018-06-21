@@ -88,7 +88,11 @@ public class HomeGridActivity extends AppCompatActivity {
 
         setUpToolbar();
         setUpRecyclerView();
+
+        itemHeight = (Utils.getScreenWhith() - Utils.dip2px(Mp3App.sContext, 16)*4)/3;
     }
+
+    private int itemHeight;
 
     private void setUpRecyclerView() {
         recyclerView.setHasFixedSize(true);
@@ -102,6 +106,7 @@ public class HomeGridActivity extends AppCompatActivity {
             protected void convert(ViewHolder holder, final JamendoModel jamendoModel, int position) {
                 ImageView imageView = holder.getView(R.id.image);
                 imageView.setImageResource(jamendoModel.imageRes);
+                imageView.getLayoutParams().height = itemHeight;
                 Glide.with(HomeGridActivity.this).load(jamendoModel.imageRes)
                         .apply(Utils.requestOptions).into(imageView);
 

@@ -1,6 +1,10 @@
 package com.mp3downloader.musicgo;
 
+import com.facebook.ads.AudienceNetworkActivity;
+
 import org.junit.Test;
+
+import java.net.URLDecoder;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +18,9 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
 
-        int a[] = new int[]{1,3,6,2,5,7};
+        String str = "utm_medium=(not%20set)";
+        str = URLDecoder.decode(str, "utf-8");
+        System.out.println(str.contains("not set"));
 
     }
 

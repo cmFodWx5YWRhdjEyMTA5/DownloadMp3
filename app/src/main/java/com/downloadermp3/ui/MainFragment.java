@@ -1,12 +1,11 @@
 package com.downloadermp3.ui;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
+
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -73,49 +72,37 @@ public class MainFragment extends SupportFragment implements IHomeFragment, Bott
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1) {
+                if (position == 2) {
                     hideRedBadge();
                 }
-                int menuId = mBNavigation.getMenu().getItem(position).getItemId();
-                mBNavigation.setSelectedItemId(menuId);
             }
         });
         mViewPager.setOffscreenPageLimit(homePageAdapter.getCount());
 
         Router.getInstance().register(this);
-        mBNavigation = view.findViewById(R.id.main_navigation);
-        mBNavigation.setOnNavigationItemSelectedListener(this);
+        mBNavigation = view.findViewById(R.id.home_tablayout);
+        mBNavigation.setupWithViewPager(mViewPager);
 
-        int[][] states = new int[][]{                new int[]{-android.R.attr.state_checked},
-                new int[]{android.R.attr.state_checked}
-        };
-        int[] colors;
+        mBNavigation.getTabAt(0).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_home_white_24dp));
+        mBNavigation.getTabAt(1).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_whatshot_white_24dp));
+        mBNavigation.getTabAt(2).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_file_download_white_24dp));
+
+
         if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            colors = new int[]{ getResources().getColor(R.color.color_606060),
-                    getResources().getColor(R.color.colorPrimary)
-            };
+            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary));
         } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            colors = new int[]{ getResources().getColor(R.color.color_606060),
-                    getResources().getColor(R.color.sdcound_primary)
-            };
+            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
         } else {
-            colors = new int[]{ getResources().getColor(R.color.color_606060),
-                    getResources().getColor(R.color.colorPrimary2)
-            };
+            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary2));
         }
-
-        ColorStateList csl = new ColorStateList(states, colors);
-        mBNavigation.setItemIconTintList(csl);
-        mBNavigation.setItemTextColor(csl);
 
         if (Mp3App.sPreferences.getBoolean("DownloadNew", false)) {
             showRedBadge();
         }
 
-
     }
 
-    private BottomNavigationView mBNavigation;
+    private TabLayout mBNavigation;
 
     @Override
     public void onDestroyView() {
@@ -134,18 +121,13 @@ public class MainFragment extends SupportFragment implements IHomeFragment, Bott
         if (mRedTabBadge != null) {
             return;
         }
-
-        BottomNavigationMenuView view = (BottomNavigationMenuView)mBNavigation.getChildAt(0);
-        BottomNavigationItemView itemView = (BottomNavigationItemView)view.getChildAt(1);
+        View itemView = ((ViewGroup)mBNavigation.getChildAt(0)).getChildAt(2);
         mRedTabBadge = new QBadgeView(Mp3App.sContext)
                 .bindTarget(itemView);
-        if (Mp3App.isYTB()) {
-            mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
-                    R.color.colorPrimary));
-        } else {
-            mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
-                    R.color.colorPrimary2));
-        }
+
+        mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
+                    R.color.color2_fbc02d));
+
         mRedTabBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
         mRedTabBadge.setBadgeNumber(-1);
         mRedTabBadge.setGravityOffset(16, true);

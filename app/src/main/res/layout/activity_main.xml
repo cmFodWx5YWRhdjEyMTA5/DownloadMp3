@@ -55,7 +55,7 @@
             app:floatingSearch_searchHint="Search..."
             app:floatingSearch_showSearchKey="true"
             app:floatingSearch_suggestionsListAnimDuration="250"
-            app:layout_behavior="com.downloadermp3.view.FloatSearchBehavior"
+            app:layout_behavior="com.freedownloader.view.FloatSearchBehavior"
              />
 
 

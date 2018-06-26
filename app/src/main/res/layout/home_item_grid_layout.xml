@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -53,7 +53,7 @@
         </LinearLayout>
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -93,7 +93,7 @@
         </LinearLayout>
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -133,7 +133,7 @@
         </LinearLayout>
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
     </LinearLayout>
@@ -145,7 +145,7 @@
         android:orientation="horizontal">
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -184,7 +184,7 @@
         </LinearLayout>
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -224,7 +224,7 @@
         </LinearLayout>
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
         <LinearLayout
@@ -264,15 +264,12 @@
         </LinearLayout>
 
         <View
-            android:layout_width="16dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent" />
 
     </LinearLayout>
 
     <View
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/white_60" />

@@ -27,8 +27,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.freedownloader.Mp3App;
 import com.freedownloader.R;
-import com.freedownloader.bean.MusicArchiveModel;
-import com.freedownloader.bean.TitleModel;
+import com.freedownloader.bean.MusicArchiveBean;
+import com.freedownloader.bean.TitleBean;
 import com.freedownloader.data.Song;
 import com.freedownloader.facebook.FBAdUtils;
 import com.freedownloader.util.AdViewWrapperAdapter;
@@ -87,17 +87,17 @@ public class HomeRecommendActivity extends AppCompatActivity {
             featuerList = savedInstanceState.getParcelableArrayList("featuerList");
             recentList = savedInstanceState.getParcelableArrayList("recentList");
         } else {
-            HashMap<Integer, MusicArchiveModel> map = (HashMap<Integer, MusicArchiveModel>) HomeFragment
-                    .getDataByType(TitleModel.RECOMMEND_TYPE);
+            HashMap<Integer, MusicArchiveBean> map = (HashMap<Integer, MusicArchiveBean>) HomeFragment
+                    .getDataByType(TitleBean.RECOMMEND_TYPE);
             LogUtil.v("HomeRecomd", "onSaveInstanceState  "+ map);
             if (map == null
-                    || map.get(MusicArchiveModel.FEATURED_TYPE) == null
-                    || map.get(MusicArchiveModel.RECENT_TYPE) == null) {
+                    || map.get(MusicArchiveBean.FEATURED_TYPE) == null
+                    || map.get(MusicArchiveBean.RECENT_TYPE) == null) {
                 finish();
                 return;
             }
-            featuerList = map.get(MusicArchiveModel.FEATURED_TYPE).contentList;
-            recentList = map.get(MusicArchiveModel.RECENT_TYPE).contentList;
+            featuerList = map.get(MusicArchiveBean.FEATURED_TYPE).contentList;
+            recentList = map.get(MusicArchiveBean.RECENT_TYPE).contentList;
         }
 
 

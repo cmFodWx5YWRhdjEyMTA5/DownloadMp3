@@ -4,11 +4,11 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.musictube.freemusic.downloaderone"
+        applicationId "com.wetube.freemusic.mp3downloaderone"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 1
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -25,10 +25,10 @@ android {
 //            keyAlias "musicdownload"
 //            keyPassword "!@c2018"
 
-            storeFile file("downoadmusic.jks")
-            storePassword "we12345678"
-            keyAlias "downloadmusic"
-            keyPassword "we12345678"
+            storeFile file("newmusicdownloader.jks")
+            storePassword "zxcvasdf"
+            keyAlias "wemusicdownloader"
+            keyPassword "zxcvasdf"
         }
     }
 

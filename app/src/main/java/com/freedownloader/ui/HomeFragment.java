@@ -20,9 +20,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.freedownloader.Mp3App;
 import com.freedownloader.R;
-import com.freedownloader.bean.JamendoModel;
-import com.freedownloader.bean.MusicArchiveModel;
-import com.freedownloader.bean.TitleModel;
+import com.freedownloader.bean.JamendoBean;
+import com.freedownloader.bean.MusicArchiveBean;
+import com.freedownloader.bean.TitleBean;
 import com.freedownloader.data.HomeDataList;
 import com.freedownloader.util.LogUtil;
 import com.freedownloader.util.Utils;
@@ -176,7 +176,7 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public boolean isForViewType(Object item, int position) {
-            if (item instanceof ArrayList && ((ArrayList) item).get(0) instanceof JamendoModel.JamendoResult) {
+            if (item instanceof ArrayList && ((ArrayList) item).get(0) instanceof JamendoBean.JamendoResult) {
                 return true;
             }
             return false;
@@ -184,7 +184,7 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public void convert(ViewHolder holder, Object o, int position) {
-            final ArrayList<JamendoModel.JamendoResult> list = (ArrayList<JamendoModel.JamendoResult>) o;
+            final ArrayList<JamendoBean.JamendoResult> list = (ArrayList<JamendoBean.JamendoResult>) o;
 
             ImageView songImage1 = holder.getView(R.id.song_iv1);
             songImage1.getLayoutParams().height = itemWidth;
@@ -279,7 +279,7 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public boolean isForViewType(Object item, int position) {
-            if (item instanceof ArrayList && ((ArrayList) item).get(0) instanceof JamendoModel) {
+            if (item instanceof ArrayList && ((ArrayList) item).get(0) instanceof JamendoBean) {
                 return true;
             }
             return false;
@@ -287,7 +287,7 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public void convert(ViewHolder holder, Object o, int position) {
-            final ArrayList<JamendoModel> list = (ArrayList<JamendoModel>) o;
+            final ArrayList<JamendoBean> list = (ArrayList<JamendoBean>) o;
 
             ImageView songImage1 = holder.getView(R.id.song_iv1);
             songImage1.getLayoutParams().height = itemWidth;
@@ -377,11 +377,11 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public void convert(ViewHolder holder, Object o, int position) {
-            final MusicArchiveModel featured = (MusicArchiveModel) (((HashMap) o)
-                    .get(MusicArchiveModel.FEATURED_TYPE));
+            final MusicArchiveBean featured = (MusicArchiveBean) (((HashMap) o)
+                    .get(MusicArchiveBean.FEATURED_TYPE));
 
-            final MusicArchiveModel recent = (MusicArchiveModel) (((HashMap) o)
-                    .get(MusicArchiveModel.RECENT_TYPE));
+            final MusicArchiveBean recent = (MusicArchiveBean) (((HashMap) o)
+                    .get(MusicArchiveBean.RECENT_TYPE));
 
             ImageView featuredIV = holder.getView(R.id.song_iv1);
             featuredIV.getLayoutParams().height = itemWidth;
@@ -418,8 +418,8 @@ public class HomeFragment extends SupportFragment {
     public static Object getDataByType(int type) {
         for (int i = 0; i < sDatas.size(); i++) {
             Object obj = sDatas.get(i);
-            if (obj instanceof TitleModel
-                    && ((TitleModel) obj).type == type) {
+            if (obj instanceof TitleBean
+                    && ((TitleBean) obj).type == type) {
                 return sDatas.get(i + 1);
             }
         }
@@ -435,22 +435,22 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public boolean isForViewType(Object item, int position) {
-            return item instanceof TitleModel;
+            return item instanceof TitleBean;
         }
 
         @Override
         public void convert(ViewHolder holder, Object o, int position) {
-            final TitleModel titleModel = (TitleModel) o;
+            final TitleBean titleModel = (TitleBean) o;
             TextView titleTV = holder.getView(R.id.home_title_item_tv);
             titleTV.setText(titleModel.title);
 
             holder.getView(R.id.title_relative).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (titleModel.type == TitleModel.GENRES_TYPE
-                            || titleModel.type == TitleModel.INSTRUMENT_TYPE) {
+                    if (titleModel.type == TitleBean.GENRES_TYPE
+                            || titleModel.type == TitleBean.INSTRUMENT_TYPE) {
                         HomeGridActivity.launch(_mActivity, titleModel.title, titleModel.type);
-                    } else if (titleModel.type == TitleModel.RECOMMEND_TYPE) {
+                    } else if (titleModel.type == TitleBean.RECOMMEND_TYPE) {
                         HomeRecommendActivity.launch(_mActivity);
                     } else {
                         HomeListActivity.launch(_mActivity, titleModel.type, titleModel.title);

@@ -226,10 +226,6 @@ public class RangeHandler {
             return true;
         }
 
-        if ("fr".equals(country.toLowerCase())) {
-            return true;
-        }
-
         if ("la".equals(country.toLowerCase())) {
             return true;
         }
@@ -324,13 +320,13 @@ public class RangeHandler {
 
         if (countryIfShow(country)) {
             setYoutube();
-            FacebookReport.logSentOpenSuper("country open ytb ");
+            FacebookReport.logSentOpenSuper("open ytb ");
             return;
         }
 
         if (!TextUtils.isEmpty(country3) && countryIfShow2(country3)) {
             setSoundCloud();
-            FacebookReport.logSentOpenSuper("scoud country open ");
+            FacebookReport.logSentOpenSuper("open scloud ");
             return;
         }
     }

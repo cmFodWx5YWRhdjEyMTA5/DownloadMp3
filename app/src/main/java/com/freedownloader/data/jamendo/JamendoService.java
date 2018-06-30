@@ -1,6 +1,6 @@
 package com.freedownloader.data.jamendo;
 
-import com.freedownloader.bean.JamendoModel;
+import com.freedownloader.bean.JamendoBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -21,11 +21,11 @@ public interface JamendoService {
     int PAGE_LIMIT = 25;
 
     @GET("tracks?client_id="+ClIENT_ID+"&format=json&include=lyrics&limit=25&audiodlformat=mp32&order=relevance&type=single+albumtrack")
-    Call<JamendoModel> searchJamendoData(@Query("search") String namesearch, @Query("offset") int offset);
+    Call<JamendoBean> searchJamendoData(@Query("search") String namesearch, @Query("offset") int offset);
 
     @GET("tracks?client_id="+ClIENT_ID+"&format=json&limit="+PAGE_LIMIT+"&type=single+albumtrack")
-    Call<JamendoModel> getJamendoDataByOrder(@Query("order") String order, @Query("offset") int offset);
+    Call<JamendoBean> getJamendoDataByOrder(@Query("order") String order, @Query("offset") int offset);
 
     @GET("tracks?client_id="+ClIENT_ID+"&format=json&include=lyrics&limit=25&type=single+albumtrack")
-    Call<JamendoModel> getJamendoDataByTags(@Query("tags") String tags, @Query("offset") int offset);
+    Call<JamendoBean> getJamendoDataByTags(@Query("tags") String tags, @Query("offset") int offset);
 }

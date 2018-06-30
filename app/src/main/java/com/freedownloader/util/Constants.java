@@ -6,13 +6,13 @@ package com.freedownloader.util;
 
 public class Constants {
 
-    public static final String KEY_SOUNDCLOUD = "faster_scloud_key";
+    public static final String KEY_SOUNDCLOUD = "feater_scloud_key";
 
-    public static final String KEY_YOUTUBE = "faster_ytb_key";
+    public static final String KEY_YOUTUBE = "feater_ytb_key";
 
-    public static final String CHA_YE_ID = "1848756022085767_1848756942085675";
-    public static final String CHA_YE_HEIGH_ID = "1848756022085767_1848757118752324";
+    public static final String CHA_YE_ID = "208027086507458_208028416507325";
+    public static final String CHA_YE_HEIGH_ID = "208027086507458_208028949840605";
 
-    public static final String NATIVE_ID_LIST = "1848756022085767_1848756582085711";
-    public static final String NATIVE_ID_DIALOG = "1848756022085767_1848757278752308";
+    public static final String NATIVE_ID_LIST = "208027086507458_208027506507416";
+    public static final String NATIVE_ID_DIALOG = "208027086507458_208027689840731";
 }

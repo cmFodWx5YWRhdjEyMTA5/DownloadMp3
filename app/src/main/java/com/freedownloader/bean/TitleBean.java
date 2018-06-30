@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by liyanju on 2018/6/20.
  */
 
-public class TitleModel implements Serializable {
+public class TitleBean implements Serializable {
 
     public String title;
 
@@ -19,7 +19,7 @@ public class TitleModel implements Serializable {
     public int type;
 
 
-    public TitleModel(String title, int type) {
+    public TitleBean(String title, int type) {
         this.title = title;
         this.type = type;
     }

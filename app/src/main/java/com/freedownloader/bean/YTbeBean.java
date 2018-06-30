@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by liyanju on 2018/5/18.
  */
 
-public class YTbeModel {
+public class YTbeBean {
 
     public String nextPageToken;
 

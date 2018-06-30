@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by liyanju on 2018/6/20.
  */
 
-public class MusicArchiveModel implements Serializable{
+public class MusicArchiveBean implements Serializable{
 
     public static final int PAGE_LIMIT = 25;
 

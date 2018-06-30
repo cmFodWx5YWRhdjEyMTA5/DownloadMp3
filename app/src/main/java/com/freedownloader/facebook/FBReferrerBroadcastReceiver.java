@@ -10,7 +10,7 @@ import com.freedownloader.util.ReferrerHandler;
  * Created by liyanju on 2018/5/18.
  */
 
-public class FacebookReferrerBroadcastReceiver extends BroadcastReceiver{
+public class FBReferrerBroadcastReceiver extends BroadcastReceiver{
 
 
     @Override

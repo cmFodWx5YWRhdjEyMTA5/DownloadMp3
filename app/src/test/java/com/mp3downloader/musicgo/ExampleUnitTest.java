@@ -1,10 +1,15 @@
 package com.mp3downloader.musicgo;
 
+import android.util.Log;
+
 import com.facebook.ads.AudienceNetworkActivity;
 
 import org.junit.Test;
 
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
+import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
@@ -16,11 +21,29 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+//        assertEquals(4, 2 + 2);
 
-        String str = "utm_medium=(not%20set)";
-        str = URLDecoder.decode(str, "utf-8");
-        System.out.println(str.contains("not set"));
+//        String str = "utm_medium=(not%20set)";
+//        str = URLDecoder.decode(str, "utf-8");
+//        System.out.println(str.contains("not set"));
+        try {
+
+            URL url = new URL("https://www.google.com");
+            URLConnection uc = url.openConnection();
+            uc.setConnectTimeout(10 * 1000);
+            uc.setReadTimeout(10 * 1000);
+            uc.connect();
+
+            long ld = uc.getDate();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(ld);
+            int week = calendar.get(Calendar.DAY_OF_WEEK) - 1;//0代表周日，6代表周六
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int mi = calendar.get(Calendar.MINUTE);
+            Log.v("XX", "XXX");
+        } catch (Throwable e) {
+
+        }
 
     }
 

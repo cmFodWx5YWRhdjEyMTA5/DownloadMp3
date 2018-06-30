@@ -22,9 +22,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.freedownloader.Mp3App;
 import com.freedownloader.R;
-import com.freedownloader.bean.JamendoModel;
-import com.freedownloader.bean.MusicArchiveModel;
-import com.freedownloader.bean.TitleModel;
+import com.freedownloader.bean.JamendoBean;
+import com.freedownloader.bean.MusicArchiveBean;
+import com.freedownloader.bean.TitleBean;
 import com.freedownloader.data.Song;
 import com.freedownloader.data.jamendo.JamendoApi;
 import com.freedownloader.data.jamendo.JamendoService;
@@ -151,13 +151,13 @@ public class HomeListActivity extends AppCompatActivity {
 
             try {
                 if (TextUtils.isEmpty(mTags)) {
-                    if (mType != TitleModel.RECOMMEND_TYPE) {
+                    if (mType != TitleBean.RECOMMEND_TYPE) {
                         ArrayList<Song> arrayList = (ArrayList<Song>) HomeFragment.getDataByType(mType);
                         if (arrayList != null) {
                             mList.addAll(arrayList);
                         }
                     } else {
-                        HashMap<Integer, MusicArchiveModel> map = (HashMap<Integer, MusicArchiveModel>) HomeFragment.getDataByType(mType);
+                        HashMap<Integer, MusicArchiveBean> map = (HashMap<Integer, MusicArchiveBean>) HomeFragment.getDataByType(mType);
                         if (map.get(mKey).contentList != null) {
                             mList.addAll(map.get(mKey).contentList);
                         }
@@ -235,7 +235,7 @@ public class HomeListActivity extends AppCompatActivity {
 
         mCommonAdapter = new AdViewWrapperAdapter(adapter);
         recyclerView.setAdapter(mCommonAdapter);
-        if (mType != TitleModel.RECOMMEND_TYPE) {
+        if (mType != TitleBean.RECOMMEND_TYPE) {
             mPaginate = Paginate.with(recyclerView, callbacks)
                     .setLoadingTriggerThreshold(2)
                     .build();
@@ -284,15 +284,15 @@ public class HomeListActivity extends AppCompatActivity {
 
     private void requestHomeList() {
         String order = JamendoService.LISTEN_TOTAL_ORDER;
-        if (mType == TitleModel.TOP_DOWNLOAD_TYPE) {
+        if (mType == TitleBean.TOP_DOWNLOAD_TYPE) {
             order = JamendoService.DOWNLOADS_TOTAL_ORDER;
         }
-        new AsyncTask<String, Void, JamendoModel>() {
+        new AsyncTask<String, Void, JamendoBean>() {
 
             @Override
-            protected JamendoModel doInBackground(String... voids) {
+            protected JamendoBean doInBackground(String... voids) {
                 try {
-                    Response<JamendoModel> response;
+                    Response<JamendoBean> response;
                     if (!TextUtils.isEmpty(mTags)) {
                         response = JamendoApi.getJamendoService(Mp3App.sContext)
                                 .getJamendoDataByTags(mTags, curOffset).execute();
@@ -308,7 +308,7 @@ public class HomeListActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(JamendoModel jamendoModel) {
+            protected void onPostExecute(JamendoBean jamendoModel) {
                 super.onPostExecute(jamendoModel);
                 if (HomeListActivity.this.isFinishing()) {
                     return;

@@ -2,7 +2,7 @@ package com.freedownloader.data.musicarchive;
 
 import android.content.Context;
 
-import com.freedownloader.bean.MusicArchiveModel;
+import com.freedownloader.bean.MusicArchiveBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -35,7 +35,7 @@ public class MusicArchiveClient {
     public static MusicArchiveService getMusicArchiveRetrofit(Context context) {
         if (sMusicArchiveService == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(MusicArchiveModel.class, new MusicArchiveDeserializer());
+            gsonBuilder.registerTypeAdapter(MusicArchiveBean.class, new MusicArchiveDeserializer());
             Gson gson = gsonBuilder.create();
             GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
 

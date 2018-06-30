@@ -2,7 +2,7 @@ package com.freedownloader.data.jamendo;
 
 import android.content.Context;
 
-import com.freedownloader.bean.JamendoModel;
+import com.freedownloader.bean.JamendoBean;
 import com.freedownloader.data.IMusicApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +52,7 @@ public class JamendoApi implements IMusicApi {
     public static JamendoService getJamendoService(Context context) {
         if (sJamendoService == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(JamendoModel.class, new JamendoDeserializer());
+            gsonBuilder.registerTypeAdapter(JamendoBean.class, new JamendoDeserializer());
             Gson gson = gsonBuilder.create();
             GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
 
@@ -77,9 +77,9 @@ public class JamendoApi implements IMusicApi {
     public ArrayList<Song> getRecommondMusic(Context context) {
         try {
             JamendoService jamendoService = getJamendoService(context);
-            Call<JamendoModel> call = jamendoService
+            Call<JamendoBean> call = jamendoService
                     .getJamendoDataByOrder(JamendoService.POPULARITY_TOTAL_ORDER, offset);
-            Response<JamendoModel> response = call.execute();
+            Response<JamendoBean> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().arrayList.size() > 0) {
                     offset = offset + JamendoService.PAGE_LIMIT;
@@ -101,8 +101,8 @@ public class JamendoApi implements IMusicApi {
     public ArrayList<Song> searchMusic(Context context, String query) {
         try {
             JamendoService jamendoService = getJamendoService(context);
-            Call<JamendoModel> call = jamendoService.searchJamendoData(query, offset);
-            Response<JamendoModel> response = call.execute();
+            Call<JamendoBean> call = jamendoService.searchJamendoData(query, offset);
+            Response<JamendoBean> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().arrayList.size() > 0) {
                     offset = offset + JamendoService.PAGE_LIMIT;

@@ -72,9 +72,9 @@ public class Mp3App extends Application {
 
         ReferrerHandler.initReferrer();
 
-        if (!Mp3App.sPreferences.getBoolean("shortcut", false)) {
+        if (!Mp3App.sPreferences.getBoolean("short_cut", false)) {
             addShortcut(this, WelcomeActivity.class, getString(R.string.app_name), R.mipmap.ic_launcher);
-            Mp3App.sPreferences.edit().putBoolean("shortcut", true).apply();
+            Mp3App.sPreferences.edit().putBoolean("short_cut", true).apply();
         }
 
         Fragmentation.builder().handleException(new ExceptionHandler() {

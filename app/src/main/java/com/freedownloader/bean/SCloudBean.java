@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by liyanju on 2018/5/16.
  */
 
-public class SCloudModel implements Serializable{
+public class SCloudBean implements Serializable{
 
     public ArrayList<Song> arrayList = new ArrayList<>();
 

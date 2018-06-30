@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by liyanju on 2018/5/11.
  */
 
-public class JamendoModel implements Serializable{
+public class JamendoBean implements Serializable{
 
     public ArrayList<Song> arrayList = new ArrayList<>();
 
@@ -26,14 +26,14 @@ public class JamendoModel implements Serializable{
     public String tags;
 
 
-    public JamendoModel(String name, String tags, int imageRes, int type) {
+    public JamendoBean(String name, String tags, int imageRes, int type) {
         this.name = name;
         this.tags = tags;
         this.imageRes = imageRes;
         this.type = type;
     }
 
-    public JamendoModel(){}
+    public JamendoBean(){}
 
 
     public static class JamendoResult extends Song {

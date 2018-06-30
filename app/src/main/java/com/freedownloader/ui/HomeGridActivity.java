@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.freedownloader.Mp3App;
 import com.freedownloader.R;
-import com.freedownloader.bean.JamendoModel;
+import com.freedownloader.bean.JamendoBean;
 import com.freedownloader.util.Utils;
 import com.freedownloader.view.GridSpacingItemDecoration;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class HomeGridActivity extends AppCompatActivity {
 
-    private ArrayList<JamendoModel> mList = new ArrayList<>();
+    private ArrayList<JamendoBean> mList = new ArrayList<>();
 
     private CommonAdapter mCommonAdapter;
 
@@ -81,11 +81,11 @@ public class HomeGridActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mType = savedInstanceState.getInt("type", 0);
             mTitle = savedInstanceState.getString("title");
-            mList = (ArrayList<JamendoModel>) savedInstanceState.getSerializable("list");
+            mList = (ArrayList<JamendoBean>) savedInstanceState.getSerializable("list");
         } else {
             mType = getIntent().getIntExtra("type", 0);
             mTitle = getIntent().getStringExtra("title");
-            mList = (ArrayList<JamendoModel>) HomeFragment.getDataByType(mType);
+            mList = (ArrayList<JamendoBean>) HomeFragment.getDataByType(mType);
         }
 
         setUpToolbar();
@@ -103,9 +103,9 @@ public class HomeGridActivity extends AppCompatActivity {
         recyclerView.setPadding(Utils.dip2px(Mp3App.sContext, 2), Utils.dip2px(Mp3App.sContext, 2),
                 Utils.dip2px(Mp3App.sContext, 2),Utils.dip2px(Mp3App.sContext, 2));
 
-        mCommonAdapter = new CommonAdapter<JamendoModel>(this, R.layout.home_grid_item, mList) {
+        mCommonAdapter = new CommonAdapter<JamendoBean>(this, R.layout.home_grid_item, mList) {
             @Override
-            protected void convert(ViewHolder holder, final JamendoModel jamendoModel, int position) {
+            protected void convert(ViewHolder holder, final JamendoBean jamendoModel, int position) {
                 ImageView imageView = holder.getView(R.id.image);
                 imageView.setImageResource(jamendoModel.imageRes);
                 imageView.getLayoutParams().height = itemHeight;

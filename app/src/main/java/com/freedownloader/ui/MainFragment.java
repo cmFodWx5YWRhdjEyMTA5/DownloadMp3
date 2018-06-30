@@ -47,6 +47,11 @@ public class MainFragment extends SupportFragment implements IHomeFragment, Bott
 
     @Override
     public void tabLayoutBg(boolean isYoutube) {
+        if (isYoutube) {
+            mBNavigation.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
+        } else {
+            mBNavigation.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+        }
     }
 
     @Override

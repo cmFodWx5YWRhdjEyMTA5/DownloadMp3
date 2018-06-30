@@ -1,6 +1,6 @@
 package com.freedownloader.data.musicarchive;
 
-import com.freedownloader.bean.MusicArchiveModel;
+import com.freedownloader.bean.MusicArchiveBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,8 +12,8 @@ import retrofit2.http.GET;
 public interface MusicArchiveService {
 
     @GET("featured.json")
-    Call<MusicArchiveModel> getMusicArchiveFeatred();
+    Call<MusicArchiveBean> getMusicArchiveFeatred();
 
     @GET("recent.json")
-    Call<MusicArchiveModel> getMusicArchiveRecent();
+    Call<MusicArchiveBean> getMusicArchiveRecent();
 }

@@ -3,7 +3,7 @@ package com.freedownloader.data.youtube;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.freedownloader.bean.YTbeModel;
+import com.freedownloader.bean.YTbeBean;
 import com.freedownloader.data.Song;
 import com.freedownloader.data.IMusicApi;
 import com.google.gson.Gson;
@@ -36,9 +36,10 @@ public class YouTubeApi implements IMusicApi {
     private static final Random SRANDOM = new Random();
 
     private static final String KEYS[] = new String[]{
-            "AIzaSyAfUZ4-2kPeAOCM1dJh1uUc1Je0TYzUG2U",
-            "AIzaSyBkFmDbphq1RhGpVN-2hTUMgHsNXG39ti4",
-            "AIzaSyDOf6pnswcaN0_-L8swhAEO9UT3rC1Hy-g"
+            "AIzaSyArKpVSYj7TSp0PAk76qo6AbJ-QBONDf1I",
+            "AIzaSyBLvL_R0Kxd_te876hdRtRDLg6z0aQYe_M",
+            "AIzaSyAIXsIWV3xQFEWCuHURR6dFb4ynxtKZ8-A",
+            "AIzaSyAMM7NHUwZGQa3RfqbJXWifxksOvWgzRr0"
     };
 
     private static Cache createDefaultCache(Context context) {
@@ -52,7 +53,7 @@ public class YouTubeApi implements IMusicApi {
     private static YouTubeService getYouTubeService(Context context) {
         if (sYouTubeService == null) {
             GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(YTbeModel.class, new YouTubeDesrializer());
+            gsonBuilder.registerTypeAdapter(YTbeBean.class, new YouTubeDesrializer());
             Gson gson = gsonBuilder.create();
             GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
 
@@ -79,8 +80,8 @@ public class YouTubeApi implements IMusicApi {
     public List<Song> getRecommondMusic(Context context) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
-            Call<YTbeModel> call = youTubeService.getYoutubeMusic(nextPage, getDevelopKey());
-            Response<YTbeModel> response = call.execute();
+            Call<YTbeBean> call = youTubeService.getYoutubeMusic(nextPage, getDevelopKey());
+            Response<YTbeBean> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().list.size() > 0) {
                     nextPage = response.body().nextPageToken;
@@ -97,8 +98,8 @@ public class YouTubeApi implements IMusicApi {
     public List<Song> searchMusic(Context context, String query) {
         try {
             YouTubeService youTubeService = getYouTubeService(context);
-            Call<YTbeModel> call = youTubeService.searchYoutubeMusic(query, nextPage, getDevelopKey());
-            Response<YTbeModel> response = call.execute();
+            Call<YTbeBean> call = youTubeService.searchYoutubeMusic(query, nextPage, getDevelopKey());
+            Response<YTbeBean> response = call.execute();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().list.size() > 0) {
                     nextPage = response.body().nextPageToken;

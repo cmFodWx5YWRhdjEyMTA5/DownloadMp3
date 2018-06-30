@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.freedownloader.Mp3App;
 import com.freedownloader.R;
-import com.freedownloader.bean.YTbeModel;
+import com.freedownloader.bean.YTbeBean;
 import com.freedownloader.facebook.FBAdUtils;
 import com.freedownloader.util.Utils;
 import com.facebook.ads.NativeAd;
@@ -89,8 +89,8 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                 LogUtil.v(TAG, "onPostExecute url " + url);
                 super.onPostExecute(url);
                 mLoadingView.setVisibility(View.GONE);
-                if (mSong != null && mSong instanceof YTbeModel.YTBSnippet) {
-                    ((YTbeModel.YTBSnippet)mSong).downloadurl = url;
+                if (mSong != null && mSong instanceof YTbeBean.YTBSnippet) {
+                    ((YTbeBean.YTBSnippet)mSong).downloadurl = url;
                     if (runnable != null) {
                         runnable.run();
                     }
@@ -129,7 +129,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             @Override
             public void onClick(View view) {
                 if (mSong.getType() == Song.YOUTUBE_TYPE) {
-                    parseYouTubeUrl(((YTbeModel.YTBSnippet) mSong).vid, new Runnable() {
+                    parseYouTubeUrl(((YTbeBean.YTBSnippet) mSong).vid, new Runnable() {
                         @Override
                         public void run() {
                             if (isShowing()) {
@@ -173,7 +173,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
             public void onClick(View view) {
                 try {
                     if (mSong.getType() == Song.YOUTUBE_TYPE) {
-                        parseYouTubeUrl(((YTbeModel.YTBSnippet) mSong).vid, new Runnable() {
+                        parseYouTubeUrl(((YTbeBean.YTBSnippet) mSong).vid, new Runnable() {
                             @Override
                             public void run() {
                                 if (isShowing()) {
@@ -248,8 +248,8 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
 
     private SongInfo toSongInfo() {
         SongInfo songInfo = new SongInfo();
-        if (mSong instanceof YTbeModel.YTBSnippet) {
-            songInfo.setSongId(((YTbeModel.YTBSnippet) mSong).vid);
+        if (mSong instanceof YTbeBean.YTBSnippet) {
+            songInfo.setSongId(((YTbeBean.YTBSnippet) mSong).vid);
         } else {
             songInfo.setSongId(String.valueOf(System.currentTimeMillis()));
         }

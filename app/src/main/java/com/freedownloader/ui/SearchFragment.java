@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.freedownloader.Mp3App;
 import com.freedownloader.R;
-import com.freedownloader.bean.YTbeModel;
+import com.freedownloader.bean.YTbeBean;
 import com.freedownloader.data.IMusicApi;
 import com.freedownloader.data.soundcloud.SoundCloudApi;
 import com.freedownloader.util.AdViewWrapperAdapter;
@@ -147,7 +147,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
             textTV.setText(baseModel.getArtistName());
 
             TextView timeTV = holder.getView(R.id.time_tv);
-            if (!(baseModel instanceof YTbeModel.YTBSnippet)) {
+            if (!(baseModel instanceof YTbeBean.YTBSnippet)) {
                 timeTV.setVisibility(View.VISIBLE);
                 timeTV.setText(FormatUtil.formatMusicTime(baseModel.getDuration()));
             } else {

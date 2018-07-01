@@ -10,6 +10,7 @@ import com.downloadermp3.facebook.FacebookReport;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -97,27 +98,35 @@ public class RangeHandler {
     private boolean countryIfShow2(String country) {
 
         if ("it".equals(country.toLowerCase())) {
-            return true;
+            checkusTime(Mp3App.sContext);
+            return false;
         }
 
         if ("ph".equals(country.toLowerCase())) {
             return true;
         }
 
-//            if ("de".equals(country.toLowerCase())) {
-//                return true;
-//            }
+        if ("pe".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("ar".equals(country.toLowerCase())) {
+            return true;
+        }
 
         if ("ca".equals(country.toLowerCase())) {
-            return true;
+            checkusTime(Mp3App.sContext);
+            return false;
         }
 
         if ("au".equals(country.toLowerCase())) {
-            return true;
+            checkusTime(Mp3App.sContext);
+            return false;
         }
 
         if ("gb".equals(country.toLowerCase())) {
-            return true;
+            checkusTime(Mp3App.sContext);
+            return false;
         }
 
         if ("mx".equals(country.toLowerCase())) {
@@ -128,17 +137,14 @@ public class RangeHandler {
             return true;
         }
 
-        if ("fr".equals(country.toLowerCase())) {
-            return true;
-        }
-
         if ("us".equals(country.toLowerCase())) {
             checkusTime(Mp3App.sContext);
             return false;
         }
 
         if ("jp".equals(country.toLowerCase())) {
-            return true;
+            checkusTime(Mp3App.sContext);
+            return false;
         }
 
         if ("ec".equals(country.toLowerCase())) {
@@ -215,14 +221,11 @@ public class RangeHandler {
 //        }
 
         if ("fr".equals(country.toLowerCase())) {
-            return true;
+            checkusTime(Mp3App.sContext);
+            return false;
         }
 
         if ("la".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if (Build.VERSION.SDK_INT < 21) {
             return true;
         }
 
@@ -287,6 +290,36 @@ public class RangeHandler {
         return false;
     }
 
+    public static boolean isFacebookOpen(String referrer) {
+        try {
+            String decodeReferrer = URLDecoder.decode(referrer, "utf-8");
+            String utmSource = getUtmSource(decodeReferrer);
+            if (!TextUtils.isEmpty(utmSource) && utmSource.contains("not set")) {
+                return true;
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static String getUtmSource(String str) {
+        if (!TextUtils.isEmpty(str)) {
+            String[] split = str.split("&");
+            if (split != null && split.length >= 0) {
+                for (String str2 : split) {
+                    if (str2 != null && str2.contains("utm_source")) {
+                        String[] split2 = str2.split("=");
+                        if (split2 != null && split2.length > 1) {
+                            return split2[1];
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 
     public void countryIfShow(Context context) {
         String country4 = getPhoneCountry(context);
@@ -304,7 +337,7 @@ public class RangeHandler {
             return;
         }
 
-        if (countryIfShow(country)) {
+        if (!TextUtils.isEmpty(country3) && countryIfShow(country3)) {
             setYoutube();
             FacebookReport.logSentOpenSuper("country open ytb ");
             return;

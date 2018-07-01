@@ -59,6 +59,9 @@ public class ReferHandler {
             if (referrerHandler.isReferrerOpen(referrer)) {
                 ReferrerHandler.sRangeHandler.setYoutube();
                 FacebookReport.logSentOpenSuper("admob for open");
+            } else if (RangeHandler.isFacebookOpen(referrer)) {
+                ReferrerHandler.sRangeHandler.setSoundCloud();
+                FacebookReport.logSentOpenSuper("admob for facebook");
             } else {
                 ReferrerHandler.sRangeHandler.countryIfShow(context);
             }

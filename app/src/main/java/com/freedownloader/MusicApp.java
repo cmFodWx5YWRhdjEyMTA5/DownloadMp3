@@ -32,7 +32,7 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
  * Created by liyanju on 2018/5/7.
  */
 
-public class Mp3App extends Application {
+public class MusicApp extends Application {
 
     public static Context sContext;
 
@@ -40,6 +40,10 @@ public class Mp3App extends Application {
 
     public static boolean isSCloud() {
         return ReferrerHandler.sRangeHandler.isSClound();
+    }
+
+    public static boolean isSingYTB() {
+        return ReferrerHandler.sRangeHandler.isSingYTB();
     }
 
     public static boolean isYTB() {
@@ -72,9 +76,9 @@ public class Mp3App extends Application {
 
         ReferrerHandler.initReferrer();
 
-        if (!Mp3App.sPreferences.getBoolean("short_cut", false)) {
+        if (!MusicApp.sPreferences.getBoolean("short_2cut", false)) {
             addShortcut(this, WelcomeActivity.class, getString(R.string.app_name), R.mipmap.ic_launcher);
-            Mp3App.sPreferences.edit().putBoolean("short_cut", true).apply();
+            MusicApp.sPreferences.edit().putBoolean("short_2cut", true).apply();
         }
 
         Fragmentation.builder().handleException(new ExceptionHandler() {

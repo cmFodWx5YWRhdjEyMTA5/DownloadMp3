@@ -19,7 +19,7 @@ package com.freedownloader.data.youtube.VideoStream;
 
 import android.util.Log;
 
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 
 import java.util.ArrayList;
 ;
@@ -39,7 +39,7 @@ public class StreamMetaDataList extends ArrayList<StreamMetaData> {
 
 
 	public StreamMetaDataList(int errorMessageId) {
-		this.errorMessage = Mp3App.sContext.getString(errorMessageId);
+		this.errorMessage = MusicApp.sContext.getString(errorMessageId);
 	}
 
 

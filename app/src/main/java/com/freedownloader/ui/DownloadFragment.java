@@ -17,7 +17,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.data.DownloadTask;
 import com.freedownloader.db.DownloadDao;
@@ -60,7 +60,7 @@ public class DownloadFragment extends SupportFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.download_fragment, container, false);
         mRecyclerView = view.findViewById(R.id.download_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(Mp3App.sContext));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(MusicApp.sContext));
         mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
         mRecyclerView.setAdapter(mAdViewWrapperAdapter);
         mEmptyIV = view.findViewById(R.id.empty_iv);
@@ -92,7 +92,7 @@ public class DownloadFragment extends SupportFragment {
         mLoadTask = new AsyncTask<Void,Void,ArrayList<DownloadTask>>(){
             @Override
             protected ArrayList<DownloadTask> doInBackground(Void... voids) {
-                return DownloadDao.getAllDownloaded(Mp3App.sContext);
+                return DownloadDao.getAllDownloaded(MusicApp.sContext);
             }
 
             @Override
@@ -139,16 +139,16 @@ public class DownloadFragment extends SupportFragment {
         super.onResume();
         if (sIsPlayMusic) {
             sIsPlayMusic = false;
-            if (Mp3App.isYTB() || Mp3App.isSCloud()) {
-                RatingActivity.launch(Mp3App.sContext, "",
-                        Mp3App.sContext.getString(R.string.download_rating));
+            if (MusicApp.isYTB() || MusicApp.isSCloud()) {
+                RatingActivity.launch(MusicApp.sContext, "",
+                        MusicApp.sContext.getString(R.string.download_rating));
             }
         }
     }
 
     private static boolean sIsPlayMusic = false;
 
-    private CommonAdapter mCommonAdapter = new CommonAdapter<DownloadTask>(Mp3App.sContext,
+    private CommonAdapter mCommonAdapter = new CommonAdapter<DownloadTask>(MusicApp.sContext,
             R.layout.list_item, mArrayList) {
 
         RequestOptions options = new RequestOptions()
@@ -170,7 +170,7 @@ public class DownloadFragment extends SupportFragment {
             holder.setOnClickListener(R.id.list_item, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Utils.playMusic(Mp3App.sContext, baseModel.getPlayUrl());
+                    Utils.playMusic(MusicApp.sContext, baseModel.getPlayUrl());
                     FBAdUtils.showAdDialog(_mActivity, Constants.NATIVE_ID_DIALOG);
                     sIsPlayMusic = true;
                 }
@@ -205,7 +205,7 @@ public class DownloadFragment extends SupportFragment {
         new AsyncTask<DownloadTask, Void, Void>(){
             @Override
             protected Void doInBackground(DownloadTask... downloadTasks) {
-                DownloadDao.removeDownloaded(Mp3App.sContext, downloadTasks[0].id);
+                DownloadDao.removeDownloaded(MusicApp.sContext, downloadTasks[0].id);
                 File file = new File(downloadTasks[0].getPlayUrl());
                 if (file.exists()) {
                     file.delete();

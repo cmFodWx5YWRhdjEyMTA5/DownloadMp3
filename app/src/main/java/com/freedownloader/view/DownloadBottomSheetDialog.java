@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.YTbeBean;
 import com.freedownloader.facebook.FBAdUtils;
@@ -140,7 +140,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                 }
                             }
                             if (!TextUtils.isEmpty(mSong.getDownloadUrl())) {
-                                FileDownloaderHelper.addDownloadTask(Mp3App.sContext, mSong,
+                                FileDownloaderHelper.addDownloadTask(MusicApp.sContext, mSong,
                                         new WeakReference<>(mActivity));
                             } else {
                                 Utils.showLongToastSafe(R.string.parse_url_failure);
@@ -158,7 +158,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                         e.printStackTrace();
                     }
                     if (!TextUtils.isEmpty(mSong.getDownloadUrl())) {
-                        FileDownloaderHelper.addDownloadTask(Mp3App.sContext, mSong, new WeakReference<>(mActivity));
+                        FileDownloaderHelper.addDownloadTask(MusicApp.sContext, mSong, new WeakReference<>(mActivity));
                     } else {
                         Utils.showLongToastSafe(R.string.parse_url_failure);
                     }
@@ -188,7 +188,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                                     return;
                                 }
 
-                                MusicPlayerActivity.launch(Mp3App.sContext, toSongInfo(), mSong);
+                                MusicPlayerActivity.launch(MusicApp.sContext, toSongInfo(), mSong);
                             }
                         });
                     } else {
@@ -203,7 +203,7 @@ public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
                             return;
                         }
 
-                        MusicPlayerActivity.launch(Mp3App.sContext, toSongInfo(), mSong);
+                        MusicPlayerActivity.launch(MusicApp.sContext, toSongInfo(), mSong);
                         LogUtil.v(TAG, " getPlayUrl ::" + mSong.getPlayUrl());
                     }
 

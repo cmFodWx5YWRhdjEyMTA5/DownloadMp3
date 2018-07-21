@@ -16,10 +16,14 @@ import java.util.ArrayList;
 
 public class MusicArchiveBean implements Serializable{
 
-    public static final int PAGE_LIMIT = 25;
+    public static final int PAGE_LIMIT = 100;
 
     public static final int FEATURED_TYPE = 0;
     public static final int RECENT_TYPE = 1;
+
+    public static final int NEW_TYPE = 2;
+    public static final int POP_TYPE = 3;
+    public static final int TOP_TYPE = 4;
 
     public int type;
 

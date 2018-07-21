@@ -10,16 +10,14 @@ import android.content.Intent;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
-import com.freedownloader.data.Song;
 import com.freedownloader.data.DownloadTask;
+import com.freedownloader.data.Song;
+import com.freedownloader.db.DownloadDao;
 import com.freedownloader.facebook.FBAdUtils;
 import com.freedownloader.facebook.FacebookReport;
-import com.freedownloader.db.DownloadDao;
-import com.freedownloader.router.Router;
-import com.freedownloader.ui.IHomeFragment;
-import com.freedownloader.ui.MainActivity;
+import com.freedownloader.ui.DownloadActivity;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.model.FileDownloadStatus;
@@ -42,9 +40,9 @@ public class FileDownloaderHelper {
 
     public static final String TAG = "Downloader";
     public static File defaultfile = new File(Environment.getExternalStorageDirectory(),
-            Mp3App.sContext.getString(R.string.app_name));
+            MusicApp.sContext.getString(R.string.app_name));
 
-    private static Context sContext = Mp3App.sContext;
+    private static Context sContext = MusicApp.sContext;
 
 
     public static void addDownloadTask(Context context, Song song, final WeakReference<Activity> activityWeakReference) {
@@ -130,21 +128,11 @@ public class FileDownloaderHelper {
 
                         showCompletedNotification(task.getId(), song.getName());
 
-                        Mp3App.sPreferences.edit().putBoolean("DownloadNew", true).apply();
-                        Utils.runUIThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Router.getInstance().getReceiver(IHomeFragment.class).showRedBadge();
-                                } catch (Throwable e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
+                        MusicApp.sPreferences.edit().putBoolean("DownloadNew", true).apply();
 
-                        if (Mp3App.isYTB() || Mp3App.isSCloud()) {
-                            RatingActivity.launch(Mp3App.sContext, "",
-                                    Mp3App.sContext.getString(R.string.download_rating));
+                        if (MusicApp.isYTB() || MusicApp.isSCloud()) {
+                            RatingActivity.launch(MusicApp.sContext, "",
+                                    MusicApp.sContext.getString(R.string.download_rating));
                         }
 
                         FacebookReport.logSentDownloadFinish(song.getName());
@@ -161,14 +149,14 @@ public class FileDownloaderHelper {
         private void showCompletedNotification(int id, String title) {
             NotificationCompat.Builder builder = new NotificationCompat.
                     Builder(FileDownloadHelper.getAppContext(), "download_finished");
-            Intent intent = new Intent(sContext, MainActivity.class);
+            Intent intent = new Intent(sContext, DownloadActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(sContext, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setDefaults(Notification.DEFAULT_LIGHTS)
                     .setOnlyAlertOnce(true)
                     .setAutoCancel(true)
                     .setContentTitle(title)
-                    .setContentText(Mp3App.sContext.getResources().getString(R.string.finish_download))
+                    .setContentText(MusicApp.sContext.getResources().getString(R.string.finish_download))
                     .setContentIntent(pendingIntent)
                     .setSmallIcon(android.R.drawable.stat_sys_download_done);
             manager.notify(id, builder.build());
@@ -208,7 +196,7 @@ public class FileDownloaderHelper {
 
         private NotificationItem(int id, String title, String desc) {
             super(id, title, desc);
-            Intent intent = new Intent(sContext, MainActivity.class);
+            Intent intent = new Intent(sContext, DownloadActivity.class);
 
             this.pendingIntent = PendingIntent.getActivity(sContext, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);

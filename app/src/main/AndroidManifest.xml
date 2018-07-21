@@ -18,7 +18,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="com.freedownloader.Mp3App"
+        android:name="com.freedownloader.MusicApp"
         android:theme="@style/AppTheme">
 
         <activity
@@ -41,6 +41,11 @@
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 
+        <activity android:name=".ui.DownloadActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
         <activity android:name="com.freedownloader.ui.HomeListActivity"
             android:launchMode="singleTask"
             android:theme="@style/windowIsTranslucen"
@@ -59,7 +64,7 @@
             />
 
         <receiver
-            android:name="com.freedownloader.facebook.FBReferrerBroadcastReceiver"
+            android:name="com.freedownloader.facebook.InstallStatisticsReferrerReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />

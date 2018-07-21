@@ -17,9 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.JamendoBean;
 import com.freedownloader.bean.MusicArchiveBean;
@@ -99,7 +98,7 @@ public class HomeFragment extends SupportFragment {
     private void showErrorView() {
         recyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_error);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_error);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
@@ -109,7 +108,7 @@ public class HomeFragment extends SupportFragment {
     private void showEmptyView() {
         recyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_empty);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_empty);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
@@ -135,7 +134,7 @@ public class HomeFragment extends SupportFragment {
             @Override
             protected ArrayList<Object> doInBackground(Boolean... isNeedCache) {
                 LogUtil.v("initData", "doInBackground");
-                return HomeDataList.getHomeDataList(Mp3App.sContext, isNeedCache[0]);
+                return HomeDataList.getHomeDataList(MusicApp.sContext, isNeedCache[0]);
             }
 
             @Override
@@ -168,7 +167,7 @@ public class HomeFragment extends SupportFragment {
     }
 
     RequestOptions requestOptions = new RequestOptions()
-            .transforms(new GlideRoundTransform(Mp3App.sContext, 4))
+            .transforms(new GlideRoundTransform(MusicApp.sContext, 4))
             .placeholder(R.drawable.default_thumbnail_corners);
 
     class JamendoGridGridItemDelagate implements ItemViewDelegate<Object> {
@@ -190,7 +189,7 @@ public class HomeFragment extends SupportFragment {
         public void convert(ViewHolder holder, Object o, int position) {
             final ArrayList<JamendoBean.JamendoResult> list = (ArrayList<JamendoBean.JamendoResult>) o;
             RecyclerView recyclerView = holder.getView(R.id.item_horzontal_recyclerview);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(Mp3App.sContext);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(MusicApp.sContext);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(new CommonAdapter<JamendoBean.JamendoResult>(getActivity(), R.layout.home_item_horzontal_item, list) {
@@ -232,7 +231,7 @@ public class HomeFragment extends SupportFragment {
             final ArrayList<JamendoBean> list = (ArrayList<JamendoBean>) o;
 
             RecyclerView recyclerView = holder.getView(R.id.item_horzontal_recyclerview);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(Mp3App.sContext);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(MusicApp.sContext);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(new CommonAdapter<JamendoBean>(getActivity(), R.layout.home_item_horzontal_item, list) {

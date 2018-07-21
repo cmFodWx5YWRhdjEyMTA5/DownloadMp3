@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.JamendoBean;
 import com.freedownloader.util.Utils;
@@ -91,7 +91,7 @@ public class HomeGridActivity extends AppCompatActivity {
         setUpToolbar();
         setUpRecyclerView();
 
-        itemHeight = (Utils.getScreenWhith() - Utils.dip2px(Mp3App.sContext, 2)*4)/3;
+        itemHeight = (Utils.getScreenWhith() - Utils.dip2px(MusicApp.sContext, 2)*4)/3;
     }
 
     private int itemHeight;
@@ -99,9 +99,9 @@ public class HomeGridActivity extends AppCompatActivity {
     private void setUpRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, Utils.dip2px(Mp3App.sContext, 2), false));
-        recyclerView.setPadding(Utils.dip2px(Mp3App.sContext, 2), Utils.dip2px(Mp3App.sContext, 2),
-                Utils.dip2px(Mp3App.sContext, 2),Utils.dip2px(Mp3App.sContext, 2));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, Utils.dip2px(MusicApp.sContext, 2), false));
+        recyclerView.setPadding(Utils.dip2px(MusicApp.sContext, 2), Utils.dip2px(MusicApp.sContext, 2),
+                Utils.dip2px(MusicApp.sContext, 2),Utils.dip2px(MusicApp.sContext, 2));
 
         mCommonAdapter = new CommonAdapter<JamendoBean>(this, R.layout.home_grid_item, mList) {
             @Override

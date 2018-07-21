@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.YTbeBean;
 import com.freedownloader.facebook.FBAdUtils;
@@ -79,7 +79,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
     }
 
     private void initApiClient() {
-        if (Mp3App.isYTB()) {
+        if (MusicApp.isYTB()) {
             mMusicApi = new YouTubeApi();
         } else {
             mMusicApi = new JamendoApi();
@@ -90,11 +90,17 @@ public class HotFragment extends SupportFragment implements IHotFragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Router.getInstance().register(this);
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        LogUtil.v(TAG, "onLazyInitView>>>>>");
         mSwipeRefreshLayout.setRefreshing(true);
         initData();
     }
 
-    private CommonAdapter mCommonAdapter = new CommonAdapter<Song>(Mp3App.sContext,
+    private CommonAdapter mCommonAdapter = new CommonAdapter<Song>(MusicApp.sContext,
             R.layout.list_item, mArrayList) {
 
         RequestOptions options = new RequestOptions()
@@ -149,7 +155,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
         });
 
         mRecyclerView = view.findViewById(R.id.hot_rv);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(Mp3App.sContext));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(MusicApp.sContext));
         mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
         mRecyclerView.setAdapter(mAdViewWrapperAdapter);
         mStatusTV = view.findViewById(R.id.status_iv);
@@ -164,7 +170,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
     private void showErrorView() {
         mRecyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_error);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_error);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
@@ -174,7 +180,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
     private void showEmptyView() {
         mRecyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_empty);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_empty);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
@@ -198,7 +204,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
             protected List<Song> doInBackground(Void... Void) {
                 LogUtil.v(TAG, "doInBackground getRecommondMusic");
                 if (mMusicApi != null) {
-                    return mMusicApi.getRecommondMusic(Mp3App.sContext);
+                    return mMusicApi.getRecommondMusic(MusicApp.sContext);
                 }
                 return null;
             }

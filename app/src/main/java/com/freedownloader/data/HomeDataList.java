@@ -2,7 +2,7 @@ package com.freedownloader.data;
 
 import android.content.Context;
 
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.JamendoBean;
 import com.freedownloader.bean.MusicArchiveBean;
@@ -27,13 +27,13 @@ public class HomeDataList {
 
     public static final String TAG = "HomeDataList";
 
-    public static Context context = Mp3App.sContext;
+    public static Context context = MusicApp.sContext;
 
     public static ArrayList<Object> getHomeDataList(Context context, boolean isNeedCache) {
         if (isNeedCache) {
             Object object = null;
             try {
-                object = ACache.get(Mp3App.sContext).getAsObject("homeData");
+                object = ACache.get(MusicApp.sContext).getAsObject("homeData");
             } catch (Throwable e) {
                 e.printStackTrace();
             }
@@ -113,7 +113,7 @@ public class HomeDataList {
         LogUtil.v(TAG, " getHomeDataList dataFull " + dataFull);
         if (dataFull) {
             try {
-                ACache.get(Mp3App.sContext).put("homeData", dataList, 60 * 60 * 24 * 1);
+                ACache.get(MusicApp.sContext).put("homeData", dataList, 60 * 60 * 24 * 1);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
@@ -126,13 +126,13 @@ public class HomeDataList {
     private static MusicArchiveBean requestMusicArchive(int type) {
         try {
             if (type == MusicArchiveBean.FEATURED_TYPE) {
-                Response<MusicArchiveBean> response = MusicArchiveClient.getMusicArchiveRetrofit(Mp3App.sContext)
+                Response<MusicArchiveBean> response = MusicArchiveClient.getMusicArchiveRetrofit(MusicApp.sContext)
                         .getMusicArchiveFeatred().execute();
                 if (response != null && response.body() != null) {
                     return response.body();
                 }
             } else {
-                Response<MusicArchiveBean> response = MusicArchiveClient.getMusicArchiveRetrofit(Mp3App.sContext)
+                Response<MusicArchiveBean> response = MusicArchiveClient.getMusicArchiveRetrofit(MusicApp.sContext)
                         .getMusicArchiveRecent().execute();
                 if (response != null && response.body() != null) {
                     return response.body();
@@ -147,7 +147,7 @@ public class HomeDataList {
 
     private static JamendoBean requestJamendoData(String order) {
         try {
-            Response<JamendoBean> response = JamendoApi.getJamendoService(Mp3App.sContext)
+            Response<JamendoBean> response = JamendoApi.getJamendoService(MusicApp.sContext)
                     .getJamendoDataByOrder(order, 0)
                     .execute();
             if (response != null && response.body() != null) {

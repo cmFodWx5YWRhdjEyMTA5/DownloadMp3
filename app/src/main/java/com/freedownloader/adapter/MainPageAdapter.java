@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.freedownloader.MusicApp;
+import com.freedownloader.R;
+import com.freedownloader.bean.MusicArchiveBean;
 import com.freedownloader.ui.HomeFragment;
 import com.freedownloader.ui.HotFragment;
-import com.freedownloader.ui.DownloadFragment;
+import com.freedownloader.ui.MusicArchiveFragment;
 
 import java.util.ArrayList;
 
@@ -22,11 +25,18 @@ public class MainPageAdapter extends FragmentPagerAdapter {
 
     private ArrayList<SupportFragment> mList = new ArrayList<>();
 
+    private String title[] = {MusicApp.sContext.getString(R.string.home_text),
+            MusicApp.sContext.getString(R.string.hot_text), MusicApp.sContext.getString(R.string.new_song),
+            MusicApp.sContext.getString(R.string.top_song), MusicApp.sContext.getString(R.string.pop_song)
+    };
+
     public MainPageAdapter(Context context, FragmentManager fm) {
         super(fm);
         mList.add(new HomeFragment());
         mList.add(new HotFragment());
-        mList.add(new DownloadFragment());
+        mList.add(MusicArchiveFragment.newInstances(MusicArchiveBean.NEW_TYPE));
+        mList.add(MusicArchiveFragment.newInstances(MusicArchiveBean.TOP_TYPE));
+        mList.add(MusicArchiveFragment.newInstances(MusicArchiveBean.POP_TYPE));
     }
 
     @Override
@@ -37,7 +47,7 @@ public class MainPageAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return "";
+        return title[position];
     }
 
     @Override

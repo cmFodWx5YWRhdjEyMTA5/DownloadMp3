@@ -24,7 +24,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.bumptech.glide.request.RequestOptions;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.ui.MainActivity;
 
@@ -54,26 +54,22 @@ public class Utils {
             .placeholder(R.drawable.default_thumbnail_corners);
 
     public static void setViewBackgroud(View view) {
-        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
-        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
-        } else if (Mp3App.isSCloud()) {
-            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary));
+        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.sdcound_primary));
         } else {
-            view.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary2));
+            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary2));
         }
     }
 
     public static void setActivityStatusColor(Activity activity) {
-        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
-        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
-        } else if (Mp3App.isSCloud()) {
-            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary));
+        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.sdcound_primary));
         } else {
-            setStatusColor(activity, ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary2));
+            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary2));
         }
     }
 
@@ -82,7 +78,7 @@ public class Utils {
     }
 
     public static int getScreenWhith() {
-        WindowManager wm = (WindowManager) Mp3App.sContext.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) MusicApp.sContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         return display.getWidth();
     }
@@ -138,7 +134,7 @@ public class Utils {
                 // I'm counting
                 // STATE_DOZE, STATE_OFF, STATE_DOZE_SUSPENDED
                 // all as "OFF"
-                DisplayManager dm = (DisplayManager) Mp3App.sContext.getSystemService(Context.DISPLAY_SERVICE);
+                DisplayManager dm = (DisplayManager) MusicApp.sContext.getSystemService(Context.DISPLAY_SERVICE);
                 Display[] displays = dm.getDisplays();
                 for (Display display : displays) {
                     if (display.getState() == Display.STATE_ON
@@ -150,7 +146,7 @@ public class Utils {
             }
 
             // If you use less than API20:
-            PowerManager powerManager = (PowerManager) Mp3App.sContext.getSystemService(Context.POWER_SERVICE);
+            PowerManager powerManager = (PowerManager) MusicApp.sContext.getSystemService(Context.POWER_SERVICE);
             if (powerManager.isScreenOn()) {
                 return true;
             }
@@ -204,7 +200,7 @@ public class Utils {
         sHandler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(Mp3App.sContext, resId, Toast.LENGTH_LONG).show();
+                Toast.makeText(MusicApp.sContext, resId, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -217,7 +213,7 @@ public class Utils {
         sHandler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(Mp3App.sContext, string, Toast.LENGTH_LONG).show();
+                Toast.makeText(MusicApp.sContext, string, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -255,7 +251,7 @@ public class Utils {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 intent.addFlags(FLAG_GRANT_PREFIX_URI_PERMISSION);
             }
-            Mp3App.sContext.startActivity(intent);
+            MusicApp.sContext.startActivity(intent);
         } catch (Throwable e) {
             e.printStackTrace();
         }

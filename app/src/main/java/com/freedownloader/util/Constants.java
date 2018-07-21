@@ -6,9 +6,11 @@ package com.freedownloader.util;
 
 public class Constants {
 
-    public static final String KEY_SOUNDCLOUD = "feater_scloud_key";
+    public static final String KEY_SOUNDCLOUD = "yout_scloud_key";
 
-    public static final String KEY_YOUTUBE = "feater_ytb_key";
+    public static final String KEY_YOUTUBE = "you_ytb_key";
+
+    public static final String KEY_SING_YOUTUBE = "single_ytb";
 
     public static final String CHA_YE_ID = "208027086507458_208028416507325";
     public static final String CHA_YE_HEIGH_ID = "208027086507458_208028949840605";

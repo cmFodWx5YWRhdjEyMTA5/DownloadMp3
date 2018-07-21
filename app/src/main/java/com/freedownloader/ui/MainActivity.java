@@ -17,7 +17,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.SearchSuggestionsAdapter;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
-import com.freedownloader.Mp3App;
+import com.arlib.floatingsearchview.util.view.MenuView;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.facebook.FBAdUtils;
 import com.freedownloader.data.MusicSuggistion;
@@ -42,7 +43,7 @@ import me.yokeyword.fragmentation.SupportActivity;
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
-public class MainActivity extends SupportActivity {
+public class MainActivity extends SupportActivity implements IDownloadRedBadge{
 
     private FloatingSearchView mSearchView;
     private static final String TAG = "MainActivity";
@@ -53,21 +54,31 @@ public class MainActivity extends SupportActivity {
 
     public static boolean sIsInActivity;
 
+    @Override
+    public void showRedBadge() {
+
+    }
+
     private void initSearchView() {
         mSearchView = findViewById(R.id.floating2_search_view);
 
         mSearchView.setSearchHint(getString(R.string.app_name));
 
-        if (Mp3App.isYTB() && Mp3App.sPreferences.getBoolean("ShowRed", true)) {
+        if (MusicApp.isYTB()) {
             updateSearchMenu();
-            mRedMenuBadge = new QBadgeView(Mp3App.sContext)
-                    .bindTarget(findViewById(com.arlib.floatingsearchview.R.id.menu_view));
-            mRedMenuBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
+        }
+
+        if (MusicApp.isYTB() && MusicApp.sPreferences.getBoolean("ShowRed", true)) {
+            MenuView menuView = findViewById(com.arlib.floatingsearchview.R.id.menu_view);
+            mRedMenuBadge = new QBadgeView(MusicApp.sContext)
+                    .bindTarget(menuView);
+            mRedMenuBadge.setBadgeBackgroundColor(ContextCompat.getColor(MusicApp.sContext,
                     R.color.colorPrimary));
             mRedMenuBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
             mRedMenuBadge.setBadgeNumber(-1);
             mRedMenuBadge.setGravityOffset(6, true);
         }
+
 
         mSearchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
             @Override
@@ -116,7 +127,7 @@ public class MainActivity extends SupportActivity {
             @Override
             public void onActionMenuItemSelected(MenuItem item) {
                 if (mRedMenuBadge != null) {
-                    Mp3App.sPreferences.edit().putBoolean("ShowRed", false).apply();
+                    MusicApp.sPreferences.edit().putBoolean("ShowRed", false).apply();
                     mSearchView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -126,6 +137,9 @@ public class MainActivity extends SupportActivity {
                     });
                 }
                 switch (item.getItemId())  {
+                    case R.id.action_download:
+                        DownloadActivity.launch(getApplicationContext());
+                        break;
                     case R.id.action_youtube:
                         mSearchView.inflateOverflowMenu(R.menu.search_menu3);
                         setSearchType(YOUTUBE_TYPE);
@@ -177,6 +191,7 @@ public class MainActivity extends SupportActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -197,11 +212,11 @@ public class MainActivity extends SupportActivity {
 
         initSearchView();
 
-        if (Mp3App.sPreferences.getBoolean("isReceiverRefer", true)) {
+        if (MusicApp.sPreferences.getBoolean("is2Receiver2Refer", true)) {
             mSearchView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Mp3App.sPreferences.edit().putBoolean("isReceiverRefer", false).apply();
+                    MusicApp.sPreferences.edit().putBoolean("is2Receiver2Refer", false).apply();
                 }
             }, 1000);
         }
@@ -215,15 +230,15 @@ public class MainActivity extends SupportActivity {
         mStatuBarView = findViewById(R.id.status_bar_view2);
         mTopBarLinear = findViewById(R.id.top_bar_linear2);
 
-        if (Mp3App.isYTB() && getSearchType() == YOUTUBE_TYPE) {
+        if (MusicApp.isYTB() && getSearchType() == YOUTUBE_TYPE) {
             setMainTopBarBg(true);
-        } else if (Mp3App.isYTB() && getSearchType() == SOUNDClOUND_TYPE) {
+        } else if (MusicApp.isYTB() && getSearchType() == SOUNDClOUND_TYPE) {
             setMainTopBarBg(false);
         } else {
             mStatuBarView.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.colorPrimary2));
+                    .getColor(MusicApp.sContext, R.color.colorPrimary2));
             mTopBarLinear.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.colorPrimary2));
+                    .getColor(MusicApp.sContext, R.color.colorPrimary2));
         }
     }
 
@@ -244,9 +259,9 @@ public class MainActivity extends SupportActivity {
     private void setMainTopBarBg(boolean isYoutube) {
         if (isYoutube) {
             mStatuBarView.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.colorPrimary));
+                    .getColor(MusicApp.sContext, R.color.colorPrimary));
             mTopBarLinear.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.colorPrimary));
+                    .getColor(MusicApp.sContext, R.color.colorPrimary));
             try {
                 Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(true);
             } catch (Exception e) {
@@ -254,9 +269,9 @@ public class MainActivity extends SupportActivity {
             }
         } else {
             mStatuBarView.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.sdcound_primary));
+                    .getColor(MusicApp.sContext, R.color.sdcound_primary));
             mTopBarLinear.setBackgroundColor(ContextCompat
-                    .getColor(Mp3App.sContext, R.color.sdcound_primary));
+                    .getColor(MusicApp.sContext, R.color.sdcound_primary));
             try {
                 Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(false);
             } catch (Exception e) {
@@ -286,11 +301,11 @@ public class MainActivity extends SupportActivity {
     public static final int YOUTUBE_TYPE = 2;
 
     public static void setSearchType(int type) {
-        Mp3App.sPreferences.edit().putInt("searchType", type).apply();
+        MusicApp.sPreferences.edit().putInt("searchType", type).apply();
     }
 
     public static int getSearchType() {
-        return Mp3App.sPreferences.getInt("searchType", YOUTUBE_TYPE);
+        return MusicApp.sPreferences.getInt("searchType", YOUTUBE_TYPE);
     }
 
     private void updateSearchMenu() {

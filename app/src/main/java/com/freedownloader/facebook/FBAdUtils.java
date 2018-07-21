@@ -23,7 +23,7 @@ import com.facebook.ads.InterstitialAdListener;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdsManager;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 
 /**
  * Created by liyanju on 2018/4/9.
@@ -139,11 +139,19 @@ public class FBAdUtils {
         loadAd(adId, null);
     }
 
+    private static long loadFailedTime = 0;
+
     public static void loadAd(String adId, final AdListener adListener) {
         Log.v("facebook", "loadAd....." + isLoadAding);
         if (isLoadAding) {
             return;
         }
+
+        if (Math.abs(System.currentTimeMillis() - loadFailedTime) < 10 * 1000) {
+            Log.e("facebook", " load failed time in 10s");
+            return;
+        }
+
         isLoadAding = true;
 
         sNativeAd = new NativeAd(sContext, adId);
@@ -156,6 +164,7 @@ public class FBAdUtils {
                     adListener.onError(ad, adError);
                 }
                 isLoadAding = false;
+                loadFailedTime = System.currentTimeMillis();
             }
 
             @Override
@@ -281,7 +290,7 @@ public class FBAdUtils {
 
             // Downloading and setting the ad icon.
             NativeAd.Image adIcon = nativeAd.getAdIcon();
-            Glide.with(Mp3App.sContext).load(adIcon.getUrl()).into(nativeAdIcon);
+            Glide.with(MusicApp.sContext).load(adIcon.getUrl()).into(nativeAdIcon);
 
             // Add adChoices icon
             AdChoicesView adChoicesView = new AdChoicesView(sContext, nativeAd, true);

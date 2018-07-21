@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.YTbeBean;
 import com.freedownloader.data.IMusicApi;
@@ -88,14 +88,16 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
     }
 
     private void initApiClient() {
-        if (Mp3App.isYTB()) {
+        if (MusicApp.isYTB()) {
             if (MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
                 mMusicApi = new YouTubeApi();
             } else if (MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
                 mMusicApi = new SoundCloudApi();
             }
-        } else if (Mp3App.isSCloud()) {
+        } else if (MusicApp.isSCloud()) {
             mMusicApi = new SoundCloudApi();
+        } else if (MusicApp.isSingYTB()){
+            mMusicApi = new YouTubeApi();
         } else {
             mMusicApi = new JamendoApi();
         }
@@ -127,7 +129,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
         return view;
     }
 
-    private CommonAdapter mCommonAdapter = new CommonAdapter<Song>(Mp3App.sContext,
+    private CommonAdapter mCommonAdapter = new CommonAdapter<Song>(MusicApp.sContext,
             R.layout.list_item, mArrayList) {
 
         RequestOptions options = new RequestOptions()
@@ -166,7 +168,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
 
     private void initView(View view) {
         mRecyclerView = view.findViewById(R.id.search_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(Mp3App.sContext));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(MusicApp.sContext));
         mAdViewWrapperAdapter = new AdViewWrapperAdapter(mCommonAdapter);
         mRecyclerView.setAdapter(mAdViewWrapperAdapter);
         mStatusTV = view.findViewById(R.id.status_iv);
@@ -237,7 +239,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
             @Override
             protected List<Song> doInBackground(Void... integers) {
                 if (mMusicApi != null) {
-                    return mMusicApi.searchMusic(Mp3App.sContext, mCurrentQuery);
+                    return mMusicApi.searchMusic(MusicApp.sContext, mCurrentQuery);
                 }
                 return null;
             }
@@ -289,7 +291,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
     private void showErrorView() {
         mRecyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_error);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_error);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
@@ -299,7 +301,7 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
     private void showEmptyView() {
         mRecyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_empty);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_empty);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);

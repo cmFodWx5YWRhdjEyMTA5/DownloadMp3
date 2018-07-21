@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.util.Constants;
 import com.freedownloader.facebook.FBAdUtils;
@@ -199,7 +199,7 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
                     Utils.showLongToastSafe(R.string.permission_text_tips);
                     return;
                 }
-                FileDownloaderHelper.addDownloadTask(Mp3App.sContext, mBaseModel,
+                FileDownloaderHelper.addDownloadTask(MusicApp.sContext, mBaseModel,
                         new WeakReference<Activity>(MusicPlayerActivity.this));
             }
         });
@@ -313,14 +313,14 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
                     MusicManager.get().playPre();
 
                 } else {
-                    Toast.makeText(Mp3App.sContext, R.string.not_last, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MusicApp.sContext, R.string.not_last, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_next:
                 if (MusicManager.get().hasNext()) {
                     MusicManager.get().playNext();
                 } else {
-                    Toast.makeText(Mp3App.sContext, R.string.not_next, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MusicApp.sContext, R.string.not_next, Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -365,7 +365,7 @@ public class MusicPlayerActivity extends SupportActivity implements OnPlayerEven
 
     @Override
     public void onError(String errorMsg) {
-        Toast.makeText(Mp3App.sContext, R.string.play_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MusicApp.sContext, R.string.play_error, Toast.LENGTH_SHORT).show();
         resetCoverAnim();
         mLoadingPB.setVisibility(View.GONE);
         setBtnCanEnabled();

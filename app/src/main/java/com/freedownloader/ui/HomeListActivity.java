@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.JamendoBean;
 import com.freedownloader.bean.MusicArchiveBean;
@@ -294,10 +294,10 @@ public class HomeListActivity extends AppCompatActivity {
                 try {
                     Response<JamendoBean> response;
                     if (!TextUtils.isEmpty(mTags)) {
-                        response = JamendoApi.getJamendoService(Mp3App.sContext)
+                        response = JamendoApi.getJamendoService(MusicApp.sContext)
                                 .getJamendoDataByTags(mTags, curOffset).execute();
                     } else {
-                        response = JamendoApi.getJamendoService(Mp3App.sContext)
+                        response = JamendoApi.getJamendoService(MusicApp.sContext)
                                 .getJamendoDataByOrder(voids[0], curOffset).execute();
                     }
                     return response.body();
@@ -354,7 +354,7 @@ public class HomeListActivity extends AppCompatActivity {
     private void showErrorView() {
         recyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_error);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_error);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
@@ -364,7 +364,7 @@ public class HomeListActivity extends AppCompatActivity {
     private void showEmptyView() {
         recyclerView.setVisibility(View.GONE);
         mStatusTV.setVisibility(View.VISIBLE);
-        Drawable drawable = ContextCompat.getDrawable(Mp3App.sContext, R.drawable.ic_empty);
+        Drawable drawable = ContextCompat.getDrawable(MusicApp.sContext, R.drawable.ic_empty);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);

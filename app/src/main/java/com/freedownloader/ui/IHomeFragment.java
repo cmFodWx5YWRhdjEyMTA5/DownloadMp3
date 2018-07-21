@@ -6,10 +6,6 @@ package com.freedownloader.ui;
 
 public interface IHomeFragment {
 
-    void showRedBadge();
-
-    void hideRedBadge();
-
     void tabLayoutBg(boolean isYoutube);
 
     void tabLayoutJamendo();

@@ -66,7 +66,10 @@
 
     <string name="start_speech">Start speech</string>
 
-    <string name="hot_text">Hot</string>
+    <string name="hot_text">Hot Song</string>
+    <string name="pop_song">Pop Song</string>
+    <string name="top_song">Top Song</string>
+    <string name="new_song">New Song</string>
 
     <string name="home_text">Home</string>
 

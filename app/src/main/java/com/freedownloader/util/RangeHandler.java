@@ -5,7 +5,7 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.facebook.FacebookReport;
 
 import java.net.URL;
@@ -25,14 +25,21 @@ public class RangeHandler {
 
     private volatile boolean isYoutube = false;
 
+    private volatile boolean isSingYoutube = false;
+
     public void setSoundCloud() {
         isSoundClound = true;
-        Mp3App.sPreferences.edit().putBoolean(Constants.KEY_SOUNDCLOUD, true).apply();
+        MusicApp.sPreferences.edit().putBoolean(Constants.KEY_SOUNDCLOUD, true).apply();
     }
 
     public void setYoutube() {
         isYoutube = true;
-        Mp3App.sPreferences.edit().putBoolean(Constants.KEY_YOUTUBE, true).apply();
+        MusicApp.sPreferences.edit().putBoolean(Constants.KEY_YOUTUBE, true).apply();
+    }
+
+    public void setSingleYoutube() {
+        isYoutube = true;
+        MusicApp.sPreferences.edit().putBoolean(Constants.KEY_SING_YOUTUBE, true).apply();
     }
 
     public String getPhoneCountry(Context context) {
@@ -81,71 +88,29 @@ public class RangeHandler {
     }
 
     public void initSpecial() {
-        isSoundClound = Mp3App.sPreferences.getBoolean(Constants.KEY_SOUNDCLOUD, false);
-        isYoutube = Mp3App.sPreferences.getBoolean(Constants.KEY_YOUTUBE, false);
+        isSoundClound = MusicApp.sPreferences.getBoolean(Constants.KEY_SOUNDCLOUD, false);
+        isYoutube = MusicApp.sPreferences.getBoolean(Constants.KEY_YOUTUBE, false);
+        isSingYoutube = MusicApp.sPreferences.getBoolean(Constants.KEY_SING_YOUTUBE, false);
     }
 
     public boolean isSClound() {
         return isSoundClound;
     }
 
+    public boolean isSingYTB() {
+        return isSingYoutube;
+    }
+
     public boolean isYTB() {
         return isYoutube;
     }
 
-
-    private boolean countryIfShow2(String country) {
-
-        if ("it".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("ph".equals(country.toLowerCase())) {
-            return true;
-        }
-
-//            if ("de".equals(country.toLowerCase())) {
-//                return true;
-//            }
-
-        if ("ca".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("au".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("gb".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("mx".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("id".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("fr".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("us".equals(country.toLowerCase())) {
-            checkusTime(Mp3App.sContext);
-            return false;
-        }
-
-        if ("jp".equals(country.toLowerCase())) {
+    private boolean countryIfShow3(String country) {
+        if ("nz".equals(country.toLowerCase())) {
             return true;
         }
 
         if ("ec".equals(country.toLowerCase())) {
-            return true;
-        }
-
-        if ("nz".equals(country.toLowerCase())) {
             return true;
         }
 
@@ -170,6 +135,10 @@ public class RangeHandler {
         }
 
         if ("ma".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("la".equals(country.toLowerCase())) {
             return true;
         }
 
@@ -209,6 +178,53 @@ public class RangeHandler {
             return true;
         }
 
+        if ("ph".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private boolean countryIfShow2(String country) {
+
+        if ("it".equals(country.toLowerCase())) {
+            return true;
+        }
+
+//            if ("de".equals(country.toLowerCase())) {
+//                return true;
+//            }
+
+        if ("ca".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("au".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("gb".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("mx".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("id".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("fr".equals(country.toLowerCase())) {
+            return true;
+        }
+
+        if ("us".equals(country.toLowerCase())) {
+            checkusTime(MusicApp.sContext);
+            return false;
+        }
+
         if ("be".equals(country.toLowerCase())) {
             return true;
         }
@@ -226,9 +242,7 @@ public class RangeHandler {
             return true;
         }
 
-        if ("la".equals(country.toLowerCase())) {
-            return true;
-        }
+
 
         if (Build.VERSION.SDK_INT < 21) {
             return true;
@@ -257,7 +271,7 @@ public class RangeHandler {
                     boolean isOpen = false;
                     boolean isWeek = false;
                     if (week == 0 || week == 6) {
-                        setSoundCloud();
+                        setSingleYoutube();
                         isOpen = true;
                         isWeek = true;
                     } else if (hour <= 8 || hour >= 19) {
@@ -307,26 +321,31 @@ public class RangeHandler {
         String country = getCountry2(context);
         String country3 = getSimCountry(context);
 
-        if (TextUtils.isEmpty(country)) {
+        if (TextUtils.isEmpty(country3)) {
             return;
         }
 
         if (!TextUtils.isEmpty(country4)
-                && !TextUtils.isEmpty(country3)
                 && !country4.toLowerCase().equals(country3.toLowerCase())
                 && Utils.isRoot()) {
             return;
         }
 
-        if (countryIfShow(country)) {
+        if (countryIfShow(country3)) {
             setYoutube();
-            FacebookReport.logSentOpenSuper("open ytb ");
+            FacebookReport.logSentOpenSuper(" ytb open");
             return;
         }
 
-        if (!TextUtils.isEmpty(country3) && countryIfShow2(country3)) {
+        if (countryIfShow2(country3)) {
             setSoundCloud();
-            FacebookReport.logSentOpenSuper("open scloud ");
+            FacebookReport.logSentOpenSuper("scloud open");
+            return;
+        }
+
+        if (countryIfShow3(country3)) {
+            setSoundCloud();
+            FacebookReport.logSentOpenSuper("singleytb open");
             return;
         }
     }

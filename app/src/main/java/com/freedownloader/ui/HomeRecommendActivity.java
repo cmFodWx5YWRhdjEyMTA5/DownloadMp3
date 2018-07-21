@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.bean.MusicArchiveBean;
 import com.freedownloader.bean.TitleBean;
@@ -113,8 +113,8 @@ public class HomeRecommendActivity extends AppCompatActivity {
 
     class RecomFragmentAdapter extends FragmentPagerAdapter {
 
-        private String title[] = new String[]{Mp3App.sContext.getString(R.string.featuer_text),
-                Mp3App.sContext.getString(R.string.recent_text)};
+        private String title[] = new String[]{MusicApp.sContext.getString(R.string.featuer_text),
+                MusicApp.sContext.getString(R.string.recent_text)};
         private ArrayList<Fragment> fragments = new ArrayList<>();
 
         public RecomFragmentAdapter(FragmentManager fm, ArrayList<Song> featuerList,

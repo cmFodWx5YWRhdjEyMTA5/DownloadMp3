@@ -8,21 +8,18 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.adapter.MainPageAdapter;
 import com.freedownloader.router.Router;
-import com.freedownloader.util.LogUtil;
 
 import me.yokeyword.fragmentation.SupportFragment;
 import q.rorbin.badgeview.Badge;
-import q.rorbin.badgeview.QBadgeView;
 
 /**
  * Created by liyanju on 2018/5/7.
@@ -48,9 +45,9 @@ public class MainFragment extends SupportFragment implements IHomeFragment, Bott
     @Override
     public void tabLayoutBg(boolean isYoutube) {
         if (isYoutube) {
-            mBNavigation.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.colorPrimary));
+            mBNavigation.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary));
         } else {
-            mBNavigation.setBackgroundColor(ContextCompat.getColor(Mp3App.sContext, R.color.sdcound_primary));
+            mBNavigation.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.sdcound_primary));
         }
     }
 
@@ -73,37 +70,23 @@ public class MainFragment extends SupportFragment implements IHomeFragment, Bott
 
         MainPageAdapter homePageAdapter = new MainPageAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(homePageAdapter);
-        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 2) {
-                    hideRedBadge();
-                }
-            }
-        });
         mViewPager.setOffscreenPageLimit(homePageAdapter.getCount());
 
         Router.getInstance().register(this);
         mBNavigation = view.findViewById(R.id.home_tablayout);
         mBNavigation.setupWithViewPager(mViewPager);
 
-        mBNavigation.getTabAt(0).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_home_white_24dp));
-        mBNavigation.getTabAt(1).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_whatshot_white_24dp));
-        mBNavigation.getTabAt(2).setIcon(ContextCompat.getDrawable(_mActivity, R.drawable.ic_file_download_white_24dp));
-
-
-        if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
             mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary));
-        } else if (Mp3App.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
             mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
         } else {
             mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary2));
         }
 
-        if (Mp3App.sPreferences.getBoolean("DownloadNew", false)) {
-            showRedBadge();
-        }
+//        if (Mp3App.sPreferences.getBoolean("DownloadNew", false)) {
+//            showRedBadge();
+//        }
 
     }
 
@@ -115,34 +98,34 @@ public class MainFragment extends SupportFragment implements IHomeFragment, Bott
         Router.getInstance().unregister(this);
     }
 
-    @Override
-    public void showRedBadge() {
-        Mp3App.sPreferences.edit().putBoolean("DownloadNew", false).apply();
-        if (_mActivity.isFinishing() || mViewPager.getCurrentItem() == 1) {
-            LogUtil.e(TAG, "isFinishing getCurrentItem == 0");
-            return;
-        }
-        LogUtil.v(TAG, "showRedBadge>>>>>>");
-        if (mRedTabBadge != null) {
-            return;
-        }
-        View itemView = ((ViewGroup)mBNavigation.getChildAt(0)).getChildAt(2);
-        mRedTabBadge = new QBadgeView(Mp3App.sContext)
-                .bindTarget(itemView);
+//    @Override
+//    public void showRedBadge() {
+//        Mp3App.sPreferences.edit().putBoolean("DownloadNew", false).apply();
+//        if (_mActivity.isFinishing() || mViewPager.getCurrentItem() == 1) {
+//            LogUtil.e(TAG, "isFinishing getCurrentItem == 0");
+//            return;
+//        }
+//        LogUtil.v(TAG, "showRedBadge>>>>>>");
+//        if (mRedTabBadge != null) {
+//            return;
+//        }
+//        View itemView = ((ViewGroup)mBNavigation.getChildAt(0)).getChildAt(2);
+//        mRedTabBadge = new QBadgeView(Mp3App.sContext)
+//                .bindTarget(itemView);
+//
+//        mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
+//                    R.color.color2_fbc02d));
+//
+//        mRedTabBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
+//        mRedTabBadge.setBadgeNumber(-1);
+//        mRedTabBadge.setGravityOffset(16, true);
+//    }
 
-        mRedTabBadge.setBadgeBackgroundColor(ContextCompat.getColor(Mp3App.sContext,
-                    R.color.color2_fbc02d));
-
-        mRedTabBadge.setBadgeGravity(Gravity.END | Gravity.TOP);
-        mRedTabBadge.setBadgeNumber(-1);
-        mRedTabBadge.setGravityOffset(16, true);
-    }
-
-    @Override
-    public void hideRedBadge() {
-        if (mRedTabBadge != null) {
-            mRedTabBadge.hide(true);
-            mRedTabBadge = null;
-        }
-    }
+//    @Override
+//    public void hideRedBadge() {
+//        if (mRedTabBadge != null) {
+//            mRedTabBadge.hide(true);
+//            mRedTabBadge = null;
+//        }
+//    }
 }

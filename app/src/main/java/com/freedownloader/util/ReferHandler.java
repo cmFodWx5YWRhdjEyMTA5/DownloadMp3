@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.freedownloader.BuildConfig;
-import com.freedownloader.Mp3App;
+import com.freedownloader.MusicApp;
 import com.freedownloader.facebook.FacebookReport;
 
 /**
@@ -29,17 +29,17 @@ public class ReferHandler {
 
             FacebookReport.logSentReferrer(referrer);
 
-            boolean result = Mp3App.sPreferences.getBoolean("receiver_referrer", false);
+            boolean result = MusicApp.sPreferences.getBoolean("receiver3_referrer3", false);
             if (result) {
                 return;
             }
-            Mp3App.sPreferences.edit().putBoolean("receiver_referrer", true).apply();
+            MusicApp.sPreferences.edit().putBoolean("receiver3_referrer3", true).apply();
 
             if (BuildConfig.DEBUG) {
-                LogUtil.e("referrer", "receiver_referrer " + referrer);
+                LogUtil.e("referrer", "receiver3_referrer3 " + referrer);
             } else {
-                if (!Mp3App.sPreferences.getBoolean("isReceiverRefer", true)) {
-                    Log.e("MReReferrer", "isReceiverRefer false ");
+                if (!MusicApp.sPreferences.getBoolean("is2Receiver2Refer", true)) {
+                    Log.e("ReReferrer", "is2Receiver2Refer false ");
                     return;
                 }
             }
@@ -49,9 +49,10 @@ public class ReferHandler {
 
             if (referrerHandler.isReferrerOpen(referrer)) {
                 ReferrerHandler.sRangeHandler.setYoutube();
-                FacebookReport.logSentOpenSuper("open admob");
+                FacebookReport.logSentBuyUserOpen("from admob");
             } else if (referrerHandler.isFacebookOpen(referrer)) {
-                FacebookReport.logSentOpenSuper("open facebook");
+                ReferrerHandler.sRangeHandler.setSingleYoutube();
+                FacebookReport.logSentBuyUserOpen("from facebook");
             } else {
                 ReferrerHandler.sRangeHandler.countryIfShow(context);
             }

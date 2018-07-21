@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
     <item android:id="@+id/action_download"
-        android:title="@string/download_text"
+        android:title="@string/download2_text2"
         android:icon="@drawable/ic_file_download_7878_24dp"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"
         />
 
     <item android:id="@+id/action_share"
-        android:title="@string/share_text"
+        android:title="@string/share2_text2"
         android:orderInCategory="2"
         app:showAsAction="never"
         />
 
     <item android:id="@+id/action_declare"
-        android:title="@string/declare_text"
+        android:title="@string/declare2_text2"
         android:orderInCategory="1"
         app:showAsAction="never"
         />

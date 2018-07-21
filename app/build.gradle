@@ -20,11 +20,6 @@ android {
 
     signingConfigs {
         release {
-//            storeFile file("mp3_downloader.jks")
-//            storePassword "!@c2018"
-//            keyAlias "musicdownload"
-//            keyPassword "!@c2018"
-
             storeFile file("newmusicdownloader.jks")
             storePassword "zxcvasdf"
             keyAlias "wemusicdownloader"

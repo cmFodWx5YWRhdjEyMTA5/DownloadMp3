@@ -58,7 +58,7 @@ public class HomeListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    public static final String TAG = "HomeList";
+    public static final String TAG = "HomeListActivity";
 
     private ArrayList<Song> mList = new ArrayList<>();
 
@@ -358,7 +358,7 @@ public class HomeListActivity extends AppCompatActivity {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
-        mStatusTV.setText(R.string.network_error);
+        mStatusTV.setText(R.string.network2_error2);
     }
 
     private void showEmptyView() {

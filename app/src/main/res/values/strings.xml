@@ -5,8 +5,8 @@
 
     <string name="action_voice_rec">Voice</string>
 
-    <string name="network_error">Network is Error</string>
-    <string name="load_error">Load Data Error</string>
+    <string name="network2_error2">Network is Error</string>
+    <string name="load2_error2">Load Data Error</string>
     <string name="empty_error">Data Is Empty</string>
 
     <string name="error_video_streams_empty">The video %s has no streams.</string>
@@ -14,15 +14,15 @@
     <string name="error_get_video_desc">An error has occurred while retrieving video\'s description.</string>
     <string name="error_invalid_url">Invalid video URL: %s</string>
 
-    <string name="download_text">Downloads</string>
+    <string name="download2_text2">Downloads</string>
 
     <string name="download_text2">Download</string>
 
-    <string name="play_text">Play</string>
+    <string name="play2_text2">Play</string>
 
     <string name="license_text">CC License</string>
 
-    <string name="download_added">Download already added</string>
+    <string name="download2_added2">Download already added</string>
 
     <string name="download_add_success">Add a download queue</string>
 
@@ -30,21 +30,21 @@
     <string name="finish_download">Download complete</string>
     <string name="error_download">Download error</string>
 
-    <string name="parse_url">Parse URL ...</string>
+    <string name="parse2_url2">Parse URL ...</string>
 
-    <string name="declare_text">Disclaimers</string>
+    <string name="declare2_text2">Disclaimers</string>
 
-    <string name="youtube_search">YouTube Search</string>
-    <string name="soundcloud_search">SoundCloud Search</string>
+    <string name="youtube2_search2">YouTube Search</string>
+    <string name="soundcloud2_search2">SoundCloud Search</string>
 
     <string name="switch_ytb_search">Switch YouTube Search</string>
     <string name="switch_sc_search">Switch SoundCloud Search</string>
 
-    <string name="disclaimer_text">Free Music Downloader Music is provided by "www.jamendo.com".All songs, available through this application, are intended only for your personal non-commercial use.You can visit Jamendo privacy policy https://devportal.jamendo.com/api_terms_of_use App authorized to use Jamendo API. All tracks available is under CC license(author and license link properly mentioned for each song). You can find and contact authors on www.jamendo.com</string>
+    <string name="disclaimer_text">MP3 Music Downloader Music is provided by "www.jamendo.com","http://www.freemusicarchive.net" All songs, available through this application, are intended only for your personal non-commercial use.You can visit Jamendo privacy policy https://devportal.jamendo.com/api_terms_of_use https://freemusicarchive.org/api App authorized to use Jamendo API. All tracks available is under CC license(author and license link properly mentioned for each song). You can find and contact authors on www.jamendo.com,https://freemusicarchive.org</string>
     <string name="disclaimers">Disclaimers</string>
     <string name="confirm_text">confirm</string>
 
-    <string name="del_des">Do you want to delete it?</string>
+    <string name="del_des2">Do you want to delete it?</string>
     <string name="ok_text">OK</string>
     <string name="cancel_text">Cancel</string>
 
@@ -54,15 +54,15 @@
 
     <string name="permission_text_tips">Please open read and write disk permissions</string>
 
-    <string name="facebook_app_id">208027086507458</string>
-    <string name="fb_login_protocol_scheme">fb208027086507458</string>
+    <string name="facebook_app_id">244665246152799</string>
+    <string name="fb_login_protocol_scheme">fb244665246152799</string>
 
-    <string name="download_rating">For you to download a music, please give me five stars.</string>
+    <string name="download2_rating2">For you to download a music, please give me five stars.</string>
     <string name="parse_url_failure">Parse URL failure !</string>
 
-    <string name="share_text">Share</string>
+    <string name="share2_text2">Share</string>
 
-    <string name="share_content">https://play.google.com/store/apps/details?id=%s Recommended Downloads</string>
+    <string name="share2_content2">https://play.google.com/store/apps/details?id=%s Recommended Downloads</string>
 
     <string name="start_speech">Start speech</string>
 

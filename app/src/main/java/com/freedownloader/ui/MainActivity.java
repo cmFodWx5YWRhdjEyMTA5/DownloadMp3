@@ -182,8 +182,8 @@ public class MainActivity extends SupportActivity implements IDownloadRedBadge{
                             Intent textIntent = new Intent(Intent.ACTION_SEND);
                             textIntent.setType("text/plain");
                             textIntent.putExtra(Intent.EXTRA_TEXT,
-                                    String.format(getString(R.string.share_content), getPackageName()));
-                            startActivity(Intent.createChooser(textIntent, getString(R.string.share_text)));
+                                    String.format(getString(R.string.share2_content2), getPackageName()));
+                            startActivity(Intent.createChooser(textIntent, getString(R.string.share2_text2)));
                         } catch (Throwable e) {
                             e.printStackTrace();
                         }

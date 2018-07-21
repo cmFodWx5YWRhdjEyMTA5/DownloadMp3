@@ -35,7 +35,7 @@ import java.lang.ref.WeakReference;
 
 public class DownloadBottomSheetDialog extends BaseBottomSheetFragment {
 
-    public static final String TAG = "DownloadSheet";
+    public static final String TAG = "DownloadDialog";
 
     private Song mSong;
 

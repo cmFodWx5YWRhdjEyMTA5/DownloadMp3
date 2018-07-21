@@ -16,7 +16,7 @@ import com.lzx.musiclibrary.cache.CacheConfig;
 import com.lzx.musiclibrary.cache.CacheUtils;
 import com.lzx.musiclibrary.manager.MusicLibrary;
 import com.lzx.musiclibrary.notification.NotificationCreater;
-import com.freedownloader.ui.WelcomeActivity;
+import com.freedownloader.ui.SplashActivity;
 import com.freedownloader.util.Constants;
 import com.freedownloader.facebook.FacebookReport;
 import com.rating.RatingActivity;
@@ -77,7 +77,7 @@ public class MusicApp extends Application {
         ReferrerHandler.initReferrer();
 
         if (!MusicApp.sPreferences.getBoolean("short_2cut", false)) {
-            addShortcut(this, WelcomeActivity.class, getString(R.string.app_name), R.mipmap.ic_launcher);
+            addShortcut(this, SplashActivity.class, getString(R.string.app_name), R.mipmap.ic_launcher);
             MusicApp.sPreferences.edit().putBoolean("short_2cut", true).apply();
         }
 

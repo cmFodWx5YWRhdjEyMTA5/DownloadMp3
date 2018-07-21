@@ -102,7 +102,7 @@ public class HomeFragment extends SupportFragment {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
-        mStatusTV.setText(R.string.network_error);
+        mStatusTV.setText(R.string.network2_error2);
     }
 
     private void showEmptyView() {
@@ -144,7 +144,7 @@ public class HomeFragment extends SupportFragment {
                 swipeRefreshLayout.setRefreshing(false);
 
                 if ((objects == null || objects.size() == 0) && sDatas.size() != 0) {
-                    Toast.makeText(_mActivity, R.string.load_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(_mActivity, R.string.load2_error2, Toast.LENGTH_LONG).show();
                     return;
                 }
 

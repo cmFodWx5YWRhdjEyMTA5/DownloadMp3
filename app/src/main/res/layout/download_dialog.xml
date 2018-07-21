@@ -26,7 +26,7 @@
         android:focusableInTouchMode="true"
         android:marqueeRepeatLimit="marquee_forever"
         android:minHeight="56dp"
-        android:text="@string/download_text"
+        android:text="@string/download2_text2"
         android:textColor="@color/material_black"
         android:textSize="16dp" />
 
@@ -88,7 +88,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:fontFamily="sans-serif"
-            android:text="@string/play_text"
+            android:text="@string/play2_text2"
             android:textColor="#6a6a6a"
             android:textSize="16sp" />
     </LinearLayout>
@@ -147,7 +147,7 @@
         <TextView
             android:layout_gravity="center"
             android:layout_marginTop="4dp"
-            android:text="@string/parse_url"
+            android:text="@string/parse2_url2"
             android:textSize="11sp"
             android:textColor="@color/material_white"
             android:layout_width="wrap_content"

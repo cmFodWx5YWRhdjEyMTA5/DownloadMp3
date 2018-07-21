@@ -47,7 +47,7 @@ public class DownloadFragment extends SupportFragment {
 
     private ArrayList<DownloadTask> mArrayList = new ArrayList<>();
 
-    private static final String TAG = "DownloadFragment";
+    private static final String TAG = "Download";
 
     private AsyncTask mLoadTask;
 
@@ -141,7 +141,7 @@ public class DownloadFragment extends SupportFragment {
             sIsPlayMusic = false;
             if (MusicApp.isYTB() || MusicApp.isSCloud()) {
                 RatingActivity.launch(MusicApp.sContext, "",
-                        MusicApp.sContext.getString(R.string.download_rating));
+                        MusicApp.sContext.getString(R.string.download2_rating2));
             }
         }
     }
@@ -186,7 +186,7 @@ public class DownloadFragment extends SupportFragment {
     };
 
     private void showDeleteDialog(Activity activity, final DownloadTask downloadTask) {
-        new MaterialDialog.Builder(activity).content(R.string.del_des)
+        new MaterialDialog.Builder(activity).content(R.string.del_des2)
                 .positiveText(R.string.ok_text).onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

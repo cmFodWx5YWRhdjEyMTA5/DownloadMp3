@@ -174,7 +174,7 @@ public class HotFragment extends SupportFragment implements IHotFragment{
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
-        mStatusTV.setText(R.string.network_error);
+        mStatusTV.setText(R.string.network2_error2);
     }
 
     private void showEmptyView() {

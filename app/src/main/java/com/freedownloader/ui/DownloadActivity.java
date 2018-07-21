@@ -51,7 +51,7 @@ public class DownloadActivity extends SupportActivity{
         setSupportActionBar(toolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.download_text);
+        getSupportActionBar().setTitle(R.string.download2_text2);
     }
 
     public static void launch(Context context) {

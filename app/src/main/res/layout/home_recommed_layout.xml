@@ -34,7 +34,7 @@
             app:tabIndicatorColor="@color/colorAccentReal"
             app:tabBackground="?selectableItemBackgroundBorderless"
             app:tabSelectedTextColor="@color/colorPrimaryTextWhite"
-            app:tabTextColor="@color/colorSubTextWhite"
+            app:tabTextColor="@color/colorSubTextWhite2"
             app:tabMode="fixed" />
 
             <View

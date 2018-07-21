@@ -66,7 +66,7 @@ public class FileDownloaderHelper {
 
         int createDownloadId = FileDownloadUtils.generateId(song.getDownloadUrl(), path);
         if (DownloadDao.getDownloadTaskById(sContext, createDownloadId) != null) {
-            Utils.showLongToastSafe(R.string.download_added);
+            Utils.showLongToastSafe(R.string.download2_added2);
             return;
         }
 
@@ -132,7 +132,7 @@ public class FileDownloaderHelper {
 
                         if (MusicApp.isYTB() || MusicApp.isSCloud()) {
                             RatingActivity.launch(MusicApp.sContext, "",
-                                    MusicApp.sContext.getString(R.string.download_rating));
+                                    MusicApp.sContext.getString(R.string.download2_rating2));
                         }
 
                         FacebookReport.logSentDownloadFinish(song.getName());

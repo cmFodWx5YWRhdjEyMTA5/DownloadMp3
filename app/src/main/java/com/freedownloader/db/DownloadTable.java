@@ -10,17 +10,17 @@ import java.util.Map;
 
 public class DownloadTable extends TableInfo{
 
-    public static final String TABLE_NAME = "freedownloaded";
+    public static final String TABLE_NAME = "wedownloaded";
 
     public static final Uri URI = Uri.parse("content://" + Mp3DownloadProvider.AUTHORITIES + "/" + TABLE_NAME);
 
-    public static final String PATH = "mp3_path";
-    public static final String NAME = "mp3_name";
-    public static final String IMAGE = "mp3_image";
-    public static final String DURATION = "mp3_duration";
-    public static final String NEWDOWLOAD = "mp3_newdownload";
-    public static final String ID = "mp3_id";
-    public static final String ARTIST = "mp3_artist";
+    public static final String PATH = "path";
+    public static final String NAME = "name";
+    public static final String IMAGE = "image";
+    public static final String DURATION = "duration";
+    public static final String NEWDOWLOAD = "isnewdownload";
+    public static final String ID = "id";
+    public static final String ARTIST = "artist";
 
     @Override
     public String onTableName() {

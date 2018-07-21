@@ -212,13 +212,13 @@ public class HomeDataList {
 
     private static ArrayList<JamendoBean> getJamendoInstrument() {
         ArrayList<JamendoBean> list = new ArrayList<>();
-        list.add(new JamendoBean(INSTRUMENT[10], INSTRUMENT[10].toLowerCase(), R.drawable.inst_organ, TitleBean.INSTRUMENT_TYPE));
-        list.add(new JamendoBean(INSTRUMENT[6], INSTRUMENT[6].toLowerCase(), R.drawable.inst_keyboard, TitleBean.INSTRUMENT_TYPE));
         list.add(new JamendoBean(INSTRUMENT[5], INSTRUMENT[5].toLowerCase(), R.drawable.inst_accousticguitar, TitleBean.INSTRUMENT_TYPE));
+        list.add(new JamendoBean(INSTRUMENT[6], INSTRUMENT[6].toLowerCase(), R.drawable.inst_keyboard, TitleBean.INSTRUMENT_TYPE));
+        list.add(new JamendoBean(INSTRUMENT[10], INSTRUMENT[10].toLowerCase(), R.drawable.inst_organ, TitleBean.INSTRUMENT_TYPE));
         list.add(new JamendoBean(INSTRUMENT[9], INSTRUMENT[9].toLowerCase(), R.drawable.inst_flute, TitleBean.INSTRUMENT_TYPE));
+        list.add(new JamendoBean(INSTRUMENT[0], INSTRUMENT[0].toLowerCase(), R.drawable.inst_piano, TitleBean.INSTRUMENT_TYPE));
         list.add(new JamendoBean(INSTRUMENT[1], INSTRUMENT[1].toLowerCase(), R.drawable.inst_bass, TitleBean.INSTRUMENT_TYPE));
         list.add(new JamendoBean(INSTRUMENT[13], INSTRUMENT[13].toLowerCase(), R.drawable.inst_cello, TitleBean.INSTRUMENT_TYPE));
-        list.add(new JamendoBean(INSTRUMENT[0], INSTRUMENT[0].toLowerCase(), R.drawable.inst_piano, TitleBean.INSTRUMENT_TYPE));
         list.add(new JamendoBean(INSTRUMENT[12], INSTRUMENT[12].toLowerCase(), R.drawable.inst_violin, TitleBean.INSTRUMENT_TYPE));
         list.add(new JamendoBean(INSTRUMENT[2], INSTRUMENT[2].toLowerCase(), R.drawable.inst_drum, TitleBean.INSTRUMENT_TYPE));
         list.add(new JamendoBean(INSTRUMENT[3], INSTRUMENT[3].toLowerCase(), R.drawable.inst_electroguitar, TitleBean.INSTRUMENT_TYPE));
@@ -231,11 +231,12 @@ public class HomeDataList {
 
     private static ArrayList<JamendoBean> getJamendoGeners() {
         ArrayList<JamendoBean> list = new ArrayList<>();
-        list.add(new JamendoBean(GENERSARRAY[1], GENERSARRAY[1].toLowerCase(), R.drawable.electro, TitleBean.GENRES_TYPE));
-        list.add(new JamendoBean(GENERSARRAY[0], GENERSARRAY[0].toLowerCase(), R.drawable.pop, TitleBean.GENRES_TYPE));
-        list.add(new JamendoBean(GENERSARRAY[7], GENERSARRAY[7].toLowerCase(), R.drawable.jazz, TitleBean.GENRES_TYPE));
-        list.add(new JamendoBean(GENERSARRAY[5], GENERSARRAY[5].toLowerCase(), R.drawable.hip_hop, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[2], GENERSARRAY[2].toLowerCase(), R.drawable.rock, TitleBean.GENRES_TYPE));
+        list.add(new JamendoBean(GENERSARRAY[7], GENERSARRAY[7].toLowerCase(), R.drawable.jazz, TitleBean.GENRES_TYPE));
+        list.add(new JamendoBean(GENERSARRAY[11], GENERSARRAY[11].toLowerCase(), R.drawable.chillout, TitleBean.GENRES_TYPE));
+        list.add(new JamendoBean(GENERSARRAY[0], GENERSARRAY[0].toLowerCase(), R.drawable.pop, TitleBean.GENRES_TYPE));
+        list.add(new JamendoBean(GENERSARRAY[1], GENERSARRAY[1].toLowerCase(), R.drawable.electro, TitleBean.GENRES_TYPE));
+        list.add(new JamendoBean(GENERSARRAY[5], GENERSARRAY[5].toLowerCase(), R.drawable.hip_hop, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[12], GENERSARRAY[12].toLowerCase(), R.drawable.dance, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[3], GENERSARRAY[3].toLowerCase(), R.drawable.ambient, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[4], GENERSARRAY[4].toLowerCase(), R.drawable.instrumental, TitleBean.GENRES_TYPE));
@@ -243,7 +244,6 @@ public class HomeDataList {
         list.add(new JamendoBean(GENERSARRAY[8], GENERSARRAY[8].toLowerCase(), R.drawable.world, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[9], GENERSARRAY[9].toLowerCase(), R.drawable.metal, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[10], GENERSARRAY[10].toLowerCase(), R.drawable.experimental, TitleBean.GENRES_TYPE));
-        list.add(new JamendoBean(GENERSARRAY[11], GENERSARRAY[11].toLowerCase(), R.drawable.chillout, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[13], GENERSARRAY[13].toLowerCase(), R.drawable.country, TitleBean.GENRES_TYPE));
         list.add(new JamendoBean(GENERSARRAY[14], GENERSARRAY[14].toLowerCase(), R.drawable.classic, TitleBean.GENRES_TYPE));
 

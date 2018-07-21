@@ -16,7 +16,7 @@
         app:tabIndicatorColor="@color/colorAccentReal"
         app:tabBackground="?selectableItemBackgroundBorderless"
         app:tabSelectedTextColor="@color/colorPrimaryTextWhite"
-        app:tabTextColor="@color/colorSubTextWhite"
+        app:tabTextColor="@color/colorSubTextWhite2"
         android:layout_width="match_parent"
         android:layout_height="58dp" />
 

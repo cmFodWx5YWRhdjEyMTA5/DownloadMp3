@@ -55,7 +55,7 @@ public class MusicArchiveFragment extends SupportFragment{
 
     private AsyncTask mLoadTask;
 
-    private static final String TAG = "MusicArchiveFragment";
+    private static final String TAG = "MusicArchive";
 
     private int mType = MusicArchiveBean.NEW_TYPE;
 
@@ -84,7 +84,7 @@ public class MusicArchiveFragment extends SupportFragment{
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mStatusTV.setCompoundDrawables(null, drawable,
                 null, null);
-        mStatusTV.setText(R.string.network_error);
+        mStatusTV.setText(R.string.network2_error2);
     }
 
     private void showEmptyView() {

@@ -7,24 +7,24 @@
 
     <color name="colorPrimary2">#D32F2F</color>
 
-    <color name="light_shadow_start_color">#5a000000</color>
+    <color name="light_shadow_start_color2">#5a000000</color>
 
     <color name="colorPrimaryTextWhite">#ffffffff</color>
     <color name="colorPrimaryTextBlack">#dfffffff</color>
-    <color name="colorSubTextBlack">#ccffffff</color>
+    <color name="colorSubTextBlack2">#ccffffff</color>
 
-    <color name="colorSubTextWhite">#b3ffffff</color>
+    <color name="colorSubTextWhite2">#b3ffffff</color>
     <color name="colorAccentReal">#ffffffff</color>
 
     <color name="material_white">#ffffff</color>
     <color name="material_black">#ff000000</color>
 
-    <color name="default_thum">#e5e5e5</color>
+    <color name="default_thum2">#e5e5e5</color>
     <color name="title_color">#212121</color>
     <color name="des_color">#757575</color>
 
     <color name="red">#C5025E</color>
-    <color name="color2_fbc02d">#FBC02D</color>
+    <color name="color2_fbc02d2">#FBC02D</color>
     <color name="sdcound_primary">#f8840f</color>
 
     <color name="white">#ffffff</color>

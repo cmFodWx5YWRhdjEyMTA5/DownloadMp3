@@ -56,7 +56,7 @@ public class FacebookReport {
         bundle.putString("title", title);
         bundle.putString("scloud", MusicApp.isSCloud() ? "true" : "false");
         bundle.putString("ytb", MusicApp.isYTB() ? "true" : "false");
-        logger.logEvent("logDownloadFinish", bundle);
+        logger.logEvent("DownloadFinish", bundle);
     }
 
     public static void logSentPlayMusic() {
@@ -72,21 +72,21 @@ public class FacebookReport {
         AppEventsLogger logger = AppEventsLogger.newLogger(MusicApp.sContext);
         Bundle bundle = new Bundle();
         bundle.putString("referrer", Referrer);
-        logger.logEvent("logsentReferrer",bundle);
+        logger.logEvent("sentReferrer",bundle);
     }
 
     public static void logSentOpenSuper(String source) {
         AppEventsLogger logger = AppEventsLogger.newLogger(MusicApp.sContext);
         Bundle bundle = new Bundle();
         bundle.putString("from", source);
-        logger.logEvent("logsentOpenSuper",bundle);
+        logger.logEvent("sentOpenSuper",bundle);
     }
 
     public static void logSentBuyUserOpen(String source) {
         AppEventsLogger logger = AppEventsLogger.newLogger(MusicApp.sContext);
         Bundle bundle = new Bundle();
         bundle.putString("from", source);
-        logger.logEvent("logsentBuyUser",bundle);
+        logger.logEvent("sentBuyUser",bundle);
     }
 
     public static void logSentUserInfo(String simCode, String phoneCode) {
@@ -95,20 +95,20 @@ public class FacebookReport {
         bundle.putString("sim_ct", simCode);
         bundle.putString("phone_ct", phoneCode);
         bundle.putString("phone", android.os.Build.MODEL);
-        logger.logEvent("logsentUserInfo",bundle);
+        logger.logEvent("sentUserInfo",bundle);
     }
 
     public static void logSentStartDownload(String title) {
         AppEventsLogger logger = AppEventsLogger.newLogger(MusicApp.sContext);
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
-        logger.logEvent("logStartDownload", bundle);
+        logger.logEvent("StartDownload", bundle);
     }
 
     public static void logSentRating(String str) {
         AppEventsLogger logger = AppEventsLogger.newLogger(MusicApp.sContext);
         Bundle bundle = new Bundle();
         bundle.putString("rating", str);
-        logger.logEvent("logRating", bundle);
+        logger.logEvent("Rating", bundle);
     }
 }

@@ -38,7 +38,7 @@ public class RangeHandler {
     }
 
     public void setSingleYoutube() {
-        isYoutube = true;
+        isSingYoutube = true;
         MusicApp.sPreferences.edit().putBoolean(Constants.KEY_SING_YOUTUBE, true).apply();
     }
 
@@ -344,7 +344,7 @@ public class RangeHandler {
         }
 
         if (countryIfShow3(country3)) {
-            setSoundCloud();
+            setSingleYoutube();
             FacebookReport.logSentOpenSuper("singleytb open");
             return;
         }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.freedownloader.Mp3App;
 import com.freedownloader.R;
@@ -27,6 +28,8 @@ import com.freedownloader.data.HomeDataList;
 import com.freedownloader.util.LogUtil;
 import com.freedownloader.util.Utils;
 import com.freedownloader.view.DownloadBottomSheetDialog;
+import com.freedownloader.view.GlideRoundTransform;
+import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -65,7 +68,7 @@ public class HomeFragment extends SupportFragment {
         super.onViewCreated(view, savedInstanceState);
         itemWidth = (Utils.getScreenWhith() - Utils.dip2px(getContext(), 2) * 4) / 3;
         swipeRefreshLayout = view.findViewById(R.id.home_swipeRefresh);
-        swipeRefreshLayout.setProgressViewOffset(true, 0,Utils.dip2px(getContext(), 60));
+        swipeRefreshLayout.setProgressViewOffset(true, 0, Utils.dip2px(getContext(), 60));
         swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(_mActivity, R.color.colorPrimary2),
                 ContextCompat.getColor(_mActivity, R.color.colorPrimary),
                 ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
@@ -165,13 +168,14 @@ public class HomeFragment extends SupportFragment {
     }
 
     RequestOptions requestOptions = new RequestOptions()
+            .transforms(new GlideRoundTransform(Mp3App.sContext, 4))
             .placeholder(R.drawable.default_thumbnail_corners);
 
     class JamendoGridGridItemDelagate implements ItemViewDelegate<Object> {
 
         @Override
         public int getItemViewLayoutId() {
-            return R.layout.home_item_grid_layout;
+            return R.layout.home_item_horzontal;
         }
 
         @Override
@@ -185,86 +189,24 @@ public class HomeFragment extends SupportFragment {
         @Override
         public void convert(ViewHolder holder, Object o, int position) {
             final ArrayList<JamendoBean.JamendoResult> list = (ArrayList<JamendoBean.JamendoResult>) o;
-
-            ImageView songImage1 = holder.getView(R.id.song_iv1);
-            songImage1.getLayoutParams().height = itemWidth;
-            Glide.with(getActivity()).load(list.get(0).image).apply(requestOptions)
-                    .into(songImage1);
-            TextView songName1 = holder.getView(R.id.song_title_tv1);
-            songName1.setText(list.get(0).name);
-            holder.setOnClickListener(R.id.list_item_linear1, new View.OnClickListener(){
+            RecyclerView recyclerView = holder.getView(R.id.item_horzontal_recyclerview);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(Mp3App.sContext);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(new CommonAdapter<JamendoBean.JamendoResult>(getActivity(), R.layout.home_item_horzontal_item, list) {
                 @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(list.get(0))
-                            .showBottomSheetFragment(getChildFragmentManager());
-                }
-            });
-
-            ImageView songImage2 = holder.getView(R.id.song_iv2);
-            songImage2.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(1).image).apply(requestOptions)
-                    .into(songImage2);
-            TextView songName2 = holder.getView(R.id.song_title_v2);
-            songName2.setText(list.get(1).name);
-            holder.setOnClickListener(R.id.list_item_linear2, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(list.get(1))
-                            .showBottomSheetFragment(getChildFragmentManager());
-                }
-            });
-
-            ImageView songImage3 = holder.getView(R.id.song_image3);
-            songImage3.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(2).image).apply(requestOptions)
-                    .into(songImage3);
-            TextView songName3 = holder.getView(R.id.song_name_tv3);
-            songName3.setText(list.get(2).name);
-            holder.setOnClickListener(R.id.list_item_linear3, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(list.get(2))
-                            .showBottomSheetFragment(getChildFragmentManager());
-                }
-            });
-
-            ImageView songImage11 = holder.getView(R.id.song_image11);
-            songImage11.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(3).image).apply(requestOptions)
-                    .into(songImage11);
-            TextView songName11 = holder.getView(R.id.song_name_tv11);
-            songName11.setText(list.get(3).name);
-            holder.setOnClickListener(R.id.list_item_linear11, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(list.get(3))
-                            .showBottomSheetFragment(getChildFragmentManager());
-                }
-            });
-
-            ImageView songImage22 = holder.getView(R.id.song_image22);
-            songImage22.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(4).image).apply(requestOptions).into(songImage22);
-            TextView songName22 = holder.getView(R.id.song_name_tv22);
-            songName22.setText(list.get(4).name);
-            holder.setOnClickListener(R.id.list_item_linear22, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(list.get(4))
-                            .showBottomSheetFragment(getChildFragmentManager());
-                }
-            });
-
-            ImageView songImage33 = holder.getView(R.id.song_image33);
-            songImage33.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(5).image).apply(requestOptions).into(songImage33);
-            TextView songName33 = holder.getView(R.id.song_name_tv33);
-            songName33.setText(list.get(5).name);
-            holder.setOnClickListener(R.id.list_item_linear33, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(list.get(5))
-                            .showBottomSheetFragment(getChildFragmentManager());
+                protected void convert(ViewHolder holder, final JamendoBean.JamendoResult result, final int position) {
+                    ImageView songImage1 = holder.getView(R.id.song_iv1);
+                    Glide.with(_mActivity).load(result.getImageUrl()).apply(requestOptions).into(songImage1);
+                    TextView songName1 = holder.getView(R.id.song_title_tv1);
+                    songName1.setText(result.name);
+                    holder.setOnClickListener(R.id.list_item_linear1, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            DownloadBottomSheetDialog.newInstance(result)
+                                    .showBottomSheetFragment(getChildFragmentManager());
+                        }
+                    });
                 }
             });
         }
@@ -274,7 +216,7 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public int getItemViewLayoutId() {
-            return R.layout.home_item_grid_layout;
+            return R.layout.home_item_horzontal;
         }
 
         @Override
@@ -289,75 +231,23 @@ public class HomeFragment extends SupportFragment {
         public void convert(ViewHolder holder, Object o, int position) {
             final ArrayList<JamendoBean> list = (ArrayList<JamendoBean>) o;
 
-            ImageView songImage1 = holder.getView(R.id.song_iv1);
-            songImage1.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(0).imageRes).apply(requestOptions).into(songImage1);
-            TextView songName1 = holder.getView(R.id.song_title_tv1);
-            songName1.setText(list.get(0).name);
-            holder.setOnClickListener(R.id.list_item_linear1, new View.OnClickListener(){
+            RecyclerView recyclerView = holder.getView(R.id.item_horzontal_recyclerview);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(Mp3App.sContext);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(new CommonAdapter<JamendoBean>(getActivity(), R.layout.home_item_horzontal_item, list) {
                 @Override
-                public void onClick(View view) {
-                    HomeListActivity.launch(_mActivity, list.get(0).type, list.get(0).name, list.get(0).tags);
-                }
-            });
-
-            ImageView songImage2 = holder.getView(R.id.song_iv2);
-            songImage2.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(1).imageRes).apply(requestOptions).into(songImage2);
-            TextView songName2 = holder.getView(R.id.song_title_v2);
-            songName2.setText(list.get(1).name);
-            holder.setOnClickListener(R.id.list_item_linear2, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    HomeListActivity.launch(_mActivity, list.get(1).type, list.get(1).name, list.get(1).tags);
-                }
-            });
-
-            ImageView songImage3 = holder.getView(R.id.song_image3);
-            songImage3.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(2).imageRes).apply(requestOptions).into(songImage3);
-            TextView songName3 = holder.getView(R.id.song_name_tv3);
-            songName3.setText(list.get(2).name);
-            holder.setOnClickListener(R.id.list_item_linear3, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    HomeListActivity.launch(_mActivity, list.get(2).type, list.get(2).name, list.get(2).tags);
-                }
-            });
-
-            ImageView songImage11 = holder.getView(R.id.song_image11);
-            songImage11.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(3).imageRes).apply(requestOptions).into(songImage11);
-            TextView songName11 = holder.getView(R.id.song_name_tv11);
-            songName11.setText(list.get(3).name);
-            holder.setOnClickListener(R.id.list_item_linear11, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    HomeListActivity.launch(_mActivity, list.get(3).type, list.get(3).name, list.get(3).tags);
-                }
-            });
-
-            ImageView songImage22 = holder.getView(R.id.song_image22);
-            songImage22.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(4).imageRes).apply(requestOptions).into(songImage22);
-            TextView songName22 = holder.getView(R.id.song_name_tv22);
-            songName22.setText(list.get(4).name);
-            holder.setOnClickListener(R.id.list_item_linear22, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    HomeListActivity.launch(_mActivity, list.get(4).type, list.get(4).name, list.get(4).tags);
-                }
-            });
-
-            ImageView songImage33 = holder.getView(R.id.song_image33);
-            songImage33.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(list.get(5).imageRes).apply(requestOptions).into(songImage33);
-            TextView songName33 = holder.getView(R.id.song_name_tv33);
-            songName33.setText(list.get(5).name);
-            holder.setOnClickListener(R.id.list_item_linear33, new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    HomeListActivity.launch(_mActivity, list.get(5).type, list.get(5).name, list.get(5).tags);
+                protected void convert(ViewHolder holder, final JamendoBean result, final int position) {
+                    ImageView songImage1 = holder.getView(R.id.song_iv1);
+                    Glide.with(_mActivity).load(result.imageRes).apply(requestOptions).into(songImage1);
+                    TextView songName1 = holder.getView(R.id.song_title_tv1);
+                    songName1.setText(result.name);
+                    holder.setOnClickListener(R.id.list_item_linear1, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HomeListActivity.launch(_mActivity, result.type, result.name, result.tags);
+                        }
+                    });
                 }
             });
         }

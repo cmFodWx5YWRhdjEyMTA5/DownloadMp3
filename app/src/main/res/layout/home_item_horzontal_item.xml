@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_linear1"
+    android:layout_width="130dp"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="3dp"
+    android:paddingTop="3dp"
+    >
+
+    <ImageView
+        android:padding="2dp"
+        android:id="@+id/song_iv1"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:src="@drawable/default_thumbnail_corners" />
+
+    <TextView
+        android:id="@+id/song_title_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:singleLine="true"
+        android:text="222"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/title_color"
+        android:textSize="14sp" />
+
+</LinearLayout>
+

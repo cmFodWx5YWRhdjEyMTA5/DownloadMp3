@@ -18,17 +18,18 @@
             android:background="?selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingBottom="2dp"
-            android:paddingEnd="2dp"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingStart="2dp"
-            android:paddingTop="2dp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="3dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="3dp"
+            android:paddingStart="6dp"
+            android:paddingTop="4dp"
             android:visibility="visible">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/song_iv1"
                 android:elevation="4dp"
+                app:riv_corner_radius="4dip"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -59,17 +60,18 @@
             android:background="?selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingBottom="2dp"
-            android:paddingEnd="2dp"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingStart="2dp"
-            android:paddingTop="2dp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="6dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="6dp"
+            android:paddingStart="3dp"
+            android:paddingTop="4dp"
             android:visibility="visible">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/song_iv2"
                 android:elevation="4dp"
+                app:riv_corner_radius="4dip"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

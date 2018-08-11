@@ -18,9 +18,9 @@ public class Constants {
 //    public static final String NATIVE_ID_LIST = "244665246152799_244666369486020";
 //    public static final String NATIVE_ID_DIALOG = "244665246152799_244666096152714";
 
-    public static final String CHA_YE_ID = "2126711137570479_2126712340903692";
-    public static final String CHA_YE_HEIGH_ID = "2126711137570479_2126712224237037";
+    public static final String CHA_YE_ID = "1101766563333532_1107119799464875";
+    public static final String CHA_YE_HEIGH_ID = "1101766563333532_1107119956131526";
 
-    public static final String NATIVE_ID_LIST = "2126711137570479_2126711964237063";
-    public static final String NATIVE_ID_DIALOG = "2126711137570479_2126711727570420";
+    public static final String NATIVE_ID_LIST = "1101766563333532_1107117802798408";
+    public static final String NATIVE_ID_DIALOG = "1101766563333532_1107118286131693";
 }

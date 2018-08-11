@@ -13,9 +13,9 @@
         app:tabMinWidth="100dp"
         android:paddingTop="8dp"
         android:background="@color/transparent"
-        app:tabIndicatorColor="@color/colorAccentReal"
+        app:tabIndicatorColor="@color/color2AccentReal"
         app:tabBackground="?selectableItemBackgroundBorderless"
-        app:tabSelectedTextColor="@color/colorPrimaryTextWhite"
+        app:tabSelectedTextColor="@color/color2PrimaryTextWhite"
         app:tabTextColor="@color/colorSubTextWhite2"
         android:layout_width="match_parent"
         android:layout_height="58dp" />

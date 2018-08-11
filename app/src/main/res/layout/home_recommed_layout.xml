@@ -38,9 +38,9 @@
             android:paddingTop="8dp"
             app:tabPaddingStart="16dp"
             app:tabPaddingEnd="16dp"
-            app:tabIndicatorColor="@color/colorAccentReal"
+            app:tabIndicatorColor="@color/color2AccentReal"
             app:tabBackground="?selectableItemBackgroundBorderless"
-            app:tabSelectedTextColor="@color/colorPrimaryTextWhite"
+            app:tabSelectedTextColor="@color/color2PrimaryTextWhite"
             app:tabTextColor="@color/colorSubTextWhite2"
             app:tabMode="fixed" />
 

@@ -10,6 +10,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/ic_logo_splash" />
+            android:src="@mipmap/ic_logo" />
     </item>
 </layer-list>

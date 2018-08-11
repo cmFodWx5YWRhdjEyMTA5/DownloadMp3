@@ -72,6 +72,7 @@
     <string name="new_song">New Song</string>
 
     <string name="home_text">Home</string>
+    <string name="recom_text">Recommend</string>
 
     <string name="pop_text">pop</string>
     <string name="Electronic_text">Electronic</string>
@@ -121,10 +122,10 @@
     <string name="Classicalguitar">Classicalguitar</string>
     <string name="Accordion">Accordion</string>
 
-    <string name="recommend_text">Recommend</string>
-    <string name="top_download_text">Top Download</string>
-    <string name="top_listened_text">Top listened</string>
-    <string name="genre_text">Genre</string>
+    <string name="recommend_text">Hot &amp; New</string>
+    <string name="top_download_text">Download Charts</string>
+    <string name="top_listened_text">listened Charts</string>
+    <string name="genre_text">Genres</string>
     <string name="instrument_text">Instrument</string>
 
     <string name="featuer_text">Featuer</string>

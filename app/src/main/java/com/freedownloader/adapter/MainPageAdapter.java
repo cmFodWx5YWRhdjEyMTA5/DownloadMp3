@@ -25,18 +25,20 @@ public class MainPageAdapter extends FragmentPagerAdapter {
 
     private ArrayList<SupportFragment> mList = new ArrayList<>();
 
-    private String title[] = {MusicApp.sContext.getString(R.string.home_text),
-            MusicApp.sContext.getString(R.string.hot_text), MusicApp.sContext.getString(R.string.new_song),
-            MusicApp.sContext.getString(R.string.top_song), MusicApp.sContext.getString(R.string.pop_song)
+    private String title[] = {MusicApp.sContext.getString(R.string.recom_text),
+            MusicApp.sContext.getString(R.string.top_song),
+            MusicApp.sContext.getString(R.string.new_song),
+            MusicApp.sContext.getString(R.string.pop_song),
+            MusicApp.sContext.getString(R.string.hot_text),
     };
 
     public MainPageAdapter(Context context, FragmentManager fm) {
         super(fm);
         mList.add(new HomeFragment());
         mList.add(new HotFragment());
-        mList.add(MusicArchiveFragment.newInstances(MusicArchiveBean.NEW_TYPE));
         mList.add(MusicArchiveFragment.newInstances(MusicArchiveBean.TOP_TYPE));
         mList.add(MusicArchiveFragment.newInstances(MusicArchiveBean.POP_TYPE));
+        mList.add(MusicArchiveFragment.newInstances(MusicArchiveBean.NEW_TYPE));
     }
 
     @Override

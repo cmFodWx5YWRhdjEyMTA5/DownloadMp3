@@ -4,7 +4,7 @@
 
     <item android:id="@+id/action_download"
         android:title="@string/download2_text2"
-        android:icon="@drawable/ic_file_download_7878_24dp"
+        android:icon="@drawable/ic_file_download"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"
         />

@@ -224,22 +224,27 @@ public class MainActivity extends SupportActivity implements IDownloadRedBadge{
         FacebookReport.logSentMainPageShow();
 
         initTopBarBG();
+
+        View bgView = findViewById(R.id.bg_view);
+        bgView.getLayoutParams().height =
+                (int) getResources().getDimension(R.dimen.statusbar_view_height)
+                        + Utils.dip2px(this, 65) + Utils.dip2px(this, 58);
     }
 
     private void initTopBarBG() {
-        mStatuBarView = findViewById(R.id.status_bar_view2);
-        mTopBarLinear = findViewById(R.id.top_bar_linear2);
-
-        if (MusicApp.isYTB() && getSearchType() == YOUTUBE_TYPE) {
-            setMainTopBarBg(true);
-        } else if (MusicApp.isYTB() && getSearchType() == SOUNDClOUND_TYPE) {
-            setMainTopBarBg(false);
-        } else {
-            mStatuBarView.setBackgroundColor(ContextCompat
-                    .getColor(MusicApp.sContext, R.color.colorPrimary2));
-            mTopBarLinear.setBackgroundColor(ContextCompat
-                    .getColor(MusicApp.sContext, R.color.colorPrimary2));
-        }
+//        mStatuBarView = findViewById(R.id.status_bar_view2);
+//        mTopBarLinear = findViewById(R.id.top_bar_linear2);
+//
+//        if (MusicApp.isYTB() && getSearchType() == YOUTUBE_TYPE) {
+//            setMainTopBarBg(true);
+//        } else if (MusicApp.isYTB() && getSearchType() == SOUNDClOUND_TYPE) {
+//            setMainTopBarBg(false);
+//        } else {
+//            mStatuBarView.setBackgroundColor(ContextCompat
+//                    .getColor(MusicApp.sContext, R.color.colorPrimary2));
+//            mTopBarLinear.setBackgroundColor(ContextCompat
+//                    .getColor(MusicApp.sContext, R.color.colorPrimary2));
+//        }
     }
 
     @Override
@@ -257,27 +262,27 @@ public class MainActivity extends SupportActivity implements IDownloadRedBadge{
     private View mTopBarLinear;
 
     private void setMainTopBarBg(boolean isYoutube) {
-        if (isYoutube) {
-            mStatuBarView.setBackgroundColor(ContextCompat
-                    .getColor(MusicApp.sContext, R.color.colorPrimary));
-            mTopBarLinear.setBackgroundColor(ContextCompat
-                    .getColor(MusicApp.sContext, R.color.colorPrimary));
-            try {
-                Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            mStatuBarView.setBackgroundColor(ContextCompat
-                    .getColor(MusicApp.sContext, R.color.sdcound_primary));
-            mTopBarLinear.setBackgroundColor(ContextCompat
-                    .getColor(MusicApp.sContext, R.color.sdcound_primary));
-            try {
-                Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        if (isYoutube) {
+//            mStatuBarView.setBackgroundColor(ContextCompat
+//                    .getColor(MusicApp.sContext, R.color.colorPrimary));
+//            mTopBarLinear.setBackgroundColor(ContextCompat
+//                    .getColor(MusicApp.sContext, R.color.colorPrimary));
+//            try {
+//                Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(true);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            mStatuBarView.setBackgroundColor(ContextCompat
+//                    .getColor(MusicApp.sContext, R.color.sdcound_primary));
+//            mTopBarLinear.setBackgroundColor(ContextCompat
+//                    .getColor(MusicApp.sContext, R.color.sdcound_primary));
+//            try {
+//                Router.getInstance().getReceiver(IHomeFragment.class).tabLayoutBg(false);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     private void showDisclaimers() {

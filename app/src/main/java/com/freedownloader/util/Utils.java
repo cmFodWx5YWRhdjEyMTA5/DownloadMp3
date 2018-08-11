@@ -27,6 +27,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.freedownloader.MusicApp;
 import com.freedownloader.R;
 import com.freedownloader.ui.MainActivity;
+import com.jaeger.library.StatusBarUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -54,23 +55,24 @@ public class Utils {
             .placeholder(R.drawable.default_thumbnail_corners);
 
     public static void setViewBackgroud(View view) {
-        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary));
-        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.sdcound_primary));
-        } else {
-            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary2));
-        }
+//        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+//            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary));
+//        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+//            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.sdcound_primary));
+//        } else {
+//            view.setBackgroundColor(ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary2));
+//        }
     }
 
     public static void setActivityStatusColor(Activity activity) {
-        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary));
-        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.sdcound_primary));
-        } else {
-            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary2));
-        }
+//        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+//            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary));
+//        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+//            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.sdcound_primary));
+//        } else {
+//            setStatusColor(activity, ContextCompat.getColor(MusicApp.sContext, R.color.colorPrimary2));
+//        }
+        Utils.transparence(activity);
     }
 
     public static void runSingleThread(Runnable runnable) {
@@ -87,6 +89,12 @@ public class Utils {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
+
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
 
     public static int durationChange(String time) {
         try {

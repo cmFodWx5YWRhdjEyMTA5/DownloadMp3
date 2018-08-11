@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,16 @@ import com.freedownloader.bean.JamendoBean;
 import com.freedownloader.bean.MusicArchiveBean;
 import com.freedownloader.bean.TitleBean;
 import com.freedownloader.data.HomeDataList;
+import com.freedownloader.data.Song;
+import com.freedownloader.util.GlideImageLoader;
 import com.freedownloader.util.LogUtil;
 import com.freedownloader.util.Utils;
 import com.freedownloader.view.DownloadBottomSheetDialog;
 import com.freedownloader.view.GlideRoundTransform;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
@@ -166,7 +173,7 @@ public class HomeFragment extends SupportFragment {
         }.executeOnExecutor(Utils.sExecutorService3, isNeedCache);
     }
 
-    RequestOptions requestOptions = new RequestOptions()
+    public static RequestOptions requestOptions = new RequestOptions()
             .transforms(new GlideRoundTransform(MusicApp.sContext, 4))
             .placeholder(R.drawable.default_thumbnail_corners);
 
@@ -256,7 +263,7 @@ public class HomeFragment extends SupportFragment {
 
         @Override
         public int getItemViewLayoutId() {
-            return R.layout.home_item_list_layout;
+            return R.layout.home_list_item_banner;
         }
 
         @Override
@@ -264,41 +271,81 @@ public class HomeFragment extends SupportFragment {
             return item instanceof HashMap;
         }
 
+        private Song getSong(ArrayList<Song> list1, ArrayList<Song> list2, String url) {
+            for (Song song1: list1) {
+                if (song1.getImageUrl().equals(url)) {
+                    return song1;
+                }
+            }
+
+            for (Song song1: list2) {
+                if (song1.getImageUrl().equals(url)) {
+                    return song1;
+                }
+            }
+
+            return null;
+        }
+
+
         @Override
         public void convert(ViewHolder holder, Object o, int position) {
+
             final MusicArchiveBean featured = (MusicArchiveBean) (((HashMap) o)
                     .get(MusicArchiveBean.FEATURED_TYPE));
 
             final MusicArchiveBean recent = (MusicArchiveBean) (((HashMap) o)
                     .get(MusicArchiveBean.RECENT_TYPE));
 
-            ImageView featuredIV = holder.getView(R.id.song_iv1);
-            featuredIV.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity)
-                    .load(featured.contentList.get(0).getImageUrl())
-                    .apply(requestOptions).into(featuredIV);
-            TextView featuredTV = holder.getView(R.id.song_title_tv1);
-            featuredTV.setText(featured.contentList.get(0).getName());
+            final ArrayList<String> urlList = new ArrayList<>();
+            urlList.add(featured.contentList.get(0).getImageUrl());
+            urlList.add(recent.contentList.get(0).getImageUrl());
+            urlList.add(featured.contentList.get(1).getImageUrl());
+            urlList.add(recent.contentList.get(1).getImageUrl());
+            urlList.add(featured.contentList.get(2).getImageUrl());
+            urlList.add(recent.contentList.get(2).getImageUrl());
 
-            ImageView recentIV = holder.getView(R.id.song_iv2);
-            recentIV.getLayoutParams().height = itemWidth;
-            Glide.with(_mActivity).load(recent.contentList.get(0).getImageUrl()).apply(requestOptions).into(recentIV);
-            TextView recentTV = holder.getView(R.id.song_title_v2);
-            recentTV.setText(recent.contentList.get(0).getName());
+            ArrayList<String> titleList = new ArrayList<>();
+            titleList.add(featured.contentList.get(0).getName());
+            titleList.add(recent.contentList.get(0).getName());
+            titleList.add(featured.contentList.get(1).getName());
+            titleList.add(recent.contentList.get(1).getName());
+            titleList.add(featured.contentList.get(2).getName());
+            titleList.add(recent.contentList.get(2).getName());
 
-            holder.setOnClickListener(R.id.list_item_linear1, new View.OnClickListener() {
+            Banner banner = holder.getView(R.id.home_item_banner);
+            LogUtil.v("BANNER", "banner.getTag() "+ banner.getTag());
+            if (banner.getTag() == null) {
+                banner.setTag("banner");
+                //设置banner样式
+                banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+                //设置图片加载器
+                banner.setImageLoader(new GlideImageLoader());
+                //设置图片集合
+                banner.setImages(urlList);
+                //设置banner动画效果
+                //banner.setBannerAnimation(Transformer.FlipHorizontal);
+                //设置标题集合（当banner样式有显示title时）
+                banner.setBannerTitles(titleList);
+                //设置自动轮播，默认为true
+                banner.isAutoPlay(true);
+                //设置轮播时间
+                banner.setDelayTime(3000);
+                //设置指示器位置（当banner模式中有指示器时）
+                banner.setIndicatorGravity(BannerConfig.RIGHT);
+                //banner设置方法全部调用完毕时最后调用
+                banner.start();
+            } else {
+                banner.update(urlList, titleList);
+            }
+            banner.setOnBannerListener(new OnBannerListener() {
                 @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(featured.contentList.get(0))
-                            .showBottomSheetFragment(getChildFragmentManager());
-                }
-            });
-
-            holder.setOnClickListener(R.id.list_item_linear2, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    DownloadBottomSheetDialog.newInstance(recent.contentList.get(0))
-                            .showBottomSheetFragment(getChildFragmentManager());
+                public void OnBannerClick(int position) {
+                    Song song = getSong(featured.contentList, recent.contentList, urlList.get(position));
+                    if (song != null) {
+                        DownloadBottomSheetDialog.newInstance(song)
+                                .showBottomSheetFragment(getChildFragmentManager());
+                    }
                 }
             });
         }
@@ -331,7 +378,7 @@ public class HomeFragment extends SupportFragment {
         public void convert(ViewHolder holder, Object o, int position) {
             final TitleBean titleModel = (TitleBean) o;
             TextView titleTV = holder.getView(R.id.home_title_item_tv);
-            titleTV.setText(titleModel.title);
+            titleTV.setText(titleModel.title.toUpperCase());
 
             holder.getView(R.id.title_relative).setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -10,6 +10,7 @@ import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
 import com.freedownloader.facebook.FBAdUtils;
+import com.freedownloader.util.ReferHandler;
 import com.freedownloader.util.ReferrerHandler;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.lzx.musiclibrary.cache.CacheConfig;
@@ -76,9 +77,9 @@ public class MusicApp extends Application {
 
         ReferrerHandler.initReferrer();
 
-        if (!MusicApp.sPreferences.getBoolean("short_2cut", false)) {
+        if (!MusicApp.sPreferences.getBoolean("new_short_cut", false)) {
             addShortcut(this, SplashActivity.class, getString(R.string.app_name), R.mipmap.ic_launcher);
-            MusicApp.sPreferences.edit().putBoolean("short_2cut", true).apply();
+            MusicApp.sPreferences.edit().putBoolean("new_short_cut", true).apply();
         }
 
         Fragmentation.builder().handleException(new ExceptionHandler() {

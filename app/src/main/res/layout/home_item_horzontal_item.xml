@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_item_linear1"
-    android:layout_width="130dp"
+    android:layout_width="125dp"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
     android:gravity="center"
@@ -11,7 +11,7 @@
     >
 
     <ImageView
-        android:padding="2dp"
+        android:padding="1dp"
         android:id="@+id/song_iv1"
         android:layout_width="124dp"
         android:layout_height="124dp"
@@ -27,6 +27,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:singleLine="true"
+        android:ellipsize="end"
         android:text="222"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@color/title_color"

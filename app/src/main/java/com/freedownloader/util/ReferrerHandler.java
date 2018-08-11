@@ -25,6 +25,10 @@ public class ReferrerHandler {
         sRangeHandler.setYoutube();
     }
 
+    public static void setSingytb() {
+        sRangeHandler.setSingleYoutube();
+    }
+
     public static void initReferrer() {
         sRangeHandler.initSpecial();
     }

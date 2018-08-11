@@ -76,13 +76,13 @@ public class MainFragment extends SupportFragment implements IHomeFragment, Bott
         mBNavigation = view.findViewById(R.id.home_tablayout);
         mBNavigation.setupWithViewPager(mViewPager);
 
-        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
-            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary));
-        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
-            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
-        } else {
-            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary2));
-        }
+//        if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.YOUTUBE_TYPE) {
+//            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary));
+//        } else if (MusicApp.isYTB() && MainActivity.getSearchType() == MainActivity.SOUNDClOUND_TYPE) {
+//            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.sdcound_primary));
+//        } else {
+//            mBNavigation.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.colorPrimary2));
+//        }
 
 //        if (Mp3App.sPreferences.getBoolean("DownloadNew", false)) {
 //            showRedBadge();

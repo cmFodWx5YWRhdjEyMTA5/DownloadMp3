@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <View
+        android:id="@+id/bg_view"
+        android:background="@drawable/top_bar_bg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +18,7 @@
         android:id="@+id/status_bar_view2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"
-        android:background="@color/colorPrimary" />
+         />
 
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +38,6 @@
                 android:id="@+id/top_bar_linear2"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
-                android:background="@color/colorPrimary"
                 android:orientation="vertical"
                 app:layout_scrollFlags="scroll|enterAlways"/>
 
@@ -61,4 +70,7 @@
 
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
+
+
+</FrameLayout>
 

@@ -15,14 +15,21 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/top_bar_bg"
             tools:ignore="UnusedAttribute">
+
+            <View
+                android:id="@+id/status_bar_view2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/statusbar_view_height"
+                />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:background="@color/colorPrimary2" />
+                android:background="@color/transparent" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
@@ -37,15 +44,13 @@
             app:tabTextColor="@color/colorSubTextWhite2"
             app:tabMode="fixed" />
 
-            <View
-                android:background="@drawable/toolbar_shadow_light"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"/>
-
         </LinearLayout>
 
     </LinearLayout>
-
+    <View
+        android:background="@drawable/toolbar_shadow_light"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

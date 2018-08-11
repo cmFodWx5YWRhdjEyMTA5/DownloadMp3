@@ -12,7 +12,7 @@
         app:tabMode="scrollable"
         app:tabMinWidth="100dp"
         android:paddingTop="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/transparent"
         app:tabIndicatorColor="@color/colorAccentReal"
         app:tabBackground="?selectableItemBackgroundBorderless"
         app:tabSelectedTextColor="@color/colorPrimaryTextWhite"
@@ -20,6 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="58dp" />
 
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <View
         android:background="@drawable/toolbar_shadow_light"
         android:layout_width="match_parent"
@@ -30,5 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+    </LinearLayout>
 
 </LinearLayout>

@@ -40,6 +40,7 @@ import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import retrofit2.Response;
@@ -335,6 +336,7 @@ public class HomeListActivity extends AppCompatActivity {
                         itemCount++;
                     }
 
+                    Collections.shuffle(jamendoModel.arrayList);
                     mList.addAll(jamendoModel.arrayList);
                     mCommonAdapter.notifyItemRangeInserted(positionStart, itemCount);
                     return;

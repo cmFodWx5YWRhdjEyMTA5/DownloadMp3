@@ -4,11 +4,11 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.wemusic.mp3downloader.youdownloader"
+        applicationId "com.ssdf.mp3downloader222.sdf"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.0.1"
+        versionCode
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -72,44 +72,46 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    compile 'com.github.arimorty:floatingsearchview:2.1.1'
-    compile 'me.yokeyword:fragmentation:1.3.3'
-    compile 'com.jaeger.statusbarutil:library:1.5.1'
+    implementation 'com.github.arimorty:floatingsearchview:2.1.1'
+    implementation 'me.yokeyword:fragmentation:1.3.3'
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    compile 'com.zhy:base-rvadapter:3.0.3'
+    implementation 'com.zhy:base-rvadapter:3.0.3'
 
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-    compile 'com.github.markomilos:paginate:0.5.1'
+    implementation 'com.github.markomilos:paginate:0.5.1'
 
-    compile 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
 
-    compile 'com.github.TeamNewPipe:NewPipeExtractor:v0.11.5'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.11.5'
 
-    compile 'com.liulishuo.filedownloader:library:1.6.9'
+    implementation 'com.liulishuo.filedownloader:library:1.6.9'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
-    compile 'q.rorbin:badgeview:1.1.3'
+    implementation 'q.rorbin:badgeview:1.1.3'
 
-    compile 'com.tencent.bugly:crashreport:2.6.6.1'
+    implementation 'com.tencent.bugly:crashreport:2.6.6.1'
 
-    compile project(':musiclibrary')
+    implementation project(':musiclibrary')
 
-    compile 'com.plattysoft.leonids:LeonidsLib:1.3.2'
+    implementation 'com.plattysoft.leonids:LeonidsLib:1.3.2'
 
-    compile 'com.facebook.android:audience-network-sdk:4.28.2'
+    implementation 'com.facebook.android:audience-network-sdk:4.28.2'
     implementation 'com.facebook.android:facebook-android-sdk:4.33.0'
 
-    compile(name: 'rating-release2', ext: 'aar')
+    implementation(name: 'rating-release2', ext: 'aar')
 
     implementation 'com.android.support:multidex:1.0.3'
 
 
-    compile 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+
+    implementation 'com.youth.banner:banner:1.4.10'
 
     //implementation 'com.lzx:MusicLibrary:1.3.6'
 

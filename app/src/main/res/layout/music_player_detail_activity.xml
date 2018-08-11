@@ -41,7 +41,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="66dp">
 
-        <com.freedownloader.view.CircleImageView
+        <com.wedownloader.view.CircleImageView
             android:id="@+id/music_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

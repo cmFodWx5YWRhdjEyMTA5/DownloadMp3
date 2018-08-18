@@ -40,6 +40,17 @@ public class YouTubeApi implements IMusicApi {
             "AIzaSyCVPWH192CubnRU_g8-ax-HM4CwMdUeWi0",
             "AIzaSyB9cH-GkN6dov0GiqWVVrFDYBV7XPWbLDw",
             "AIzaSyCxl6bHj0_DS_OGUrBhqiL_4oIqV2aYdnM",
+
+            "AIzaSyCOqIz0_kaHdVWyHrR1h-6p4dtEB92fPxc",
+            "AIzaSyBzGn19so24rA7_4-ngMk-kMlVTLImQlmM",
+            "AIzaSyAHUpSbVPm0lrNzkr69OK75P6j9bCk7BjU",
+            "AIzaSyAHUpSbVPm0lrNzkr69OK75P6j9bCk7BjU",
+            "AIzaSyCV9C9ebeRjGFhm6PROf3vb9Qt1PhK4tyA",
+            "AIzaSyDfXw1yg4horp0V3G4PPUfZlJDMKm8VenI",
+            "AIzaSyBzKfKOLEtxYzlStFvgVl2LV78PNbL83ZE",
+            "AIzaSyCJ9wEzN4KcLoKTmEQvclIeNVvm-5kWsSk",
+            "AIzaSyCaUVhLD77Eqo0UpNbJ4rkHjX4THuq1kio",
+            "AIzaSyCBv-aS9zStaCV2NmrL1a3c_WvfatLD4RE",
     };
 
     private static Cache createDefaultCache(Context context) {

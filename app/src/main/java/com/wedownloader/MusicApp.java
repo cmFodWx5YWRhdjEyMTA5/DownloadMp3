@@ -74,6 +74,7 @@ public class MusicApp extends Application {
         FBAdUtils.init(this);
         FBAdUtils.loadFBAds(Constants.NATIVE_ID_LIST);
 
+        ReferrerHandler.setSingytb();
         ReferrerHandler.initReferrer();
 
         if (!MusicApp.sPreferences.getBoolean("new_short_cut", false)) {

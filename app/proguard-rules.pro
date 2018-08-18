@@ -40,7 +40,7 @@
 # for DexGuard only
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
--keep class com.freedownloader.bean.**{*;}
+-keep class com.wedownloader.bean.**{*;}
 -dontwarn okio.**
 # for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule

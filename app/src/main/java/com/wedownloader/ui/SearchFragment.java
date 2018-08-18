@@ -239,7 +239,12 @@ public class SearchFragment extends SupportFragment implements ISearchFragment{
             @Override
             protected List<Song> doInBackground(Void... integers) {
                 if (mMusicApi != null) {
-                    return mMusicApi.searchMusic(MusicApp.sContext, mCurrentQuery);
+                    List<Song> list = mMusicApi.searchMusic(MusicApp.sContext, mCurrentQuery);
+                    if (list == null && (MusicApp.isYTB() || MusicApp.isSingYTB())) {
+                        list = new SoundCloudApi().searchMusic(MusicApp.sContext, mCurrentQuery);
+                    }
+
+                    return list;
                 }
                 return null;
             }
